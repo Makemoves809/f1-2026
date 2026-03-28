@@ -1740,74 +1740,7 @@ function buildUpcomingPanel(r){
 }
 
 // ════════════════════════════════════════════════════════
-// RACE NOTIFICATIONS (10 min before)
-// ════════════════════════════════════════════════════════
-let notifyEnabled = localStorage.getItem("f1notify")==="true";
-let notifyTimeout = null;
-
-function updateNotifyBtn(){
-  const btn = document.getElementById("notify-btn");
-  if(btn) btn.classList.toggle("active", notifyEnabled);
-}
-
-function showToast(msg){
-  const el = document.getElementById("notify-toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  setTimeout(()=>el.classList.remove("show"), 3000);
-}
-
-function toggleNotify(){
-  if(!("Notification" in window)){
-    showToast(t("notify_unsupported")); return;
-  }
-  if(notifyEnabled){
-    notifyEnabled = false;
-    localStorage.setItem("f1notify","false");
-    if(notifyTimeout){ clearTimeout(notifyTimeout); notifyTimeout=null; }
-    updateNotifyBtn();
-    showToast(t("notify_off"));
-    return;
-  }
-  Notification.requestPermission().then(perm=>{
-    if(perm==="granted"){
-      notifyEnabled = true;
-      localStorage.setItem("f1notify","true");
-      updateNotifyBtn();
-      scheduleNotification();
-      showToast(t("notify_on"));
-    } else {
-      showToast(t("notify_denied"));
-    }
-  });
-}
-
-function scheduleNotification(){
-  if(notifyTimeout){ clearTimeout(notifyTimeout); notifyTimeout=null; }
-  if(!notifyEnabled) return;
-  const next = SCHEDULE.find(r=>!r.done && !r.cancelled);
-  if(!next) return;
-  const raceTime = new Date(next.utc).getTime();
-  const notifyTime = raceTime - 10*60*1000; // 10 min before
-  const now = Date.now();
-  const delay = notifyTime - now;
-  if(delay < 0) return; // already past the 10-min mark
-  // Only set timeout if within 25 days (setTimeout limit)
-  if(delay > 2147483647) return;
-  notifyTimeout = setTimeout(()=>{
-    if(!notifyEnabled) return;
-    const raceName = next.flag+" "+next.name;
-    new Notification(t("notify_title"),{
-      body: raceName+" "+t("notify_body_pre"),
-      icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>",
-      tag: "f1-race-"+next.round,
-    });
-  }, delay);
-}
-
-
-// ════════════════════════════════════════════════════════
-// PUSH NOTIFICATIONS
+// NOTIFICATIONS
 // ════════════════════════════════════════════════════════
 let notifTimers = JSON.parse(localStorage.getItem("f1notifs") || "{}");
 let activeTimeouts = {};
@@ -1819,11 +1752,30 @@ function showToast(msg, duration=3000){
   setTimeout(()=>el.classList.remove("show"), duration);
 }
 
+// Update the hero bell button state based on notifTimers
+function updateNextRaceBtn(){
+  const next = SCHEDULE.find(r=>!r.done && !r.cancelled);
+  const btn = document.getElementById("notify-btn");
+  if(!btn || !next) return;
+  const isSet = !!notifTimers[next.round];
+  btn.classList.toggle("active", isSet);
+  const dot = btn.querySelector(".notify-dot");
+  if(dot) dot.style.display = isSet ? "block" : "none";
+}
+
+// Called by the hero bell button
+function toggleNotify(){
+  const next = SCHEDULE.find(r=>!r.done && !r.cancelled);
+  if(!next) return;
+  const btn = document.getElementById("notify-btn");
+  toggleNotification(next.round, next.name, next.utc, btn);
+}
+
 async function toggleNotification(roundNum, raceName, utcStr, btnEl){
   if(!("Notification" in window)){
     showToast(t("notify_unsupported")); return;
   }
-  // If already set, cancel it
+  // Cancel if already set
   if(notifTimers[roundNum]){
     clearTimeout(activeTimeouts[roundNum]);
     delete activeTimeouts[roundNum];
@@ -1831,6 +1783,7 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
     localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
     btnEl.classList.remove("set");
     btnEl.innerHTML = `<span class="nb-icon">🔔</span> Remind Me`;
+    updateNextRaceBtn();
     showToast(t("notify_off")); return;
   }
   // Request permission
@@ -1840,40 +1793,38 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
   if(perm === "denied"){ showToast(t("notify_denied")); return; }
   if(perm !== "granted"){ return; }
 
-  const raceTime = new Date(utcStr);
-  const notifTime = raceTime - 10 * 60 * 1000; // 10 min before
-  const msUntil = notifTime - Date.now();
+  const msUntil = new Date(utcStr) - 10*60*1000 - Date.now();
 
-  if(msUntil < 0){
-    showToast("Race already started!"); return;
+  if(msUntil < 0){ showToast("Race already started!"); return; }
+  // setTimeout max is ~24.8 days — skip scheduling for far-future races but still save the reminder
+  if(msUntil <= 2147483647){
+    activeTimeouts[roundNum] = setTimeout(()=>{
+      new Notification(t("notify_title"), {
+        body: `${raceName} ${t("notify_body_pre")}`,
+        icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>",
+        tag: "f1-race-"+roundNum
+      });
+      delete notifTimers[roundNum];
+      delete activeTimeouts[roundNum];
+      localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
+      const btn = document.getElementById("notif-btn-"+roundNum);
+      if(btn){ btn.classList.remove("set"); btn.innerHTML=`<span class="nb-icon">🔔</span> Remind Me`; }
+      updateNextRaceBtn();
+    }, msUntil);
   }
 
   notifTimers[roundNum] = utcStr;
   localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-
-  activeTimeouts[roundNum] = setTimeout(()=>{
-    new Notification(t("notify_title"), {
-      body: `${raceName} ${t("notify_body_pre")}`,
-      icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/200px-F1.svg.png",
-      tag: "f1-race-"+roundNum
-    });
-    delete notifTimers[roundNum];
-    delete activeTimeouts[roundNum];
-    localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-    // Update button
-    const btn = document.getElementById("notif-btn-"+roundNum);
-    if(btn){ btn.classList.remove("set"); btn.innerHTML=`<span class="nb-icon">🔔</span> Remind Me`; }
-  }, msUntil);
-
   btnEl.classList.add("set");
   const mins = Math.round(msUntil/60000);
   const hrs  = Math.floor(mins/60), remMins = mins%60;
   const timeStr = hrs>0 ? `${hrs}h ${remMins}m` : `${mins}m`;
   btnEl.innerHTML = `<span class="nb-icon">🔕</span> Set (in ${timeStr})`;
+  updateNextRaceBtn();
   showToast(t("notify_on"));
 }
 
-// Restore active timers on page load
+// Re-arm any saved reminders after page reload
 function restoreNotifTimers(){
   Object.entries(notifTimers).forEach(([roundNum, utcStr])=>{
     const r = SCHEDULE.find(x=>x.round===parseInt(roundNum));
@@ -1884,16 +1835,20 @@ function restoreNotifTimers(){
       localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
       return;
     }
-    activeTimeouts[roundNum] = setTimeout(()=>{
-      new Notification(t("notify_title"), {
-        body: `${r.name} ${t("notify_body_pre")}`,
-        icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/200px-F1.svg.png",
-        tag: "f1-race-"+roundNum
-      });
-      delete notifTimers[roundNum];
-      localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-    }, msUntil);
+    if(msUntil <= 2147483647){
+      activeTimeouts[roundNum] = setTimeout(()=>{
+        new Notification(t("notify_title"), {
+          body: `${r.name} ${t("notify_body_pre")}`,
+          icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>",
+          tag: "f1-race-"+roundNum
+        });
+        delete notifTimers[roundNum];
+        localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
+        updateNextRaceBtn();
+      }, msUntil);
+    }
   });
+  updateNextRaceBtn();
 }
 
 // ════════════════════════════════════════════════════════
@@ -1922,8 +1877,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   renderHome();
   buildRacesPage();
   // Init notifications
-  updateNotifyBtn();
-  if(notifyEnabled && "Notification" in window && Notification.permission==="granted") scheduleNotification();
+  if("Notification" in window && Notification.permission==="granted") restoreNotifTimers();
+  else updateNextRaceBtn();
 });
 </script>
 </body>
