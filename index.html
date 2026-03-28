@@ -809,7 +809,7 @@ SCHEDULE[21].round = 22; SCHEDULE[22].round = 23; SCHEDULE[23].round = 24;
 const RACE_FACTS = {
   1:  ["7 lead changes in the first 9 laps between Russell and Leclerc.","Ferrari VSC blunder — stayed out during Virtual Safety Cars, handing Mercedes the win.","Verstappen started P20 after a Q1 crash and recovered to P6 with the fastest lap.","Piastri DNS — crashed on his sighting lap in front of his home Melbourne crowd.","Alonso retired mid-race and flagged a risk of nerve damage.","Bortoleto scored Audi's first-ever F1 point in P9 on the team's debut."],
   2:  ["Russell wins the China Sprint from Leclerc (+0.674s) and Hamilton (+2.554s) after a thrilling lead battle.","Antonelli qualifies on pole — youngest pole-sitter in F1 history at 19 years, 6 months, 18 days.","Antonelli given 10-second penalty in the Sprint for contact with Hadjar at Turn 4.","Hülkenberg stoppage triggers Safety Car on lap 14 of 19 — Russell holds on at the restart.","Three DNFs in the Sprint: Hülkenberg (stopped), Bottas and Lindblad (retired).","Hamilton led early but Russell retook the lead on lap 7 and pulled away after Leclerc's poor restart from SC."],
-  3:  ["Suzuka's iconic figure-of-eight layout features the legendary 130R, Spoon Curve and the Esses.","Race starts 2:00 PM local JST — that's 1:00 AM for PA and DR.","Suzuka has decided more world championships than any other circuit on the calendar."],
+  3:  ["Antonelli takes back-to-back poles with a 1:28.778 — 0.298s clear of Russell. Verstappen knocked out in Q2, complaining of an 'undriveable' car.","FP1: Russell headed a Mercedes 1-2. FP2: Piastri set the pace from Antonelli. FP3: Antonelli beat Russell by 0.3s. Red Bull 1.5s off pace all weekend.","Norris plagued by reliability — hydraulics issue in FP2, battery change before FP3, but recovered to qualify P5.","Suzuka has decided more world championships than any other circuit on the calendar."],
   4:  ["Floodlit night race in the desert — local start 6:00 PM Bahrain time.","Sandy, abrasive tarmac makes tyre management absolutely crucial.","Bahrain also hosted 2026 pre-season testing — teams arrive with extra setup data."],
   5:  ["One of the fastest street circuits — average speeds over 250 km/h.","Night race under floodlights at 8:00 PM local time.","Tight barriers and minimal run-off areas make qualifying uniquely intense."],
   6:  ["Set around Hard Rock Stadium, home of the Miami Dolphins.","Sprint weekend — Saturday sprint plus Sunday feature race.","May heat averages 28–32°C — one of the hottest races of the season."],
@@ -944,6 +944,30 @@ const SPRINT_RESULTS = {  2: {
 
 // Qualifying grid for the race (separate from sprint qualifying)
 const QUALIFYING_GRID = {
+  3: [
+    {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", time:"1:28.778"},
+    {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", time:"1:29.076"},
+    {pos:3,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", time:"1:29.132"},
+    {pos:4,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", time:"1:29.405"},
+    {pos:5,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", time:"1:29.409"},
+    {pos:6,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", time:"1:29.567"},
+    {pos:7,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", time:"1:29.691"},
+    {pos:8,  name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", time:"1:29.978"},
+    {pos:9,  name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", time:"1:30.274"},
+    {pos:10, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", time:"1:30.319"},
+    {pos:11, name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", time:"1:30.512"},
+    {pos:12, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", time:"1:30.559"},
+    {pos:13, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", time:"1:30.628"},
+    {pos:14, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", time:"1:30.745"},
+    {pos:15, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", time:"1:30.877"},
+    {pos:16, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", time:"1:31.283"},
+    {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", time:"1:31.648"},
+    {pos:18, name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", time:"1:31.650"},
+    {pos:19, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", time:"1:32.706"},
+    {pos:20, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", time:"1:32.830"},
+    {pos:21, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", time:"1:33.146"},
+    {pos:22, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", time:"1:33.420"},
+  ],
   2: [
     {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", time:"1:32.064"},
     {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", time:"1:32.286"},
