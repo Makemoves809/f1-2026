@@ -1,32 +1,55 @@
-# 🏎️ F1 2026 Season Hub
+# F1 2026 Season Hub
 
-A personal Formula 1 fan site tracking the 2026 season with results, standings and race times for **Pennsylvania** and the **Dominican Republic**.
+A Formula 1 fan site tracking the full 2026 season — results, standings, session schedules, and race times displayed in **your local timezone**.
 
-## 🌐 Live Site
+## Live Site
 **[makemoves809.github.io/f1-2026](https://makemoves809.github.io/f1-2026)**
 
-## ✨ Features
-- 🏆 Driver & Constructor Championship standings
-- 📈 Points progression chart
-- ⏱️ Race times converted for PA (Eastern) and DR (Atlantic)
-- 📅 Full weekend schedule for every race
-- 🔔 Race reminders — 10 min notification before race start
-- 🏁 Full race classifications & highlights
-- ⭐ Pin your favourite drivers
-- 🌙 Light / Dark mode
-- 🇺🇸 🇩🇴 English / Spanish toggle
-- ❌ Bahrain & Saudi GP cancelled (Middle East conflict) — 22 races in 2026
+## Features
 
-## 📅 2026 Season Status
-| Round | Race | Date | Result |
+**Results & Standings**
+- Driver & Constructor Championship standings with live points
+- Points progression chart (interactive, click to highlight a driver)
+- Full race classifications with gaps, laps, DNFs, and DNS
+- Qualifying grid results per round
+- Sprint race results where applicable
+- Pin favourite drivers (saved across sessions)
+
+**Schedule & Times**
+- Full weekend schedule for every round (Practice, Qualifying, Sprint, Race)
+- All session times auto-converted to **your local timezone** via browser detection
+- Eastern (ET) reference shown when you're outside the Eastern timezone
+- Countdown timer to next race start
+
+**UX & Notifications**
+- Race reminders — browser notification 10 minutes before race start (saved across reloads)
+- Notification state synced across all tabs simultaneously
+- **Share button** on every race — copies a direct deep-link URL (e.g. `?race=3`)
+- **Add to Google Calendar** on upcoming races — pre-fills race name, time, and circuit
+- **Back to top** button appears when scrolling down
+- Deep-link support — opening `?race=5` automatically navigates to that round
+
+**Design**
+- Dark / Light mode toggle (saved preference)
+- English / Spanish language toggle
+- Mobile-first responsive layout with bottom navigation
+- Smooth card hover animations
+
+## 2026 Season
+
+| Round | Race | Date | Status |
 |-------|------|------|--------|
 | R1 | 🇦🇺 Australian GP | Mar 8 | Russell 🥇 |
 | R2 | 🇨🇳 Chinese GP | Mar 15 | Antonelli 🥇 |
 | R3 | 🇯🇵 Japanese GP | Mar 29 | Upcoming |
 | R4 | 🇧🇭 Bahrain GP | Apr 12 | ❌ Cancelled |
 | R5 | 🇸🇦 Saudi Arabian GP | Apr 19 | ❌ Cancelled |
+| R6–R24 | Remaining rounds | May–Dec | Upcoming |
 
-## 🛠️ Built With
-- Pure HTML, CSS & JavaScript — no frameworks, no dependencies
-- Fully static — works on any device, no server needed
-- Hosted free on GitHub Pages
+> R4 Bahrain and R5 Saudi Arabia were cancelled due to the ongoing Middle East conflict, confirmed March 15, 2026. Season reduced from 24 to 22 Grands Prix.
+
+## Tech
+
+- Pure HTML, CSS & JavaScript — zero frameworks, zero dependencies
+- Single `index.html` file — fully static, works on any device
+- Hosted on GitHub Pages

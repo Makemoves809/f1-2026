@@ -120,7 +120,7 @@ body.light .cd-num{color:#18181b;}
 .podium-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;}
 @media(max-width:600px){.podium-cards{grid-template-columns:1fr;gap:8px;}}
 .podium-card{border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden;border:1px solid transparent;cursor:pointer;transition:transform var(--t),filter var(--t);}
-.podium-card:hover{transform:translateY(-2px);filter:brightness(1.08);}
+.podium-card:hover{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 12px 30px rgba(0,0,0,.45);}
 .podium-card.rank1{background:linear-gradient(135deg,rgba(245,197,24,.18),rgba(245,197,24,.05));border-color:rgba(245,197,24,.3);}
 .podium-card.rank2{background:linear-gradient(135deg,rgba(184,184,184,.15),rgba(184,184,184,.04));border-color:rgba(184,184,184,.25);}
 .podium-card.rank3{background:linear-gradient(135deg,rgba(200,121,65,.15),rgba(200,121,65,.04));border-color:rgba(200,121,65,.25);}
@@ -237,6 +237,15 @@ body.light .race-name-big{color:#18181b;}
 .notif-btn .nb-icon{font-size:13px;}
 .notif-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 18px;font-size:12px;color:var(--txt);font-family:'DM Mono',monospace;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;max-width:320px;text-align:center;}
 .notif-toast.show{opacity:1;}
+/* SHARE & CALENDAR BUTTONS */
+.share-btn{background:none;border:1px solid var(--border);border-radius:3px;padding:3px 8px;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--txt3);display:inline-flex;align-items:center;gap:4px;cursor:pointer;transition:all var(--t);font-family:'DM Mono',monospace;text-transform:uppercase;}
+.share-btn:hover{border-color:var(--txt2);color:var(--txt);}
+.cal-btn{background:none;border:1px solid rgba(34,197,94,.3);border-radius:3px;padding:4px 10px;font-size:11px;color:var(--green);display:inline-flex;align-items:center;gap:5px;cursor:pointer;transition:all var(--t);font-family:'DM Sans',sans-serif;white-space:nowrap;}
+.cal-btn:hover{background:rgba(34,197,94,.08);border-color:var(--green);}
+/* BACK TO TOP */
+.btt-btn{position:fixed;bottom:80px;right:16px;z-index:150;background:var(--card);border:1px solid var(--border);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:var(--txt2);opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s,color var(--t),border-color var(--t);pointer-events:none;box-shadow:0 2px 12px rgba(0,0,0,.3);}
+.btt-btn.visible{opacity:1;transform:translateY(0);pointer-events:all;}
+.btt-btn:hover{color:var(--txt);border-color:var(--txt2);}
 
 /* RESULTS LAYOUT */
 .results-layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start;}
@@ -271,7 +280,8 @@ body.light .race-name-big{color:#18181b;}
 
 /* SIDEBAR */
 .sidebar{display:flex;flex-direction:column;gap:14px;}
-.card-block{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.card-block{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:box-shadow var(--t);}
+.card-block:hover{box-shadow:0 4px 20px rgba(0,0,0,.2);}
 .card-block-title{padding:9px 12px;background:var(--card2);border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:3px;color:var(--txt2);text-transform:uppercase;}
 .key-fact{padding:9px 12px;border-bottom:1px solid rgba(38,38,38,.55);display:flex;gap:8px;align-items:flex-start;}
 .key-fact:last-child{border-bottom:none;}
@@ -551,6 +561,9 @@ body.light .ms-num{color:#18181b;}
     <span class="bnav-icon">🏁</span><span data-i18n="nav_races_short">Races</span>
   </button>
 </nav>
+
+<!-- BACK TO TOP -->
+<button class="btt-btn" id="btt-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <!-- FOOTER -->
 <footer class="site-footer">
@@ -1462,6 +1475,8 @@ function showTab(roundNum,btn){
   if(panel){ panel.classList.add("active"); buildPanel(roundNum,panel); }
   if(btn) btn.classList.add("active");
   else{ const btns=document.querySelectorAll(".tab-btn"); if(btns[roundNum-1]) btns[roundNum-1].classList.add("active"); }
+  // Update URL for deep-linking
+  history.replaceState(null,'',`?race=${roundNum}`);
   // Scroll tab into view
   const activeBtn = document.querySelector(".tab-btn.active");
   if(activeBtn) activeBtn.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
@@ -1549,7 +1564,7 @@ function buildCancelledPanel(r){
         <div class="race-name-big" style="opacity:.5;text-decoration:line-through">${r.name}</div>
         <div class="race-circuit">${r.circuit} · ${r.location}</div>
         <div class="race-dates-big">${r.date}</div>
-        <div class="pills"><span class="pill pill-cancelled">❌ Race Cancelled</span></div>
+        <div class="pills"><span class="pill pill-cancelled">❌ Race Cancelled</span><button class="share-btn" onclick="shareRace(${r.round})">🔗 Share</button></div>
       </div>
     </div>
     <div style="background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius);padding:20px 22px;max-width:600px;">
@@ -1611,7 +1626,7 @@ function buildResultPanel(r, res){
         <div class="race-name-big">${r.name}</div>
         <div class="race-circuit">${r.circuit} · ${r.location}</div>
         <div class="race-dates-big">${r.date} · ${res.laps} laps</div>
-        <div class="pills"><span class="pill pill-done">${t("done_badge")}</span></div>
+        <div class="pills"><span class="pill pill-done">${t("done_badge")}</span><button class="share-btn" onclick="shareRace(${r.round})">🔗 Share</button></div>
       </div>
     </div>
     <div class="results-layout">
@@ -1708,7 +1723,10 @@ function buildUpcomingPanel(r){
     <div class="time-card tc-local"><div class="time-card-label">Your Local Time</div><div class="time-card-time">${localRace.time}</div><div class="time-card-tz">${localRace.tz}</div></div>
     ${showEtCard?`<div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz}</div></div>`:""}
   </div>
-  <button class="notif-btn ${isNotifSet?"set":""}" id="notif-btn-${r.round}" onclick="toggleNotification(${r.round},'${r.name}','${r.utc}',this)">${notifLabel}</button>`;
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;">
+    <button class="notif-btn ${isNotifSet?"set":""}" id="notif-btn-${r.round}" onclick="toggleNotification(${r.round},'${r.name}','${r.utc}',this)">${notifLabel}</button>
+    <button class="cal-btn" onclick="addToCalendar('${r.name.replace(/'/g,"\\'")}','${r.utc}','${r.circuit.replace(/'/g,"\\'")}')">📅 Calendar</button>
+  </div>`;
 
   const facts = (RACE_FACTS[r.round]||[]).map(f=>`<div class="key-fact"><div class="kf-icon">→</div><div class="kf-text">${f}</div></div>`).join("");
   const miniRows = DRIVER_STANDINGS.slice(0,10).map((d,i)=>{
@@ -1726,7 +1744,7 @@ function buildUpcomingPanel(r){
         <div class="race-name-big">${r.name}</div>
         <div class="race-circuit">${r.circuit} · ${r.location}</div>
         <div class="race-dates-big">${r.date}</div>
-        <div class="pills">${pills}</div>
+        <div class="pills">${pills}<button class="share-btn" onclick="shareRace(${r.round})">🔗 Share</button></div>
       </div>
     </div>
     <div class="upcoming-layout">
@@ -1875,6 +1893,33 @@ function restoreNotifTimers(){
 }
 
 // ════════════════════════════════════════════════════════
+// SHARE & CALENDAR
+// ════════════════════════════════════════════════════════
+function shareRace(roundNum){
+  const url = `${location.origin}${location.pathname}?race=${roundNum}`;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>showToast('🔗 Link copied!'));
+  } else {
+    const el = document.createElement('textarea');
+    el.value = url; document.body.appendChild(el); el.select();
+    document.execCommand('copy'); document.body.removeChild(el);
+    showToast('🔗 Link copied!');
+  }
+}
+function addToCalendar(name, utcStr, circuit){
+  const start = new Date(utcStr);
+  const end = new Date(start.getTime() + 2*60*60*1000);
+  const fmt = d => d.toISOString().replace(/[-:]|\.\d{3}/g,'');
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(name)}&dates=${fmt(start)}/${fmt(end)}&details=${encodeURIComponent('F1 2026 · '+circuit)}&location=${encodeURIComponent(circuit)}`;
+  window.open(url,'_blank','noopener');
+}
+// Back to top visibility
+window.addEventListener('scroll',()=>{
+  const b=document.getElementById('btt-btn');
+  if(b) b.classList.toggle('visible', window.scrollY>350);
+});
+
+// ════════════════════════════════════════════════════════
 // PAGE SWITCHER
 // ════════════════════════════════════════════════════════
 function showPage(id, btn){
@@ -1902,6 +1947,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   // Init notifications
   if("Notification" in window && Notification.permission==="granted") restoreNotifTimers();
   else updateNextRaceBtn();
+  // Deep-link: navigate to race from URL param
+  const urlRace = parseInt(new URLSearchParams(location.search).get('race'));
+  if(urlRace){ showPage('races',null); setTimeout(()=>showTab(urlRace),80); }
 });
 </script>
 </body>
