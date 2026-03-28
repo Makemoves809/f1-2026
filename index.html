@@ -464,7 +464,7 @@ body.light .ms-num{color:#18181b;}
       <div>
         <div class="hero-eyebrow" data-i18n="hero_eyebrow">🏁 FIA Formula One World Championship</div>
         <h1>F1 <span>2026</span></h1>
-        <p class="hero-sub" data-i18n="hero_sub">Results, standings & times for Eastern Time (ET) & Dominican Republic (AST).</p>
+        <p class="hero-sub" data-i18n="hero_sub">Results, standings & race times displayed in your local timezone.</p>
         <div class="hero-stats">
           <div class="hero-stat"><div class="hero-stat-num" id="stat-rounds">22</div><div class="hero-stat-lbl" data-i18n="stat_rounds">Rounds</div></div>
           <div class="hero-stat"><div class="hero-stat-num" id="stat-done">1</div><div class="hero-stat-lbl" data-i18n="stat_complete">Complete</div></div>
@@ -554,8 +554,7 @@ body.light .ms-num{color:#18181b;}
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  F1 2026 Season Hub · 22 Races (R4 Bahrain &amp; R5 Saudi cancelled) · Eastern Time (ET) &amp; Dominican Republic (AST)<br>
-  Rounds 1–19: ET = DR · Rounds 20–22: ET is 1 hr behind DR
+  F1 2026 Season Hub · 22 Races (R4 Bahrain &amp; R5 Saudi cancelled) · Times shown in your local timezone
 </footer>
 
 <script>
@@ -827,11 +826,11 @@ const RACE_FACTS = {
   17: ["SATURDAY RACE — moved to Saturday to respect Azerbaijan's national Remembrance Day.","The Castle Straight is the longest DRS zone in F1 — over 2 km.","Safety Cars are almost always guaranteed at Baku — chaos is the norm."],
   18: ["F1's premier night race — the Marina Bay circuit looks stunning under floodlights.","Humidity exceeds 80% — physically one of the most demanding races of the season.","Sprint weekend — the 6th and final sprint race of the 2026 season."],
   19: ["Circuit of the Americas is the only purpose-built F1 circuit in the United States.","Austin's GP weekend is legendary for live music, amazing atmosphere, and huge crowds.","Turn 1 features a dramatic uphill blind crest — one of the most breathtaking approaches in F1."],
-  20: ["Highest circuit on the calendar at 2,285 m — thin air is brutal on power units.","The Foro Sol baseball stadium forms the iconic stadium section.","Race day (Nov 1) coincides with Pennsylvania's clock change from EDT to EST."],
-  21: ["Interlagos is notorious for unpredictable weather — fierce thunderstorms can arrive anytime.","Brazilian fans create one of the loudest atmospheres in all of Formula One.","PA is now on EST — race is 12:00 PM EST (PA) and 1:00 PM AST (DR). 1 hour apart."],
-  22: ["SATURDAY NIGHT RACE — local start 8:00 PM PST. PA watches at 11:00 PM EST Saturday.","PA and DR are now 1 hour apart: PA 11:00 PM Sat, DR midnight Sun.","November nights in Las Vegas can drop below 10°C."],
-  23: ["Floodlit Lusail circuit — cool desert air creates ideal racing conditions.","Penultimate race — championship battles typically reach their boiling point here.","PA = 11:00 AM EST, DR = 12:00 PM AST — 1 hour apart."],
-  24: ["The season finale — world championship titles decided under the Yas Marina floodlights.","Race starts at sunset and ends under lights — visually stunning.","PA = 8:00 AM EST, DR = 9:00 AM AST — 1 hour apart for the grand finale."],
+  20: ["Highest circuit on the calendar at 2,285 m — thin air is brutal on power units.","The Foro Sol baseball stadium forms the iconic stadium section.","Race day (Nov 1) is North American Daylight Saving Time end — clocks fall back 1 hour."],
+  21: ["Interlagos is notorious for unpredictable weather — fierce thunderstorms can arrive anytime.","Brazilian fans create one of the loudest atmospheres in all of Formula One.","Race day (Nov 8) coincides with the US clock change from EDT to EST — check your local time."],
+  22: ["SATURDAY NIGHT RACE — local start 8:00 PM PST. One of the most glamorous venues on the calendar.","November nights in Las Vegas can drop below 10°C — cold tyres make for tricky opening laps.","The Las Vegas Strip Circuit winds past the iconic casino hotels on the famous Strip."],
+  23: ["Floodlit Lusail circuit — cool desert air creates ideal racing conditions.","Penultimate race — championship battles typically reach their boiling point here.","Qatar hosts its second consecutive F1 Grand Prix after joining the permanent calendar."],
+  24: ["The season finale — world championship titles decided under the Yas Marina floodlights.","Race starts at sunset and ends under lights — visually stunning.","Yas Marina has hosted the season finale every year since 2009."],
 };
 
 const RACE_RESULTS = {
@@ -1007,7 +1006,7 @@ const T = {
   en:{
     nav_home_short:"Home", nav_races_short:"Races",
     hero_eyebrow:"🏁 FIA Formula One World Championship",
-    hero_sub:"Results, standings & times for Eastern Time (ET) & Dominican Republic (AST).",
+    hero_sub:"Results, standings & race times displayed in your local timezone.",
     stat_rounds:"Rounds",stat_complete:"Complete",stat_remaining:"Remaining",stat_teams:"Teams",
     next_race_label:"⚡ Next Race",driver_champ:"🏆 Driver Championship",
     constructor_champ:"🏭 Constructor Championship",season_progress:"📅 Season Progress",
@@ -1067,7 +1066,7 @@ const T = {
   es:{
     nav_home_short:"Inicio",nav_races_short:"Carreras",
     hero_eyebrow:"🏁 Campeonato Mundial de Fórmula 1 de la FIA",
-    hero_sub:"Resultados, clasificación y horarios para Hora del Este (ET) y República Dominicana (AST).",
+    hero_sub:"Resultados, clasificación y horarios de carrera en tu zona horaria local.",
     stat_rounds:"Rondas",stat_complete:"Completadas",stat_remaining:"Restantes",stat_teams:"Equipos",
     next_race_label:"⚡ Próxima Carrera",driver_champ:"🏆 Campeonato de Pilotos",
     constructor_champ:"🏭 Campeonato de Constructores",season_progress:"📅 Progreso de la Temporada",
@@ -1277,7 +1276,7 @@ function renderHome(){
     document.getElementById("nrw-date").textContent  = `${next.race_date} · ${next.location.split(",")[0]}`;
     const localNext = fmtLocal(new Date(next.utc));
     document.getElementById("nrw-times").innerHTML =
-      `<div class="nrc-time-row"><span class="nrc-flag-lbl">YOUR TIME</span><span class="nrc-time-val">${localNext.time}</span><span class="nrc-tz">${localNext.tz}</span></div>`;
+      `<div class="nrc-time-row"><span class="nrc-flag-lbl">YOUR TIME</span><div style="text-align:right"><div class="nrc-time-val">${localNext.time}</div><div class="nrc-tz">${localNext.tz}</div></div></div>`;
     const btn = document.getElementById("nrw-btn");
     btn.textContent = t("view_race");
     btn.onclick = ()=>{ showPage("races",null); setTimeout(()=>showTab(next.round),60); };
