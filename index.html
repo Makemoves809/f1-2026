@@ -1702,9 +1702,11 @@ function buildUpcomingPanel(r){
   const isNotifSet = !!notifTimers[r.round];
   const notifLabel = isNotifSet ? `<span class="nb-icon">🔕</span> Reminder Set` : `<span class="nb-icon">🔔</span> Remind Me`;
   const localRace = fmtLocal(new Date(r.utc));
+  const etTime = new Date(r.utc).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit',hour12:true});
+  const showEtCard = localRace.time !== etTime;
   const timeSection = `<div class="time-cards">
     <div class="time-card tc-local"><div class="time-card-label">Your Local Time</div><div class="time-card-time">${localRace.time}</div><div class="time-card-tz">${localRace.tz}</div></div>
-    <div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz}</div></div>
+    ${showEtCard?`<div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz}</div></div>`:""}
   </div>
   <button class="notif-btn ${isNotifSet?"set":""}" id="notif-btn-${r.round}" onclick="toggleNotification(${r.round},'${r.name}','${r.utc}',this)">${notifLabel}</button>`;
 
@@ -1746,7 +1748,7 @@ function buildUpcomingPanel(r){
         <div class="card-block"><div class="card-block-title">${t("section_need")}</div>${facts}</div>
         <div class="card-block"><div class="card-block-title">${t("section_tz")}</div>
           <div class="key-fact"><div class="kf-icon">🌍</div><div class="kf-text"><strong>Your Local Time:</strong> ${localRace.time} ${localRace.tz}</div></div>
-          <div class="key-fact"><div class="kf-icon">${t("pa_label").split(" ")[0]}</div><div class="kf-text"><strong>Eastern (ET):</strong> ${r.pa} ${r.pa_tz}</div></div>
+          ${showEtCard?`<div class="key-fact"><div class="kf-icon">${t("pa_label").split(" ")[0]}</div><div class="kf-text"><strong>Eastern (ET):</strong> ${r.pa} ${r.pa_tz}</div></div>`:""}
           <div class="key-fact"><div class="kf-icon">${t("dr_label").split(" ")[0]}</div><div class="kf-text"><strong>Dominican Rep.:</strong> ${r.dr} ${r.dr_tz}</div></div>
         </div>
       </div>
