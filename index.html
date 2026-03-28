@@ -499,6 +499,7 @@ body.light .ms-num{color:#18181b;}
         </div>
         <div class="nrc-actions">
           <button class="nrc-cta" id="nrw-btn">View Race Details →</button>
+          <button class="notify-btn" id="nrw-cal-btn" title="Add to calendar" style="display:none">📅</button>
           <button class="notify-btn" id="notify-btn" onclick="toggleNotify()" title="Race reminder">
             🔔<span class="notify-dot"></span>
           </button>
@@ -1293,6 +1294,8 @@ function renderHome(){
     const btn = document.getElementById("nrw-btn");
     btn.textContent = t("view_race");
     btn.onclick = ()=>{ showPage("races",null); setTimeout(()=>showTab(next.round),60); };
+    const calBtn = document.getElementById("nrw-cal-btn");
+    if(calBtn){ calBtn.style.display="flex"; calBtn.onclick=()=>addToCalendar(next.name,next.utc,next.circuit); }
     startCountdown(next.utc);
   }
 
@@ -1906,12 +1909,46 @@ function shareRace(roundNum){
     showToast('🔗 Link copied!');
   }
 }
+function getOS(){
+  const ua = navigator.userAgent;
+  if(/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+  if(/Macintosh|Mac OS X/i.test(ua)) return 'mac';
+  if(/Android/i.test(ua)) return 'android';
+  if(/Windows/i.test(ua)) return 'windows';
+  return 'other';
+}
 function addToCalendar(name, utcStr, circuit){
   const start = new Date(utcStr);
   const end = new Date(start.getTime() + 2*60*60*1000);
   const fmt = d => d.toISOString().replace(/[-:]|\.\d{3}/g,'');
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(name)}&dates=${fmt(start)}/${fmt(end)}&details=${encodeURIComponent('F1 2026 · '+circuit)}&location=${encodeURIComponent(circuit)}`;
-  window.open(url,'_blank','noopener');
+  const os = getOS();
+  if(os === 'ios' || os === 'mac'){
+    // Apple Calendar — download .ics file
+    const ics = [
+      'BEGIN:VCALENDAR','VERSION:2.0',
+      'PRODID:-//F1 2026 Season Hub//EN',
+      'CALSCALE:GREGORIAN','METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `UID:f1-2026-${name.replace(/\s+/g,'-').toLowerCase()}@f1hub`,
+      `DTSTAMP:${fmt(new Date())}`,
+      `DTSTART:${fmt(start)}`,`DTEND:${fmt(end)}`,
+      `SUMMARY:🏎️ ${name}`,
+      `DESCRIPTION:F1 2026 · ${circuit}`,
+      `LOCATION:${circuit}`,
+      'END:VEVENT','END:VCALENDAR'
+    ].join('\r\n');
+    const blob = new Blob([ics],{type:'text/calendar;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${name.replace(/\s+/g,'-')}.ics`;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    showToast('📅 Opening Apple Calendar…');
+  } else {
+    // Google Calendar — Android, Windows, other
+    const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent('🏎️ '+name)}&dates=${fmt(start)}/${fmt(end)}&details=${encodeURIComponent('F1 2026 · '+circuit)}&location=${encodeURIComponent(circuit)}`;
+    window.open(url,'_blank','noopener');
+  }
 }
 // Back to top visibility
 window.addEventListener('scroll',()=>{
