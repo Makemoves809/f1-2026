@@ -1772,6 +1772,7 @@ function toggleNotify(){
 }
 
 async function toggleNotification(roundNum, raceName, utcStr, btnEl){
+  const isHeroBell = btnEl && btnEl.id === "notify-btn";
   if(!("Notification" in window)){
     showToast(t("notify_unsupported")); return;
   }
@@ -1781,8 +1782,7 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
     delete activeTimeouts[roundNum];
     delete notifTimers[roundNum];
     localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-    btnEl.classList.remove("set");
-    btnEl.innerHTML = `<span class="nb-icon">🔔</span> Remind Me`;
+    if(!isHeroBell){ btnEl.classList.remove("set"); btnEl.innerHTML = `<span class="nb-icon">🔔</span> Remind Me`; }
     updateNextRaceBtn();
     showToast(t("notify_off")); return;
   }
@@ -1815,11 +1815,13 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
 
   notifTimers[roundNum] = utcStr;
   localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-  btnEl.classList.add("set");
-  const mins = Math.round(msUntil/60000);
-  const hrs  = Math.floor(mins/60), remMins = mins%60;
-  const timeStr = hrs>0 ? `${hrs}h ${remMins}m` : `${mins}m`;
-  btnEl.innerHTML = `<span class="nb-icon">🔕</span> Set (in ${timeStr})`;
+  if(!isHeroBell){
+    const mins = Math.round(msUntil/60000);
+    const hrs  = Math.floor(mins/60), remMins = mins%60;
+    const timeStr = hrs>0 ? `${hrs}h ${remMins}m` : `${mins}m`;
+    btnEl.classList.add("set");
+    btnEl.innerHTML = `<span class="nb-icon">🔕</span> Set (in ${timeStr})`;
+  }
   updateNextRaceBtn();
   showToast(t("notify_on"));
 }
