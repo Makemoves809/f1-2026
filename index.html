@@ -308,6 +308,7 @@ body.light .race-name-big{color:#18181b;}
 /* TIME CARDS */
 .time-cards{display:flex;gap:10px;flex-wrap:wrap;}
 .time-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;flex:1;min-width:130px;}
+.tc-local{border-top:3px solid var(--next);}
 .tc-pa{border-top:3px solid var(--blue);}
 .tc-dr{border-top:3px solid var(--green);}
 .time-card-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--txt3);margin-bottom:4px;}
@@ -317,7 +318,7 @@ body.light .time-card-time{color:#18181b;}
 
 /* WEEKEND SCHEDULE TABLE */
 .wknd-table{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0;}
-.wknd-row{display:grid;grid-template-columns:1fr 90px 90px;padding:8px 12px;border-bottom:1px solid rgba(38,38,38,.45);align-items:center;}
+.wknd-row{display:grid;grid-template-columns:1fr 110px;padding:8px 12px;border-bottom:1px solid rgba(38,38,38,.45);align-items:center;}
 .wknd-row:last-child{border-bottom:none;}
 .wknd-row.header{background:var(--card2);border-bottom:1px solid var(--border);}
 .wknd-row.header span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt3);}
@@ -428,7 +429,7 @@ body.light .ms-num{color:#18181b;}
   .class-header,.driver-row{grid-template-columns:36px 1fr 76px 38px;}
   .class-header span:nth-child(4),.driver-row .laps-cell{display:none;}
   .results-layout,.upcoming-layout{grid-template-columns:1fr;}
-  .wknd-row{grid-template-columns:1fr 80px 80px;}
+  .wknd-row{grid-template-columns:1fr 95px;}
 }
 </style>
 </head>
@@ -1274,11 +1275,9 @@ function renderHome(){
     document.getElementById("nrw-round").textContent = roundLabel;
     document.getElementById("nrw-name").textContent  = `${next.flag} ${next.name.replace(" Grand Prix"," GP").replace("-Catalunya","").replace(" — Madrid","")}`;
     document.getElementById("nrw-date").textContent  = `${next.race_date} · ${next.location.split(",")[0]}`;
-    const sameTime = !next.split;
-    document.getElementById("nrw-times").innerHTML = sameTime
-      ? `<div class="nrc-time-row"><span class="nrc-flag-lbl">PA / DR</span><span class="nrc-time-val">${next.pa}</span><span class="nrc-tz">${next.pa_tz}</span></div>`
-      : `<div class="nrc-time-row"><span class="nrc-flag-lbl">PA</span><span class="nrc-time-val">${next.pa}</span><span class="nrc-tz">${next.pa_tz}</span></div>
-         <div class="nrc-time-row"><span class="nrc-flag-lbl">DR</span><span class="nrc-time-val">${next.dr}</span><span class="nrc-tz">${next.dr_tz}</span></div>`;
+    const localNext = fmtLocal(new Date(next.utc));
+    document.getElementById("nrw-times").innerHTML =
+      `<div class="nrc-time-row"><span class="nrc-flag-lbl">YOUR TIME</span><span class="nrc-time-val">${localNext.time}</span><span class="nrc-tz">${localNext.tz}</span></div>`;
     const btn = document.getElementById("nrw-btn");
     btn.textContent = t("view_race");
     btn.onclick = ()=>{ showPage("races",null); setTimeout(()=>showTab(next.round),60); };
@@ -1354,9 +1353,11 @@ function renderHome(){
   // Season progress
   const prog = document.getElementById("season-progress");
   const nxt = SCHEDULE.find(r=>!r.done);
+  const nxtActual = SCHEDULE.find(r=>!r.done && !r.cancelled);
+  const nxtLocal = nxtActual ? fmtLocal(new Date(nxtActual.utc)) : null;
   prog.innerHTML = `
     ${lastDone?`<div class="prog-row" style="border-left:3px solid var(--green)"><span class="prog-label" style="color:var(--green)">✓ Last</span><span class="prog-value">R${lastDone.round} ${lastDone.name.replace(" Grand Prix"," GP")}</span></div>`:""}
-    ${nxt?`<div class="prog-row" style="border-left:3px solid var(--next)"><span class="prog-label" style="color:var(--next)">⚡ Next</span><span class="prog-value">R${nxt.round} ${nxt.name.replace(" Grand Prix"," GP")} · ${nxt.pa} ${nxt.pa_tz}</span></div>`:""}
+    ${nxtActual?`<div class="prog-row" style="border-left:3px solid var(--next)"><span class="prog-label" style="color:var(--next)">⚡ Next</span><span class="prog-value">R${nxtActual.round} ${nxtActual.name.replace(" Grand Prix"," GP")} · ${nxtLocal.time} ${nxtLocal.tz}</span></div>`:""}
     <div class="prog-row" style="border-left:3px solid #f87171"><span class="prog-label" style="color:#f87171">❌ Cancelled</span><span class="prog-value">R4 Bahrain &amp; R5 Saudi — Middle East conflict</span></div>
     <div class="prog-row"><span class="prog-label">Sprint rounds</span><span class="prog-value">R2, R6, R7, R11, R14, R18</span></div>
     <div class="prog-row"><span class="prog-label">Saturday races</span><span class="prog-value">R17 Baku · R22 Las Vegas</span></div>
@@ -1421,6 +1422,21 @@ function renderChart(){
 // ════════════════════════════════════════════════════════
 // RACES PAGE
 // ════════════════════════════════════════════════════════
+// ── LOCAL TIME HELPERS ────────────────────────────────
+const userTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+function fmtLocal(utcDate){
+  const time = utcDate.toLocaleTimeString('en-US',{timeZone:userTz,hour:'numeric',minute:'2-digit',hour12:true});
+  const full = utcDate.toLocaleTimeString('en-US',{timeZone:userTz,timeZoneName:'short'});
+  const tz = full.split(' ').at(-1);
+  return {time, tz};
+}
+function sessionLocal(day, utcHHMM){
+  const months={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  const parts = day.split(' ');
+  const [hh,mm] = utcHHMM.split(':').map(Number);
+  return fmtLocal(new Date(Date.UTC(2026,months[parts[1]],parseInt(parts[2]),hh,mm,0)));
+}
+
 function buildRacesPage(){
   const tabsScroll = document.getElementById("tabsScroll");
   tabsScroll.innerHTML = SCHEDULE.map(r=>{
@@ -1475,7 +1491,7 @@ function buildWeekendTable(round){
     "Qualifying":"session_q","Sprint Qualifying":"session_sq","Sprint":"session_s","Race":"session_r"
   };
   const rows = ws.sessions.map(([name,day,utcT])=>{
-    const times = fmtSession(utcT, ws.pa_off);
+    const local = sessionLocal(day, utcT);
     const isSprint = name==="Sprint"||name==="Sprint Qualifying";
     const isQual   = name==="Qualifying";
     const isRace   = name==="Race";
@@ -1484,13 +1500,12 @@ function buildWeekendTable(round){
               : isRace  ?`<span class="wknd-session-tag tag-race">RACE</span>`:"";
     return `<div class="wknd-row">
       <div><div class="wknd-session">${t(sessionKey[name]||"session_r")}${tag}</div><div class="wknd-day">${day}</div></div>
-      <div class="wknd-time pa">${times.pa}</div>
-      <div class="wknd-time dr">${times.dr}</div>
+      <div class="wknd-time pa" style="text-align:right">${local.time}<div style="font-size:9px;opacity:.55;font-family:'DM Mono',monospace;font-weight:400">${local.tz}</div></div>
     </div>`;
   }).join("");
   return `<div class="section-title" style="margin-top:20px">${t("section_wknd")}</div>
     <div class="wknd-table">
-      <div class="wknd-row header"><span>${t("session_r").replace("Race","Session")}</span><span style="text-align:right">${t("pa_label")}</span><span style="text-align:right">${t("dr_label")}</span></div>
+      <div class="wknd-row header"><span>${t("session_r").replace("Race","Session")}</span><span style="text-align:right">LOCAL</span></div>
       ${rows}
     </div>`;
 }
@@ -1616,7 +1631,7 @@ function buildResultPanel(r, res){
         <div class="card-block"><div class="card-block-title">${t("section_facts")}</div>
           <div class="key-fact"><div class="kf-icon">⏱️</div><div class="kf-text"><strong>${t("section_facts").replace("⚡ ","")}: Fastest Lap:</strong> ${res.fastest_lap}</div></div>
           <div class="key-fact"><div class="kf-icon">📍</div><div class="kf-text"><strong>Pole:</strong> ${res.pole}</div></div>
-          <div class="key-fact"><div class="kf-icon">🕐</div><div class="kf-text"><strong>PA/DR:</strong> ${r.pa} ${r.pa_tz}</div></div>
+          <div class="key-fact"><div class="kf-icon">🕐</div><div class="kf-text"><strong>Race Time:</strong> ${fmtLocal(new Date(r.utc)).time} ${fmtLocal(new Date(r.utc)).tz}</div></div>
         </div>
         <div class="card-block"><div class="card-block-title">${t("section_highlights")}</div>${highlights}</div>
       </div>
@@ -1687,11 +1702,11 @@ function buildUpcomingPanel(r){
 
   const isNotifSet = !!notifTimers[r.round];
   const notifLabel = isNotifSet ? `<span class="nb-icon">🔕</span> Reminder Set` : `<span class="nb-icon">🔔</span> Remind Me`;
+  const localRace = fmtLocal(new Date(r.utc));
   const timeSection = `<div class="time-cards">
-    <div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz} · Eastern</div></div>
-    <div class="time-card tc-dr"><div class="time-card-label">${t("dr_label")}</div><div class="time-card-time">${r.dr}</div><div class="time-card-tz">${r.dr_tz} · Atlantic</div></div>
+    <div class="time-card tc-local"><div class="time-card-label">Your Local Time</div><div class="time-card-time">${localRace.time}</div><div class="time-card-tz">${localRace.tz}</div></div>
+    <div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz}</div></div>
   </div>
-  <p style="font-size:11px;color:${isSplit?"var(--orange)":"var(--green)"};margin-top:8px;margin-bottom:10px;font-family:'DM Mono',monospace;">${isSplit?t("split_note"):t("same_note")}</p>
   <button class="notif-btn ${isNotifSet?"set":""}" id="notif-btn-${r.round}" onclick="toggleNotification(${r.round},'${r.name}','${r.utc}',this)">${notifLabel}</button>`;
 
   const facts = (RACE_FACTS[r.round]||[]).map(f=>`<div class="key-fact"><div class="kf-icon">→</div><div class="kf-text">${f}</div></div>`).join("");
@@ -1731,9 +1746,9 @@ function buildUpcomingPanel(r){
       <div class="sidebar">
         <div class="card-block"><div class="card-block-title">${t("section_need")}</div>${facts}</div>
         <div class="card-block"><div class="card-block-title">${t("section_tz")}</div>
-          <div class="key-fact"><div class="kf-icon">${t("pa_label").split(" ")[0]}</div><div class="kf-text"><strong>Eastern Time (ET):</strong> ${r.pa} ${r.pa_tz}</div></div>
-          <div class="key-fact"><div class="kf-icon">${t("dr_label").split(" ")[0]}</div><div class="kf-text"><strong>Dominican Republic:</strong> ${r.dr} ${r.dr_tz}</div></div>
-          <div class="key-fact"><div class="kf-icon">${isSplit?"⚠️":"✅"}</div><div class="kf-text">${isSplit?t("split_note"):t("same_note")}</div></div>
+          <div class="key-fact"><div class="kf-icon">🌍</div><div class="kf-text"><strong>Your Local Time:</strong> ${localRace.time} ${localRace.tz}</div></div>
+          <div class="key-fact"><div class="kf-icon">${t("pa_label").split(" ")[0]}</div><div class="kf-text"><strong>Eastern (ET):</strong> ${r.pa} ${r.pa_tz}</div></div>
+          <div class="key-fact"><div class="kf-icon">${t("dr_label").split(" ")[0]}</div><div class="kf-text"><strong>Dominican Rep.:</strong> ${r.dr} ${r.dr_tz}</div></div>
         </div>
       </div>
     </div>`;
@@ -1759,8 +1774,23 @@ function updateNextRaceBtn(){
   if(!btn || !next) return;
   const isSet = !!notifTimers[next.round];
   btn.classList.toggle("active", isSet);
-  const dot = btn.querySelector(".notify-dot");
-  if(dot) dot.style.display = isSet ? "block" : "none";
+  btn.innerHTML = isSet ? `🔕<span class="notify-dot" style="display:block"></span>` : `🔔<span class="notify-dot"></span>`;
+}
+
+// Sync all UI buttons for a given round after a notification toggle
+function updateAllNotifBtns(roundNum){
+  const btn = document.getElementById("notif-btn-"+roundNum);
+  if(btn){
+    const isSet = !!notifTimers[roundNum];
+    if(isSet){
+      btn.classList.add("set");
+      btn.innerHTML = `<span class="nb-icon">🔕</span> Reminder Set`;
+    } else {
+      btn.classList.remove("set");
+      btn.innerHTML = `<span class="nb-icon">🔔</span> Remind Me`;
+    }
+  }
+  updateNextRaceBtn();
 }
 
 // Called by the hero bell button
@@ -1782,8 +1812,7 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
     delete activeTimeouts[roundNum];
     delete notifTimers[roundNum];
     localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-    if(!isHeroBell){ btnEl.classList.remove("set"); btnEl.innerHTML = `<span class="nb-icon">🔔</span> Remind Me`; }
-    updateNextRaceBtn();
+    updateAllNotifBtns(roundNum);
     showToast(t("notify_off")); return;
   }
   // Request permission
@@ -1807,22 +1836,13 @@ async function toggleNotification(roundNum, raceName, utcStr, btnEl){
       delete notifTimers[roundNum];
       delete activeTimeouts[roundNum];
       localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-      const btn = document.getElementById("notif-btn-"+roundNum);
-      if(btn){ btn.classList.remove("set"); btn.innerHTML=`<span class="nb-icon">🔔</span> Remind Me`; }
-      updateNextRaceBtn();
+      updateAllNotifBtns(roundNum);
     }, msUntil);
   }
 
   notifTimers[roundNum] = utcStr;
   localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-  if(!isHeroBell){
-    const mins = Math.round(msUntil/60000);
-    const hrs  = Math.floor(mins/60), remMins = mins%60;
-    const timeStr = hrs>0 ? `${hrs}h ${remMins}m` : `${mins}m`;
-    btnEl.classList.add("set");
-    btnEl.innerHTML = `<span class="nb-icon">🔕</span> Set (in ${timeStr})`;
-  }
-  updateNextRaceBtn();
+  updateAllNotifBtns(roundNum);
   showToast(t("notify_on"));
 }
 
@@ -1846,7 +1866,7 @@ function restoreNotifTimers(){
         });
         delete notifTimers[roundNum];
         localStorage.setItem("f1notifs", JSON.stringify(notifTimers));
-        updateNextRaceBtn();
+        updateAllNotifBtns(parseInt(roundNum));
       }, msUntil);
     }
   });
