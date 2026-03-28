@@ -143,13 +143,13 @@ body.light .pc-name{color:#18181b;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 .standings-table{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px;}
 .st-header{display:grid;padding:8px 12px;background:var(--card2);border-bottom:1px solid var(--border);}
-.st-header.d4{grid-template-columns:32px 1fr 44px 44px;}
+.st-header.d4{grid-template-columns:32px 1fr 44px;}
 .st-header.c3{grid-template-columns:32px 1fr 44px;}
 .st-header span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt3);}
 .st-row{display:grid;padding:7px 12px;border-bottom:1px solid rgba(38,38,38,.5);align-items:center;transition:background var(--t);cursor:pointer;}
 .st-row:last-child{border-bottom:none;}
 .st-row:hover{background:rgba(255,255,255,.025);}
-.st-row.d4{grid-template-columns:32px 1fr 44px 44px;}
+.st-row.d4{grid-template-columns:32px 1fr 44px;}
 .st-row.c3{grid-template-columns:32px 1fr 44px;}
 .st-pos{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--txt3);}
 .st-pos.p1{color:var(--gold);font-size:18px;}
@@ -162,8 +162,6 @@ body.light .pc-name{color:#18181b;}
 .st-pts{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);text-align:right;}
 .st-pts.zero{color:var(--txt3);font-size:14px;}
 .st-wins{font-family:'DM Mono',monospace;font-size:11px;color:var(--txt3);text-align:right;}
-.st-fav{font-size:14px;color:var(--txt3);cursor:pointer;transition:color var(--t);}
-.st-fav.starred{color:var(--gold);}
 /* Constructor bar */
 .cst-bar-wrap{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:3px;}
 .cst-bar{height:100%;border-radius:2px;transition:width .4s ease;}
@@ -521,7 +519,6 @@ body.light .ms-num{color:#18181b;}
 
     <!-- Driver Standings full -->
     <div class="standings-table" id="driver-standings-home"></div>
-    <div id="fav-tip" style="margin-top:5px;font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;"></div>
 
     <div class="home-grid">
       <div>
@@ -1009,7 +1006,6 @@ const QUALIFYING_GRID = {
 };
 // ════════════════════════════════════════════════════════
 let currentLang = localStorage.getItem("f1lang") || "en";
-let favDrivers  = JSON.parse(localStorage.getItem("f1favs") || "[]");
 let isLight     = localStorage.getItem("f1theme") === "light";
 let cdInterval  = null;
 
@@ -1049,7 +1045,6 @@ const T = {
     points_avail:"Points still available",gap_leader:"Gap to leader",math_open:"OPEN",math_tight:"TIGHT",math_closed:"CLOSED",
     laps_lbl:"Laps",dist_lbl:"Distance",corners_lbl:"Corners",record_lbl:"Lap Record",first_lbl:"First GP",
     driver_profile:"Driver Profile",total_pts:"Total Points",race_wins:"Race Wins",races_entered:"Races Entered",
-    fav_tip:"Click any driver to view their profile · ⭐ to pin as favourite",
     notify_on:"Reminder set — you'll be notified 10 min before the race",
     notify_off:"Race reminder turned off",
     notify_denied:"Notifications blocked — please allow them in your browser settings",
@@ -1136,7 +1131,6 @@ const T = {
     points_avail:"Puntos disponibles",gap_leader:"Diferencia al líder",math_open:"ABIERTO",math_tight:"CERRADO",math_closed:"CERRADO",
     laps_lbl:"Vueltas",dist_lbl:"Distancia",corners_lbl:"Curvas",record_lbl:"Vuelta Rápida",first_lbl:"Primer GP",
     driver_profile:"Perfil del Piloto",total_pts:"Puntos Totales",race_wins:"Victorias",races_entered:"Carreras",
-    fav_tip:"Toca un piloto para ver su perfil · ⭐ para fijar como favorito",
     notify_on:"Recordatorio activado — recibirás una notificación 10 min antes de la carrera",
     notify_off:"Recordatorio de carrera desactivado",
     notify_denied:"Notificaciones bloqueadas — actívalas en la configuración del navegador",
@@ -1256,16 +1250,6 @@ function startCountdown(utcStr){
   tick(); cdInterval = setInterval(tick,1000);
 }
 
-// ════════════════════════════════════════════════════════
-// FAVOURITE DRIVERS
-// ════════════════════════════════════════════════════════
-function toggleFav(name,event){
-  event.stopPropagation();
-  const i = favDrivers.indexOf(name);
-  if(i===-1) favDrivers.push(name); else favDrivers.splice(i,1);
-  localStorage.setItem("f1favs", JSON.stringify(favDrivers));
-  renderHome();
-}
 
 // ════════════════════════════════════════════════════════
 // DRIVER PROFILE MODAL
@@ -1353,12 +1337,7 @@ function renderHome(){
     startCountdown(next.utc);
   }
 
-  // Sort with favs first
-  const sorted = [...DRIVER_STANDINGS].sort((a,b)=>{
-    const af = favDrivers.includes(a.name)?-1:0;
-    const bf = favDrivers.includes(b.name)?-1:0;
-    return af - bf || a.pos - b.pos;
-  });
+  const sorted = [...DRIVER_STANDINGS].sort((a,b)=>a.pos - b.pos);
 
   // Podium cards (top 3 by actual position)
   const top3 = DRIVER_STANDINGS.slice(0,3);
@@ -1375,26 +1354,20 @@ function renderHome(){
     </div>`;
   }).join("");
 
-  // Driver standings full (with fav + click)
+  // Driver standings
   const dsHdr = `<div class="st-header d4">
     <span>${t("col_pos")}</span><span>${t("col_driver")}</span>
-    <span style="text-align:right">${t("col_pts")}</span>
-    <span style="text-align:right">${t("col_wins")}</span></div>`;
+    <span style="text-align:right">${t("col_pts")}</span></div>`;
   const dsRows = sorted.map(d=>{
     const pc = d.pos===1?"p1":d.pos===2?"p2":d.pos===3?"p3":"";
-    const isFav = favDrivers.includes(d.name);
     return `<div class="st-row d4" onclick="openDriverModal('${d.name.replace(/'/g,"\\'")}')">
-      <div class="st-pos ${pc}">${isFav?"⭐":d.pos}</div>
+      <div class="st-pos ${pc}">${d.pos}</div>
       <div class="st-info"><div class="st-stripe" style="background:${d.color}"></div>
         <div><div class="st-name">${d.name}</div><div class="st-sub">${d.team}</div></div></div>
       <div class="st-pts ${d.pts===0?"zero":""}" style="text-align:right">${d.pts}</div>
-      <div class="st-wins" style="text-align:right;display:flex;align-items:center;justify-content:flex-end;gap:6px">
-        ${d.wins||"—"}
-        <span class="st-fav ${isFav?"starred":""}" onclick="toggleFav('${d.name.replace(/'/g,"\\'")}',event)">⭐</span>
-      </div></div>`;
+      </div>`;
   }).join("");
   document.getElementById("driver-standings-home").innerHTML = dsHdr + dsRows;
-  const favTipEl = document.getElementById("fav-tip"); if(favTipEl) favTipEl.textContent = t("fav_tip");
 
 
   // Constructor standings with bars
