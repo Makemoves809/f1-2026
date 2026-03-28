@@ -568,8 +568,8 @@ const COMPLETED_ROUNDS = 2;
 
 
 const DRIVER_STANDINGS = [
-  {pos:1,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:52, wins:1,  nat:"🇬🇧", age:28, number:63},
-  {pos:2,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:48, wins:1,  nat:"🇮🇹", age:18, number:12},
+  {pos:1,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:51, wins:1,  nat:"🇬🇧", age:28, number:63},
+  {pos:2,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:47, wins:1,  nat:"🇮🇹", age:18, number:12},
   {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:34, wins:0,  nat:"🇲🇨", age:28, number:16},
   {pos:4,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:33, wins:0,  nat:"🇬🇧", age:41, number:44},
   {pos:5,  name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", pts:17, wins:0,  nat:"🇬🇧", age:19, number:87},
@@ -593,7 +593,7 @@ const DRIVER_STANDINGS = [
 ];
 
 const CONSTRUCTOR_STANDINGS = [
-  {pos:1,  name:"Mercedes",     color:"#00d2be", pts:100, drivers:"Russell 52 · Antonelli 48"},
+  {pos:1,  name:"Mercedes",     color:"#00d2be", pts:98,  drivers:"Russell 51 · Antonelli 47"},
   {pos:2,  name:"Ferrari",      color:"#e8002d", pts:67,  drivers:"Leclerc 34 · Hamilton 33"},
   {pos:3,  name:"Haas",         color:"#b6babd", pts:19,  drivers:"Bearman 17 · Ocon 2"},
   {pos:4,  name:"McLaren",      color:"#ff8000", pts:18,  drivers:"Norris 15 · Piastri 3"},
@@ -610,8 +610,8 @@ const CONSTRUCTOR_STANDINGS = [
 // Format: [round, pts_R1, pts_R2, ...] — must match order of DRIVER_STANDINGS top drivers
 const POINTS_HISTORY = [
   // cumulative: [after R1, after R1+Sprint, after R2]
-  ["George Russell",  "#00d2be", [26, 34, 52]],
-  ["Kimi Antonelli",  "#00d2be", [18, 22, 48]],
+  ["George Russell",  "#00d2be", [25, 33, 51]],
+  ["Kimi Antonelli",  "#00d2be", [18, 22, 47]],
   ["Charles Leclerc", "#e8002d", [15, 22, 34]],
   ["Lewis Hamilton",  "#e8002d", [12, 18, 33]],
   ["Oliver Bearman",  "#b6babd", [6,  7,  17]],
@@ -621,8 +621,8 @@ const POINTS_HISTORY = [
 // Per-driver race-by-race results (for profile modal)
 // pos, pts per completed round
 const DRIVER_RESULTS = {
-  "George Russell":    [{round:1, race:"Australia", pos:"P1", pts:26},{round:2, race:"China Sprint", pos:"P1", pts:8},{round:2, race:"China", pos:"P2", pts:18}],
-  "Kimi Antonelli":    [{round:1, race:"Australia", pos:"P2", pts:18},{round:2, race:"China Sprint", pos:"P5", pts:4},{round:2, race:"China", pos:"P1", pts:26}],
+  "George Russell":    [{round:1, race:"Australia", pos:"P1", pts:25},{round:2, race:"China Sprint", pos:"P1", pts:8},{round:2, race:"China", pos:"P2", pts:18}],
+  "Kimi Antonelli":    [{round:1, race:"Australia", pos:"P2", pts:18},{round:2, race:"China Sprint", pos:"P5", pts:4},{round:2, race:"China", pos:"P1", pts:25}],
   "Charles Leclerc":   [{round:1, race:"Australia", pos:"P3", pts:15},{round:2, race:"China Sprint", pos:"P2", pts:7},{round:2, race:"China", pos:"P4", pts:12}],
   "Lewis Hamilton":    [{round:1, race:"Australia", pos:"P4", pts:12},{round:2, race:"China Sprint", pos:"P3", pts:6},{round:2, race:"China", pos:"P3", pts:15}],
   "Lando Norris":      [{round:1, race:"Australia", pos:"P5", pts:10},{round:2, race:"China Sprint", pos:"P4", pts:5},{round:2, race:"China", pos:"DNS", pts:0}],
@@ -677,7 +677,7 @@ const CIRCUIT_FACTS = {
 // pa_offset: hours from UTC for PA on that date, dr_offset: always -4
 // sessions: [name, day_label, utc_time]
 const WEEKEND_SESSIONS = {
-  1: {pa_off:-4, sessions:[
+  1: {pa_off:-5, sessions:[
     ["Practice 1","Fri Mar 6","01:30"],["Practice 2","Fri Mar 6","05:00"],
     ["Practice 3","Sat Mar 7","02:00"],["Qualifying","Sat Mar 7","05:00"],
     ["Race","Sun Mar 8","04:00"]]},
@@ -777,7 +777,7 @@ const WEEKEND_SESSIONS = {
 
 // Full schedule
 const SCHEDULE = [
-  {round:1,  flag:"🇦🇺",name:"Australian Grand Prix",       circuit:"Albert Park Circuit",             location:"Melbourne, Australia",   date:"Mar 6–8",   race_date:"Sun Mar 8, 2026",   pa:"12:00 AM",pa_tz:"EDT",dr:"12:00 AM",dr_tz:"AST",utc:"2026-03-08T04:00:00Z",done:true, sprint:false,sat:false,new_track:false},
+  {round:1,  flag:"🇦🇺",name:"Australian Grand Prix",       circuit:"Albert Park Circuit",             location:"Melbourne, Australia",   date:"Mar 6–8",   race_date:"Sun Mar 8, 2026",   pa:"11:00 PM",pa_tz:"EST",dr:"12:00 AM",dr_tz:"AST",utc:"2026-03-08T04:00:00Z",done:true, sprint:false,sat:false,new_track:false},
   {round:2,  flag:"🇨🇳",name:"Chinese Grand Prix",          circuit:"Shanghai International Circuit",  location:"Shanghai, China",        date:"Mar 13–15",race_date:"Sun Mar 15, 2026",  pa:"3:00 AM", pa_tz:"EDT",dr:"3:00 AM", dr_tz:"AST",utc:"2026-03-15T07:00:00Z",done:true, sprint:true, sat:false,new_track:false},
   {round:3,  flag:"🇯🇵",name:"Japanese Grand Prix",         circuit:"Suzuka Circuit",                  location:"Suzuka, Japan",          date:"Mar 27–29",race_date:"Sun Mar 29, 2026",  pa:"1:00 AM", pa_tz:"EDT",dr:"1:00 AM", dr_tz:"AST",utc:"2026-03-29T05:00:00Z",done:false,sprint:false,sat:false,new_track:false},
   {round:4,  flag:"🇧🇭",name:"Bahrain Grand Prix", cancelled:true,          circuit:"Bahrain International Circuit",   location:"Sakhir, Bahrain",        date:"Apr 10–12",race_date:"Sun Apr 12, 2026",  pa:"11:00 AM",pa_tz:"EDT",dr:"11:00 AM",dr_tz:"AST",utc:"2026-04-12T15:00:00Z",done:false,sprint:false,sat:false,new_track:false},
@@ -837,7 +837,7 @@ const RACE_RESULTS = {
   1: {
     winner:"George Russell", pole:"George Russell", fastest_lap:"Max Verstappen — 1:22.091 (Lap 43)", laps:58,
     results:[
-      {pos:"1", name:"George Russell",    team:"Mercedes",     color:"#00d2be",gap:"WINNER",     laps:"58",pts:26, status:"fin"},
+      {pos:"1", name:"George Russell",    team:"Mercedes",     color:"#00d2be",gap:"WINNER",     laps:"58",pts:25, status:"fin"},
       {pos:"2", name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be",gap:"+2.974s",    laps:"58",pts:18, status:"fin"},
       {pos:"3", name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d",gap:"+15.519s",   laps:"58",pts:15, status:"fin"},
       {pos:"4", name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d",gap:"+16.144s",   laps:"58",pts:12, status:"fin"},
@@ -872,7 +872,7 @@ const RACE_RESULTS = {
   2: {
     winner:"Kimi Antonelli", pole:"Kimi Antonelli", fastest_lap:"Kimi Antonelli — 1:35.275", laps:56,
     results:[
-      {pos:"1", name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be",gap:"WINNER",     laps:"56",pts:26, status:"fin"},
+      {pos:"1", name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be",gap:"WINNER",     laps:"56",pts:25, status:"fin"},
       {pos:"2", name:"George Russell",    team:"Mercedes",     color:"#00d2be",gap:"+5.515s",    laps:"56",pts:18, status:"fin"},
       {pos:"3", name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d",gap:"+25.267s",   laps:"56",pts:15, status:"fin"},
       {pos:"4", name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d",gap:"+28.894s",   laps:"56",pts:12, status:"fin"},
