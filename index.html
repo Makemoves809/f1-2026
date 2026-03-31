@@ -120,18 +120,19 @@ body.light .cd-num{color:#18181b;}
 /* PODIUM CARDS */
 .podium-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;}
 @media(max-width:600px){.podium-cards{grid-template-columns:1fr;gap:8px;}}
-.podium-card{border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden;border:1px solid transparent;cursor:pointer;transition:transform var(--t),filter var(--t);}
+.podium-card{border-radius:var(--radius);padding:16px 14px;position:relative;overflow:hidden;border:1px solid transparent;cursor:pointer;transition:transform var(--t),filter var(--t);display:flex;align-items:center;justify-content:space-between;gap:14px;}
 .podium-card:hover{transform:translateY(-3px);filter:brightness(1.08);box-shadow:0 12px 30px rgba(0,0,0,.45);}
 .podium-card.rank1{background:linear-gradient(135deg,rgba(245,197,24,.18),rgba(245,197,24,.05));border-color:rgba(245,197,24,.3);}
 .podium-card.rank2{background:linear-gradient(135deg,rgba(184,184,184,.15),rgba(184,184,184,.04));border-color:rgba(184,184,184,.25);}
 .podium-card.rank3{background:linear-gradient(135deg,rgba(200,121,65,.15),rgba(200,121,65,.04));border-color:rgba(200,121,65,.25);}
-.pc-rank{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;opacity:.15;position:absolute;top:6px;right:10px;}
+.pc-rank{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;opacity:.12;position:absolute;top:4px;left:8px;z-index:0;}
 .pc-rank.r1{color:var(--gold);}
 .pc-rank.r2{color:var(--silver);}
 .pc-rank.r3{color:var(--bronze);}
+.pc-content{flex:1;min-width:0;position:relative;z-index:1;}
 /* driver photo in podium card */
-.pc-photo-wrap{width:76px;height:76px;border-radius:50%;overflow:hidden;margin-bottom:10px;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.pc-initials-txt{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;position:absolute;z-index:1;letter-spacing:1px;}
+.pc-photo-wrap{width:80px;height:80px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.pc-initials-txt{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;position:absolute;z-index:1;letter-spacing:1px;}
 .pc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
 /* team logo */
 .pc-team-logo{height:14px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.7;flex-shrink:0;}
@@ -144,7 +145,7 @@ body.light .cst-logo{filter:none;opacity:1;}
 .modal-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
 .pc-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:#fff;line-height:1;margin-bottom:2px;}
 body.light .pc-name{color:#18181b;}
-.pc-team{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.pc-team{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
 .pc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
 .pc-pts{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;}
 .pc-pts.r1{color:var(--gold);}
@@ -1456,17 +1457,19 @@ function renderHome(){
     const logoUrl  = TEAM_LOGOS[d.team]||"";
     return `<div class="podium-card ${rankCls}" onclick="openDriverModal('${d.name}')">
       <div class="pc-rank ${ptsCls}">${rnkLbl}</div>
+      <div class="pc-content">
+        <div class="pc-name">${d.name}</div>
+        <div class="pc-team">
+          ${logoUrl?`<img class="pc-team-logo" src="${logoUrl}" alt="${d.team}" onerror="this.style.display='none'">`:""}
+          <div class="pc-dot" style="background:${d.color}"></div>${d.team}
+        </div>
+        <div class="pc-pts ${ptsCls}">${d.pts}</div>
+        <div class="pc-pts-lbl">POINTS</div>
+      </div>
       <div class="pc-photo-wrap" style="background:${d.color}">
         <span class="pc-initials-txt">${initials}</span>
         <img class="pc-photo" src="${d.photo}" alt="" onerror="this.style.display='none'">
       </div>
-      <div class="pc-name">${d.name}</div>
-      <div class="pc-team">
-        ${logoUrl?`<img class="pc-team-logo" src="${logoUrl}" alt="${d.team}" onerror="this.style.display='none'">`:""}
-        <div class="pc-dot" style="background:${d.color}"></div>${d.team}
-      </div>
-      <div class="pc-pts ${ptsCls}">${d.pts}</div>
-      <div class="pc-pts-lbl">POINTS</div>
     </div>`;
   }).join("");
 
