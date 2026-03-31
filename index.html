@@ -125,13 +125,14 @@ body.light .cd-num{color:#18181b;}
 .podium-card.rank1{background:linear-gradient(135deg,rgba(245,197,24,.18),rgba(245,197,24,.05));border-color:rgba(245,197,24,.3);}
 .podium-card.rank2{background:linear-gradient(135deg,rgba(184,184,184,.15),rgba(184,184,184,.04));border-color:rgba(184,184,184,.25);}
 .podium-card.rank3{background:linear-gradient(135deg,rgba(200,121,65,.15),rgba(200,121,65,.04));border-color:rgba(200,121,65,.25);}
-.pc-rank{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;opacity:.12;position:absolute;top:4px;left:8px;z-index:0;}
+.pc-rank{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;line-height:1;margin-bottom:5px;text-align:center;}
 .pc-rank.r1{color:var(--gold);}
 .pc-rank.r2{color:var(--silver);}
 .pc-rank.r3{color:var(--bronze);}
-.pc-content{flex:1;min-width:0;position:relative;z-index:1;}
+.pc-content{flex:1;min-width:0;}
+.pc-photo-side{flex-shrink:0;display:flex;flex-direction:column;align-items:center;}
 /* driver photo in podium card */
-.pc-photo-wrap{width:80px;height:80px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.pc-photo-wrap{width:80px;height:80px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
 .pc-initials-txt{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;position:absolute;z-index:1;letter-spacing:1px;}
 .pc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
 /* team logo */
@@ -597,7 +598,7 @@ const driverPhoto = (letter, code, first, last) =>
   `${F1_CDN}/${letter}/${code}_${first}_${last}/${code.toLowerCase()}`;
 
 const DRIVER_STANDINGS = [
-  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:72, wins:2,  nat:"🇮🇹", age:19, number:12, photo:driverPhoto("K","KIMANT01","Kimi","Antonelli")},
+  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:72, wins:2,  nat:"🇮🇹", age:19, number:12, photo:driverPhoto("A","ANDANT01","Andrea_Kimi","Antonelli")},
   {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:63, wins:1,  nat:"🇬🇧", age:28, number:63, photo:driverPhoto("G","GEORUS01","George","Russell")},
   {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:49, wins:0,  nat:"🇲🇨", age:28, number:16, photo:driverPhoto("C","CHALEC01","Charles","Leclerc")},
   {pos:4,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:41, wins:0,  nat:"🇬🇧", age:41, number:44, photo:driverPhoto("L","LEWHAM01","Lewis","Hamilton")},
@@ -1456,7 +1457,6 @@ function renderHome(){
     const initials = d.name.split(" ").map(n=>n[0]).join("").slice(0,3);
     const logoUrl  = TEAM_LOGOS[d.team]||"";
     return `<div class="podium-card ${rankCls}" onclick="openDriverModal('${d.name}')">
-      <div class="pc-rank ${ptsCls}">${rnkLbl}</div>
       <div class="pc-content">
         <div class="pc-name">${d.name}</div>
         <div class="pc-team">
@@ -1466,9 +1466,12 @@ function renderHome(){
         <div class="pc-pts ${ptsCls}">${d.pts}</div>
         <div class="pc-pts-lbl">POINTS</div>
       </div>
-      <div class="pc-photo-wrap" style="background:${d.color}">
-        <span class="pc-initials-txt">${initials}</span>
-        <img class="pc-photo" src="${d.photo}" alt="" onerror="this.style.display='none'">
+      <div class="pc-photo-side">
+        <div class="pc-rank ${ptsCls}">P${rnkLbl}</div>
+        <div class="pc-photo-wrap" style="background:${d.color}">
+          <span class="pc-initials-txt">${initials}</span>
+          <img class="pc-photo" src="${d.photo}" alt="" onerror="this.style.display='none'">
+        </div>
       </div>
     </div>`;
   }).join("");
