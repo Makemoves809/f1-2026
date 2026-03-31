@@ -129,6 +129,19 @@ body.light .cd-num{color:#18181b;}
 .pc-rank.r1{color:var(--gold);}
 .pc-rank.r2{color:var(--silver);}
 .pc-rank.r3{color:var(--bronze);}
+/* driver photo in podium card */
+.pc-photo-wrap{width:76px;height:76px;border-radius:50%;overflow:hidden;margin-bottom:10px;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pc-initials-txt{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;position:absolute;z-index:1;letter-spacing:1px;}
+.pc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
+/* team logo */
+.pc-team-logo{height:14px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.7;flex-shrink:0;}
+body.light .pc-team-logo{filter:none;opacity:1;}
+.cst-logo{height:18px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.75;flex-shrink:0;margin-right:6px;}
+body.light .cst-logo{filter:none;opacity:1;}
+/* modal driver photo */
+.modal-driver-photo{width:56px;height:56px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.modal-initials-txt{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;position:absolute;z-index:1;}
+.modal-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
 .pc-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:#fff;line-height:1;margin-bottom:2px;}
 body.light .pc-name{color:#18181b;}
 .pc-team{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
@@ -578,29 +591,33 @@ const COMPLETED_ROUNDS = 3;
 // Helper to build F1 official headshot URL
 
 
+const F1_CDN = "https://media.formula1.com/image/upload/f_auto,c_limit,q_auto,w_300/content/dam/fom-website/drivers";
+const driverPhoto = (letter, code, first, last) =>
+  `${F1_CDN}/${letter}/${code}_${first}_${last}/${code.toLowerCase()}`;
+
 const DRIVER_STANDINGS = [
-  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:72, wins:2,  nat:"🇮🇹", age:19, number:12},
-  {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:63, wins:1,  nat:"🇬🇧", age:28, number:63},
-  {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:49, wins:0,  nat:"🇲🇨", age:28, number:16},
-  {pos:4,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:41, wins:0,  nat:"🇬🇧", age:41, number:44},
-  {pos:5,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", pts:25, wins:0,  nat:"🇬🇧", age:26, number:4},
-  {pos:6,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", pts:21, wins:0,  nat:"🇦🇺", age:24, number:81},
-  {pos:7,  name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", pts:17, wins:0,  nat:"🇬🇧", age:19, number:87},
-  {pos:8,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", pts:15, wins:0,  nat:"🇫🇷", age:28, number:10},
-  {pos:9,  name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", pts:12, wins:0,  nat:"🇳🇱", age:28, number:1},
-  {pos:10, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", pts:10, wins:0,  nat:"🇳🇿", age:22, number:30},
-  {pos:11, name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", pts:4,  wins:0,  nat:"🇫🇷", age:20, number:22},
-  {pos:12, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", pts:4,  wins:0,  nat:"🇬🇧", age:18, number:6},
-  {pos:13, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", pts:2,  wins:0,  nat:"🇪🇸", age:30, number:55},
-  {pos:14, name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", pts:2,  wins:0,  nat:"🇧🇷", age:20, number:5},
-  {pos:15, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", pts:1,  wins:0,  nat:"🇦🇷", age:21, number:43},
-  {pos:16, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", pts:1,  wins:0,  nat:"🇫🇷", age:28, number:31},
-  {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", pts:0,  wins:0,  nat:"🇹🇭", age:28, number:23},
-  {pos:18, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", pts:0,  wins:0,  nat:"🇪🇸", age:44, number:14},
-  {pos:19, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", pts:0,  wins:0,  nat:"🇨🇦", age:26, number:18},
-  {pos:20, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", pts:0,  wins:0,  nat:"🇲🇽", age:35, number:11},
-  {pos:21, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", pts:0,  wins:0,  nat:"🇩🇪", age:37, number:27},
-  {pos:22, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", pts:0,  wins:0,  nat:"🇫🇮", age:36, number:77},
+  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:72, wins:2,  nat:"🇮🇹", age:19, number:12, photo:driverPhoto("K","KIMANT01","Kimi","Antonelli")},
+  {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:63, wins:1,  nat:"🇬🇧", age:28, number:63, photo:driverPhoto("G","GEORUS01","George","Russell")},
+  {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:49, wins:0,  nat:"🇲🇨", age:28, number:16, photo:driverPhoto("C","CHALEC01","Charles","Leclerc")},
+  {pos:4,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:41, wins:0,  nat:"🇬🇧", age:41, number:44, photo:driverPhoto("L","LEWHAM01","Lewis","Hamilton")},
+  {pos:5,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", pts:25, wins:0,  nat:"🇬🇧", age:26, number:4,  photo:driverPhoto("L","LANNOR01","Lando","Norris")},
+  {pos:6,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", pts:21, wins:0,  nat:"🇦🇺", age:24, number:81, photo:driverPhoto("O","OSCPIA01","Oscar","Piastri")},
+  {pos:7,  name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", pts:17, wins:0,  nat:"🇬🇧", age:19, number:87, photo:driverPhoto("O","OLIBEA01","Oliver","Bearman")},
+  {pos:8,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", pts:15, wins:0,  nat:"🇫🇷", age:28, number:10, photo:driverPhoto("P","PIEGAS01","Pierre","Gasly")},
+  {pos:9,  name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", pts:12, wins:0,  nat:"🇳🇱", age:28, number:1,  photo:driverPhoto("M","MAXVER01","Max","Verstappen")},
+  {pos:10, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", pts:10, wins:0,  nat:"🇳🇿", age:22, number:30, photo:driverPhoto("L","LIALAW01","Liam","Lawson")},
+  {pos:11, name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", pts:4,  wins:0,  nat:"🇫🇷", age:20, number:22, photo:driverPhoto("I","ISAHAD01","Isack","Hadjar")},
+  {pos:12, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", pts:4,  wins:0,  nat:"🇬🇧", age:18, number:6,  photo:driverPhoto("A","ARVLIN01","Arvid","Lindblad")},
+  {pos:13, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", pts:2,  wins:0,  nat:"🇪🇸", age:30, number:55, photo:driverPhoto("C","CARSAI01","Carlos","Sainz")},
+  {pos:14, name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", pts:2,  wins:0,  nat:"🇧🇷", age:20, number:5,  photo:driverPhoto("G","GABBOR01","Gabriel","Bortoleto")},
+  {pos:15, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", pts:1,  wins:0,  nat:"🇦🇷", age:21, number:43, photo:driverPhoto("F","FRACOL01","Franco","Colapinto")},
+  {pos:16, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", pts:1,  wins:0,  nat:"🇫🇷", age:28, number:31, photo:driverPhoto("E","ESTOCO01","Esteban","Ocon")},
+  {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", pts:0,  wins:0,  nat:"🇹🇭", age:28, number:23, photo:driverPhoto("A","ALEALB01","Alexander","Albon")},
+  {pos:18, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", pts:0,  wins:0,  nat:"🇪🇸", age:44, number:14, photo:driverPhoto("F","FERALO01","Fernando","Alonso")},
+  {pos:19, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", pts:0,  wins:0,  nat:"🇨🇦", age:26, number:18, photo:driverPhoto("L","LANSTR01","Lance","Stroll")},
+  {pos:20, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", pts:0,  wins:0,  nat:"🇲🇽", age:35, number:11, photo:driverPhoto("S","SERPER01","Sergio","Perez")},
+  {pos:21, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", pts:0,  wins:0,  nat:"🇩🇪", age:37, number:27, photo:driverPhoto("N","NICHUL01","Nico","Hulkenberg")},
+  {pos:22, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", pts:0,  wins:0,  nat:"🇫🇮", age:36, number:77, photo:driverPhoto("V","VALBOT01","Valtteri","Bottas")},
 ];
 
 const CONSTRUCTOR_STANDINGS = [
@@ -616,6 +633,20 @@ const CONSTRUCTOR_STANDINGS = [
   {pos:10, name:"Aston Martin", color:"#358c75", pts:0,   drivers:"Alonso 0 · Stroll 0"},
   {pos:11, name:"Cadillac",     color:"#cccccc", pts:0,   drivers:"Pérez 0 · Bottas 0"},
 ];
+
+const TEAM_LOGOS = {
+  "Mercedes":     "https://media.formula1.com/content/dam/fom-website/teams/2026/mercedes.png",
+  "Ferrari":      "https://media.formula1.com/content/dam/fom-website/teams/2026/ferrari.png",
+  "McLaren":      "https://media.formula1.com/content/dam/fom-website/teams/2026/mclaren.png",
+  "Haas":         "https://media.formula1.com/content/dam/fom-website/teams/2026/haas.png",
+  "Alpine":       "https://media.formula1.com/content/dam/fom-website/teams/2026/alpine.png",
+  "Red Bull":     "https://media.formula1.com/content/dam/fom-website/teams/2026/red-bull.png",
+  "Racing Bulls": "https://media.formula1.com/content/dam/fom-website/teams/2026/racing-bulls.png",
+  "Audi":         "https://media.formula1.com/content/dam/fom-website/teams/2026/audi.png",
+  "Williams":     "https://media.formula1.com/content/dam/fom-website/teams/2026/williams.png",
+  "Aston Martin": "https://media.formula1.com/content/dam/fom-website/teams/2026/aston-martin.png",
+  "Cadillac":     "https://media.formula1.com/content/dam/fom-website/teams/2026/cadillac.png",
+};
 
 // Points per round — add a new array entry after each race
 // Format: [round, pts_R1, pts_R2, ...] — must match order of DRIVER_STANDINGS top drivers
@@ -1339,9 +1370,14 @@ function openDriverModal(name){
     </div>`;
   }).join("") || `<div style="padding:12px;color:var(--txt3);font-size:12px;">No results yet.</div>`;
 
+  const mInitials = d.name.split(" ").map(n=>n[0]).join("").slice(0,3);
   document.getElementById("modal-box").innerHTML = `
     <div class="modal-header">
       <div class="modal-team-stripe" style="background:${d.color}"></div>
+      <div class="modal-driver-photo" style="background:${d.color}">
+        <span class="modal-initials-txt">${mInitials}</span>
+        <img class="modal-photo" src="${d.photo}" alt="" onerror="this.style.display='none'">
+      </div>
       <div>
         <div class="modal-name">${d.name}</div>
         <div class="modal-team">${d.nat} · #${d.number} · ${d.team} · Age ${d.age}</div>
@@ -1416,10 +1452,19 @@ function renderHome(){
     const rankCls = ["rank1","rank2","rank3"][i];
     const rnkLbl  = ["1","2","3"][i];
     const ptsCls  = ["r1","r2","r3"][i];
+    const initials = d.name.split(" ").map(n=>n[0]).join("").slice(0,3);
+    const logoUrl  = TEAM_LOGOS[d.team]||"";
     return `<div class="podium-card ${rankCls}" onclick="openDriverModal('${d.name}')">
       <div class="pc-rank ${ptsCls}">${rnkLbl}</div>
+      <div class="pc-photo-wrap" style="background:${d.color}">
+        <span class="pc-initials-txt">${initials}</span>
+        <img class="pc-photo" src="${d.photo}" alt="" onerror="this.style.display='none'">
+      </div>
       <div class="pc-name">${d.name}</div>
-      <div class="pc-team"><div class="pc-dot" style="background:${d.color}"></div>${d.team}</div>
+      <div class="pc-team">
+        ${logoUrl?`<img class="pc-team-logo" src="${logoUrl}" alt="${d.team}" onerror="this.style.display='none'">`:""}
+        <div class="pc-dot" style="background:${d.color}"></div>${d.team}
+      </div>
       <div class="pc-pts ${ptsCls}">${d.pts}</div>
       <div class="pc-pts-lbl">POINTS</div>
     </div>`;
@@ -1447,11 +1492,15 @@ function renderHome(){
   const csRows = CONSTRUCTOR_STANDINGS.map(c=>{
     const pc = c.pos===1?"p1":c.pos===2?"p2":c.pos===3?"p3":"";
     const barW = c.pts>0 ? Math.round((c.pts/maxPts)*100) : 0;
+    const cLogoUrl = TEAM_LOGOS[c.name]||"";
     return `<div class="st-row c3">
       <div class="st-pos ${pc}">${c.pos}</div>
       <div class="st-info"><div class="st-stripe" style="background:${c.color}"></div>
-        <div>
-          <div class="st-name">${c.name}</div>
+        <div style="display:flex;flex-direction:column;gap:2px;width:100%">
+          <div style="display:flex;align-items:center;gap:6px">
+            ${cLogoUrl?`<img class="cst-logo" src="${cLogoUrl}" alt="${c.name}" onerror="this.style.display='none'">`:""}
+            <div class="st-name">${c.name}</div>
+          </div>
           <div class="cst-bar-wrap"><div class="cst-bar" style="width:${barW}%;background:${c.color}"></div></div>
           <div class="st-sub">${c.drivers}</div>
         </div>
