@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- F1 2026 Season Hub v1.5 -->
+<!-- F1 2026 Season Hub v1.6 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -454,6 +454,187 @@ body.light .ms-num{color:#18181b;}
   .results-layout,.upcoming-layout{grid-template-columns:1fr;}
   .wknd-row{grid-template-columns:1fr 95px;}
 }
+
+/* ════════════════════════════════════════════════════════
+   v1.6 DESIGN POLISH — keep additive; do not remove rules above.
+   ════════════════════════════════════════════════════════ */
+
+/* Tabular numerals everywhere numeric data appears */
+.hero-stat-num,.cd-num,.pc-pts,.st-pts,.mini-pts,.pts-cell,.cf-num,.time-card-time,.wknd-time,.sprint-pts,.sprint-gap,.quali-time,.gap-cell,.ms-num,.mrr-pts,.mrr-pos{font-variant-numeric:tabular-nums;font-feature-settings:"tnum";}
+
+/* Visible focus ring for keyboard users */
+:focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:3px;}
+button:focus-visible,a:focus-visible,.podium-card:focus-visible,.st-row:focus-visible,.driver-row:focus-visible{outline-offset:3px;}
+.tab-btn:focus-visible{outline-offset:-2px;}
+
+/* HERO — speed-line drift + glow border */
+.hero{will-change:transform;}
+.hero::before{animation:heroDrift 22s linear infinite;}
+@keyframes heroDrift{from{background-position:0 0;}to{background-position:560px 0;}}
+.hero::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:linear-gradient(90deg,transparent,var(--red) 30%,#ff3a30 50%,var(--red) 70%,transparent);opacity:.55;animation:heroPulse 3.4s ease-in-out infinite;pointer-events:none;}
+@keyframes heroPulse{0%,100%{opacity:.4;}50%{opacity:.95;}}
+.hero h1{text-shadow:0 4px 30px rgba(225,6,0,.18);}
+body.light .hero h1{text-shadow:none;}
+
+/* Hero stat counters */
+.hero-stat{position:relative;padding-right:22px;}
+.hero-stat:not(:last-child)::after{content:'';position:absolute;right:0;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.07),transparent);}
+body.light .hero-stat:not(:last-child)::after{background:linear-gradient(to bottom,transparent,rgba(0,0,0,.08),transparent);}
+.hero-stat-num{transition:color .25s;}
+
+/* NEXT RACE — radar pulse + lift */
+.next-race-card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;will-change:transform;}
+.next-race-card:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(124,58,237,.22);border-color:rgba(124,58,237,.55);}
+.nrc-label{position:relative;display:inline-flex;align-items:center;gap:6px;padding-left:14px;}
+.nrc-label::before{content:'';position:absolute;left:0;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--next);box-shadow:0 0 0 0 rgba(124,58,237,.55);animation:radarPulse 1.8s ease-out infinite;}
+@keyframes radarPulse{0%{box-shadow:0 0 0 0 rgba(124,58,237,.55);}70%{box-shadow:0 0 0 9px rgba(124,58,237,0);}100%{box-shadow:0 0 0 0 rgba(124,58,237,0);}}
+
+/* COUNTDOWN — softer transitions, live-state pulse */
+.cd-unit{transition:background .25s,border-color .25s;}
+.cd-num{transition:color .2s;}
+.cd-unit.live,.cd-unit:hover{background:rgba(124,58,237,.2);border-color:rgba(124,58,237,.4);}
+.countdown-wrap.live .cd-unit{border-color:var(--red);background:rgba(225,6,0,.12);animation:liveBlink 1.4s ease-in-out infinite;}
+.countdown-wrap.live .cd-num{color:var(--red);}
+@keyframes liveBlink{0%,100%{box-shadow:0 0 0 0 rgba(225,6,0,.0);}50%{box-shadow:0 0 0 4px rgba(225,6,0,.18);}}
+
+/* LAST RACE BANNER — subtle slide-in chevron */
+.lrb-cta{position:relative;transition:transform .2s;}
+.lrb-inner:hover .lrb-cta{transform:translateX(3px);}
+.lrb-inner{transition:border-color var(--t),background .25s,transform .2s;}
+.lrb-inner:hover{transform:translateY(-1px);}
+
+/* PODIUM CARDS — metallic depth, P1 shimmer */
+.podium-card{transition:transform .25s ease,filter .25s,box-shadow .25s ease,border-color .25s;}
+.podium-card.rank1{box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 1px 0 rgba(0,0,0,.4);}
+.podium-card.rank1::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(245,197,24,.18) 50%,transparent 65%);opacity:0;transition:opacity .35s;pointer-events:none;}
+.podium-card.rank1:hover::after{opacity:1;animation:shine 1.4s ease-in-out;}
+@keyframes shine{0%{transform:translateX(-30%);}100%{transform:translateX(30%);}}
+.podium-card .pc-photo-wrap{box-shadow:0 6px 18px rgba(0,0,0,.32),inset 0 0 0 1px rgba(255,255,255,.05);transition:transform .25s,box-shadow .25s;}
+.podium-card:hover .pc-photo-wrap{transform:scale(1.04);}
+.podium-card.rank1 .pc-rank{text-shadow:0 0 16px rgba(245,197,24,.45);}
+
+/* DRIVER STANDINGS — stripe glow + top-3 tint */
+.st-row{position:relative;}
+.st-row::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.04),transparent 30%);opacity:0;transition:opacity .2s;pointer-events:none;}
+.st-row:hover::before{opacity:1;}
+.st-row .st-stripe{transition:box-shadow .2s,width .2s;}
+.st-row:hover .st-stripe{box-shadow:0 0 8px currentColor;}
+body.light .st-row:hover{background:rgba(0,0,0,.03);}
+
+/* CONSTRUCTOR BARS — thicker, gradient, subtle inset */
+.cst-bar-wrap{height:6px;background:rgba(255,255,255,.05);box-shadow:inset 0 1px 1px rgba(0,0,0,.25);}
+body.light .cst-bar-wrap{background:rgba(0,0,0,.06);box-shadow:inset 0 1px 1px rgba(0,0,0,.06);}
+.cst-bar{background:linear-gradient(90deg,currentColor 0%,currentColor 60%,rgba(255,255,255,.85) 100%) !important;background-blend-mode:overlay;position:relative;transition:width .8s cubic-bezier(.2,.8,.2,1);}
+
+/* CHART — animated draw + crisper grid */
+.chart-line{stroke-dasharray:1200;stroke-dashoffset:1200;animation:chartDraw 1.4s cubic-bezier(.2,.8,.2,1) forwards;}
+@keyframes chartDraw{to{stroke-dashoffset:0;}}
+.chart-dot{transform-origin:center;transform-box:fill-box;animation:dotPop .55s cubic-bezier(.2,1.4,.4,1) backwards;}
+@keyframes dotPop{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+.chart-line:hover{opacity:1;stroke-width:3;}
+.cl-item{padding:3px 7px;border-radius:12px;border:1px solid var(--border);transition:background .15s,border-color .15s;}
+.cl-item:hover{background:rgba(255,255,255,.04);border-color:var(--txt3);}
+body.light .cl-item:hover{background:rgba(0,0,0,.04);}
+
+/* TABS — better feedback */
+.tab-btn{transition:color var(--t),background var(--t),border-color var(--t);}
+.tab-btn:hover .tab-rnd{transform:translateY(-1px);}
+.tab-rnd{transition:transform .15s;}
+.tab-btn.active{background:linear-gradient(180deg,transparent,rgba(225,6,0,.06));}
+.tab-btn.done.active{background:linear-gradient(180deg,transparent,rgba(34,197,94,.06));}
+.tab-btn.is-next.active{background:linear-gradient(180deg,transparent,rgba(124,58,237,.08));}
+
+/* TAB PANEL — soft fade-in entry */
+.tab-panel.active{animation:panelIn .3s ease-out;}
+@keyframes panelIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* RACE PANEL HEADER — flag drop shadow */
+.race-flag-big{filter:drop-shadow(0 4px 14px rgba(0,0,0,.35));transition:transform .25s;}
+.race-panel-header:hover .race-flag-big{transform:translateY(-1px);}
+
+/* RESULT ROWS — winner gold tint */
+.driver-row .pos-cell.p1{position:relative;}
+.driver-row:has(.pos-cell.p1){background:linear-gradient(90deg,rgba(245,197,24,.08),transparent 60%);}
+.driver-row:has(.pos-cell.p2){background:linear-gradient(90deg,rgba(184,184,184,.06),transparent 60%);}
+.driver-row:has(.pos-cell.p3){background:linear-gradient(90deg,rgba(200,121,65,.06),transparent 60%);}
+
+/* SECTION TITLE — telemetry shimmer line */
+.section-title::after{background:linear-gradient(90deg,var(--border),transparent);}
+
+/* CARD BLOCK — nicer hover lift */
+.card-block:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(0,0,0,.28);border-color:rgba(255,255,255,.08);}
+.card-block{transition:transform .2s,box-shadow .25s,border-color .25s;}
+body.light .card-block:hover{box-shadow:0 10px 26px rgba(0,0,0,.08);border-color:rgba(0,0,0,.12);}
+
+/* MODAL — slide-up entry, blurred backdrop */
+.modal-overlay{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(0,0,0,.6);}
+.modal-overlay.open .modal-box{animation:modalIn .25s cubic-bezier(.2,.9,.2,1);}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px) scale(.98);}to{opacity:1;transform:translateY(0) scale(1);}}
+.modal-box{box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.04);}
+body.light .modal-box{box-shadow:0 30px 60px rgba(0,0,0,.18);}
+.modal-close{transition:color var(--t),transform .15s,background .15s;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:rgba(255,255,255,.06);transform:rotate(90deg);}
+body.light .modal-close:hover{background:rgba(0,0,0,.06);}
+
+/* PILLS — subtle hover */
+.pill{transition:filter .15s,transform .15s;}
+.pill:hover{filter:brightness(1.15);}
+
+/* BOTTOM NAV — safe area, animated active dot */
+.bottom-nav{padding-bottom:env(safe-area-inset-bottom);height:calc(62px + env(safe-area-inset-bottom));}
+.bnav-btn{position:relative;transition:color var(--t),transform .15s;}
+.bnav-btn .bnav-icon{transition:transform .2s;}
+.bnav-btn:hover .bnav-icon,.bnav-btn.active .bnav-icon{transform:translateY(-1px) scale(1.05);}
+.bnav-btn.active::before{content:'';position:absolute;top:6px;left:50%;transform:translateX(-50%);width:18px;height:2px;background:var(--red);border-radius:2px;box-shadow:0 0 8px var(--red);}
+
+/* BACK TO TOP — subtle entrance */
+.btt-btn{box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.04);}
+.btt-btn:hover{transform:translateY(-2px);}
+body.light .btt-btn{box-shadow:0 6px 22px rgba(0,0,0,.12);}
+
+/* NOTIF BUTTONS — softer states */
+.notify-btn,.notif-btn,.cal-btn,.share-btn,.theme-btn,.lang-btn{transition:all var(--t),transform .12s;}
+.notify-btn:active,.notif-btn:active,.cal-btn:active,.share-btn:active,.theme-btn:active{transform:scale(.96);}
+
+/* TIME CARDS — accent shadow */
+.time-card{transition:transform .2s,box-shadow .25s;}
+.time-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,0,0,.22);}
+body.light .time-card:hover{box-shadow:0 8px 22px rgba(0,0,0,.06);}
+
+/* WEEKEND ROWS — subtle hover */
+.wknd-row:not(.header){transition:background .15s;}
+.wknd-row:not(.header):hover{background:rgba(255,255,255,.02);}
+body.light .wknd-row:not(.header):hover{background:rgba(0,0,0,.02);}
+
+/* SCROLLBAR (browsers that respect it) */
+*{scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+*::-webkit-scrollbar{width:8px;height:8px;}
+*::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+*::-webkit-scrollbar-thumb:hover{background:var(--txt3);}
+
+/* IMAGE LOADING — subtle fade in to avoid flash */
+.pc-photo,.modal-photo,.pc-team-logo,.cst-logo{opacity:0;animation:imgFade .4s ease-out forwards;}
+@keyframes imgFade{to{opacity:var(--imgEnd,1);}}
+.pc-team-logo,.cst-logo{--imgEnd:.7;}
+body.light .pc-team-logo,body.light .cst-logo{--imgEnd:1;}
+
+/* LIGHT MODE — better card contrast */
+body.light .standings-table,body.light .classification,body.light .mini-standings,body.light .sprint-block,body.light .quali-block,body.light .wknd-table,body.light .chart-wrap,body.light .card-block,body.light .modal-box{box-shadow:0 1px 0 rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);}
+
+/* REDUCED MOTION — respect users that prefer less animation */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  .hero::before,.hero::after,.nrc-label::before,.countdown-wrap.live .cd-unit,.podium-card.rank1::after,.chart-line,.chart-dot{animation:none !important;}
+  .chart-line{stroke-dashoffset:0 !important;}
+}
+
+/* PRINT — clean layout for printing standings */
+@media print{
+  .site-header,.bottom-nav,.btt-btn,.tabs-section,.notif-toast,.notify-toast,.modal-overlay,.share-btn,.cal-btn,.notif-btn,.notify-btn,.theme-btn,.lang-toggle{display:none !important;}
+  body{background:#fff;color:#000;padding-bottom:0;}
+  .hero{background:none !important;border-bottom:2px solid #000;}
+  .standings-table,.card-block,.classification{break-inside:avoid;}
+}
 </style>
 </head>
 <body>
@@ -463,10 +644,10 @@ body.light .ms-num{color:#18181b;}
   <div class="header-inner">
     <div class="site-logo">F1 <span>2026</span></div>
     <div class="header-right">
-      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
-      <div class="lang-toggle">
-        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark" aria-label="Toggle light or dark mode">🌙</button>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')" aria-label="English">EN</button>
+        <button class="lang-btn" id="btn-es" onclick="setLang('es')" aria-label="Español">ES</button>
       </div>
     </div>
   </div>
@@ -576,7 +757,7 @@ body.light .ms-num{color:#18181b;}
 </nav>
 
 <!-- BACK TO TOP -->
-<button class="btt-btn" id="btt-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+<button class="btt-btn" id="btt-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Scroll back to top">↑</button>
 
 <!-- FOOTER -->
 <footer class="site-footer">
@@ -587,7 +768,7 @@ body.light .ms-num{color:#18181b;}
 // ════════════════════════════════════════════════════════
 // F1 2026 — STATIC DATA  (update after each race)
 // ════════════════════════════════════════════════════════
-const COMPLETED_ROUNDS = 3;
+// COMPLETED_ROUNDS derived after SCHEDULE is defined (see below).
 
 // Driver standings — update pts/wins after each race
 // Helper to build F1 official headshot URL
@@ -847,8 +1028,10 @@ const SCHEDULE = [
   {round:23, flag:"🇦🇪",name:"Abu Dhabi Grand Prix",        circuit:"Yas Marina Circuit",              location:"Abu Dhabi, UAE",         date:"Dec 4–6",  race_date:"Sun Dec 6, 2026",   pa:"8:00 AM", pa_tz:"EST",dr:"9:00 AM", dr_tz:"AST",utc:"2026-12-06T13:00:00Z",done:false,sprint:false,sat:false,new_track:false,split:true},
 ];
 
-// Fix schedule round numbers properly
-SCHEDULE[21].round = 22; SCHEDULE[22].round = 23; SCHEDULE[23].round = 24;
+// Derived season totals — single source of truth
+const TOTAL_ROUNDS     = SCHEDULE.filter(r=>!r.cancelled).length;
+const COMPLETED_ROUNDS = SCHEDULE.filter(r=>r.done).length;
+const REMAINING_ROUNDS = TOTAL_ROUNDS - COMPLETED_ROUNDS;
 
 const RACE_FACTS = {
   1:  ["7 lead changes in the first 9 laps between Russell and Leclerc.","Ferrari VSC blunder — stayed out during Virtual Safety Cars, handing Mercedes the win.","Verstappen started P20 after a Q1 crash and recovered to P6 with the fastest lap.","Piastri DNS — crashed on his sighting lap in front of his home Melbourne crowd.","Alonso retired mid-race and flagged a risk of nerve damage.","Bortoleto scored Audi's first-ever F1 point in P9 on the team's debut."],
@@ -1023,30 +1206,6 @@ const SPRINT_RESULTS = {  2: {
 
 // Qualifying grid for the race (separate from sprint qualifying)
 const QUALIFYING_GRID = {
-  3: [
-    {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", time:"1:28.778"},
-    {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", time:"1:29.076"},
-    {pos:3,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", time:"1:29.132"},
-    {pos:4,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", time:"1:29.405"},
-    {pos:5,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", time:"1:29.409"},
-    {pos:6,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", time:"1:29.567"},
-    {pos:7,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", time:"1:29.691"},
-    {pos:8,  name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", time:"1:29.978"},
-    {pos:9,  name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", time:"1:30.274"},
-    {pos:10, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", time:"1:30.319"},
-    {pos:11, name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", time:"1:30.512"},
-    {pos:12, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", time:"1:30.559"},
-    {pos:13, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", time:"1:30.628"},
-    {pos:14, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", time:"1:30.745"},
-    {pos:15, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", time:"1:30.877"},
-    {pos:16, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", time:"1:31.283"},
-    {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", time:"1:31.648"},
-    {pos:18, name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", time:"1:31.650"},
-    {pos:19, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", time:"1:32.706"},
-    {pos:20, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", time:"1:32.830"},
-    {pos:21, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", time:"1:33.146"},
-    {pos:22, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", time:"1:33.420"},
-  ],
   2: [
     {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", time:"1:32.064"},
     {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", time:"1:32.286"},
@@ -1334,24 +1493,52 @@ function startCountdown(utcStr){
   const wrap = document.getElementById("nrw-countdown");
   wrap.style.display = "block";
   if(cdInterval) clearInterval(cdInterval);
+  // Race is "live" for ~2.5h after start
+  const liveWindow = 150 * 60 * 1000;
+  function setText(id,val){
+    const el = document.getElementById(id);
+    if(el && el.textContent !== String(val)) el.textContent = val;
+  }
   function tick(){
     const diff = target - new Date();
     if(diff<=0){
-      document.getElementById("cd-label").textContent=t("cd_live");
-      ["cd-days","cd-hrs","cd-min","cd-sec"].forEach(id=>document.getElementById(id).textContent="0");
-      clearInterval(cdInterval); return;
+      setText("cd-label", t("cd_live"));
+      ["cd-days","cd-hrs","cd-min","cd-sec"].forEach(id=>setText(id,"0"));
+      // Switch to live styling for the typical race window, then stop
+      if(diff > -liveWindow){ wrap.classList.add("live"); }
+      else { wrap.classList.remove("live"); clearInterval(cdInterval); return; }
+      return;
     }
-    document.getElementById("cd-label").textContent=t("cd_label");
-    document.getElementById("cd-days").textContent=Math.floor(diff/86400000);
-    document.getElementById("cd-hrs").textContent=Math.floor((diff%86400000)/3600000);
-    document.getElementById("cd-min").textContent=Math.floor((diff%3600000)/60000);
-    document.getElementById("cd-sec").textContent=String(Math.floor((diff%60000)/1000)).padStart(2,"0");
-    document.getElementById("cd-days-lbl").textContent=t("cd_days");
-    document.getElementById("cd-hrs-lbl").textContent=t("cd_hrs");
-    document.getElementById("cd-min-lbl").textContent=t("cd_min");
-    document.getElementById("cd-sec-lbl").textContent=t("cd_sec");
+    wrap.classList.remove("live");
+    setText("cd-label", t("cd_label"));
+    setText("cd-days", Math.floor(diff/86400000));
+    setText("cd-hrs",  Math.floor((diff%86400000)/3600000));
+    setText("cd-min",  Math.floor((diff%3600000)/60000));
+    setText("cd-sec",  String(Math.floor((diff%60000)/1000)).padStart(2,"0"));
+    setText("cd-days-lbl", t("cd_days"));
+    setText("cd-hrs-lbl",  t("cd_hrs"));
+    setText("cd-min-lbl",  t("cd_min"));
+    setText("cd-sec-lbl",  t("cd_sec"));
   }
   tick(); cdInterval = setInterval(tick,1000);
+}
+
+// ════════════════════════════════════════════════════════
+// ANIMATED COUNTERS (hero stats)
+// ════════════════════════════════════════════════════════
+function animateCount(el, to, dur=900){
+  if(!el) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+  if(reduce){ el.textContent = to; return; }
+  const from = 0, t0 = performance.now();
+  function step(now){
+    const p = Math.min(1,(now - t0)/dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(from + (to - from) * eased);
+    if(p < 1) requestAnimationFrame(step);
+    else el.textContent = to;
+  }
+  requestAnimationFrame(step);
 }
 
 
@@ -1406,8 +1593,18 @@ function closeModal(e){
 // HOME PAGE
 // ════════════════════════════════════════════════════════
 function renderHome(){
-  document.getElementById("stat-done").textContent = COMPLETED_ROUNDS;
-  document.getElementById("stat-rem").textContent  = 22 - COMPLETED_ROUNDS;
+  // Animate the hero counters once per page load; subsequent renderHome calls
+  // (language change, fav update) just set them directly to avoid re-animating.
+  if(!renderHome._animated){
+    animateCount(document.getElementById("stat-rounds"), TOTAL_ROUNDS);
+    animateCount(document.getElementById("stat-done"),   COMPLETED_ROUNDS);
+    animateCount(document.getElementById("stat-rem"),    REMAINING_ROUNDS);
+    renderHome._animated = true;
+  } else {
+    document.getElementById("stat-rounds").textContent = TOTAL_ROUNDS;
+    document.getElementById("stat-done").textContent   = COMPLETED_ROUNDS;
+    document.getElementById("stat-rem").textContent    = REMAINING_ROUNDS;
+  }
 
   // Last race banner
   const lastDone = [...SCHEDULE].reverse().find(r=>r.done);
@@ -1645,15 +1842,6 @@ function buildPanel(roundNum,panel){
   panel.innerHTML = r.cancelled ? buildCancelledPanel(r) : r.done && RACE_RESULTS[roundNum] ? buildResultPanel(r,RACE_RESULTS[roundNum]) : buildUpcomingPanel(r);
 }
 
-// ── SESSION TIME HELPER ────────────────────────────────
-function fmtSession(utcHHMM, paOff){
-  const [hh,mm] = utcHHMM.split(":").map(Number);
-  const paH = ((hh + paOff) % 24 + 24) % 24;
-  const drH = ((hh - 4)    % 24 + 24) % 24;
-  const fmt = (h,m)=>{ const ap=h>=12?"PM":"AM"; const h12=h%12||12; return `${h12}:${String(m).padStart(2,"0")} ${ap}`; };
-  return { pa: fmt(paH,mm), dr: fmt(drH,mm) };
-}
-
 function buildWeekendTable(round){
   const ws = WEEKEND_SESSIONS[round]; if(!ws) return "";
   const sessionKey = {
@@ -1693,7 +1881,7 @@ function buildCircuitFacts(round){
 }
 
 function buildChampMath(round){
-  const racesLeft = 22 - COMPLETED_ROUNDS;
+  const racesLeft = REMAINING_ROUNDS;
   if(racesLeft<=0) return "";
   const maxRemaining = racesLeft * 26; // max pts per race (win + fastest lap)
   const leader = DRIVER_STANDINGS[0];
@@ -2122,6 +2310,35 @@ function showPage(id, btn){
     if(next) setTimeout(()=>showTab(next.round),60);
   }
 }
+
+// ════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ════════════════════════════════════════════════════════
+document.addEventListener("keydown",(e)=>{
+  // ESC closes the driver modal
+  if(e.key === "Escape"){
+    const modal = document.getElementById("driver-modal");
+    if(modal && modal.classList.contains("open")){ modal.classList.remove("open"); e.preventDefault(); return; }
+  }
+  // Arrow keys navigate between race tabs when on the races page
+  if(e.key === "ArrowLeft" || e.key === "ArrowRight"){
+    const racesActive = document.getElementById("page-races")?.classList.contains("active");
+    if(!racesActive) return;
+    // Don't hijack arrow keys when typing in an input
+    const tag = (e.target && e.target.tagName) || "";
+    if(/INPUT|TEXTAREA|SELECT/.test(tag)) return;
+    const tabs = [...document.querySelectorAll(".tab-btn")];
+    const idx  = tabs.findIndex(b=>b.classList.contains("active"));
+    if(idx === -1) return;
+    const dir = e.key === "ArrowRight" ? 1 : -1;
+    const nextBtn = tabs[idx + dir];
+    if(nextBtn){
+      // Click via its onclick to preserve existing logic
+      nextBtn.click();
+      e.preventDefault();
+    }
+  }
+});
 
 // ════════════════════════════════════════════════════════
 // INIT
