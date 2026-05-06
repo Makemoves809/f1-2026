@@ -474,6 +474,27 @@ body.light .ms-num{color:#18181b;}
 /* FOOTER */
 .site-footer{border-top:1px solid var(--border);padding:20px 16px;text-align:center;font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;line-height:2;}
 
+/* TRACK MAP */
+.track-map{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;display:flex;align-items:center;gap:14px;}
+.track-map-svg-wrap{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;height:140px;}
+.track-map-svg-wrap img{max-width:100%;max-height:140px;width:auto;height:auto;filter:invert(1) brightness(.95);transition:filter .25s,transform .3s;}
+body.light .track-map-svg-wrap img{filter:none;opacity:.85;}
+.track-map:hover .track-map-svg-wrap img{transform:scale(1.03);}
+.track-map-info{flex-shrink:0;max-width:200px;}
+.track-map-circuit{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;color:#fff;line-height:1.1;}
+body.light .track-map-circuit{color:#18181b;}
+.track-map-loc{font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:1px;margin-top:3px;}
+.track-map-stats{display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;}
+.track-map-stat{display:flex;flex-direction:column;}
+.track-map-stat .tms-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;line-height:1;}
+body.light .track-map-stat .tms-num{color:#18181b;}
+.track-map-stat .tms-lbl{font-size:8px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:1.2px;text-transform:uppercase;margin-top:2px;}
+@media(max-width:680px){
+  .track-map{flex-direction:column;align-items:stretch;}
+  .track-map-info{max-width:none;}
+  .track-map-svg-wrap{height:120px;}
+}
+
 /* WEATHER */
 .nrc-weather{margin-top:10px;padding:10px 12px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);border-radius:5px;display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;}
 .nrc-weather.cool{background:rgba(56,189,248,.06);border-color:rgba(56,189,248,.22);}
@@ -989,6 +1010,37 @@ const TEAM_LOGOS = {
   "Williams":     "https://media.formula1.com/content/dam/fom-website/teams/2026/williams.png",
   "Aston Martin": "https://media.formula1.com/content/dam/fom-website/teams/2026/aston-martin.png",
   "Cadillac":     "https://media.formula1.com/content/dam/fom-website/teams/2026/cadillac.png",
+};
+
+// Track map SVGs hosted on Wikimedia Commons (CC-licensed). If a URL
+// 404s we hide the block via `onerror`, so a future update is just
+// dropping in a better source URL. Madrid intentionally omitted —
+// no good SVG exists yet for the 2026-debut IFEMA street circuit.
+const TRACK_MAPS = {
+  1:  "https://upload.wikimedia.org/wikipedia/commons/4/4b/Albert_Park_Circuit_2021.svg",
+  2:  "https://upload.wikimedia.org/wikipedia/commons/4/4f/Shanghai_International_Racing_Circuit_track_map.svg",
+  3:  "https://upload.wikimedia.org/wikipedia/commons/c/c1/Suzuka_circuit_map--2005.svg",
+  4:  "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bahrain_International_Circuit--Grand_Prix_Layout.svg",
+  5:  "https://upload.wikimedia.org/wikipedia/commons/4/40/Jeddah_Corniche_Circuit.svg",
+  6:  "https://upload.wikimedia.org/wikipedia/commons/5/52/Miami_International_Autodrome_Track_Map.svg",
+  7:  "https://upload.wikimedia.org/wikipedia/commons/d/d4/Circuit_Gilles_Villeneuve.svg",
+  8:  "https://upload.wikimedia.org/wikipedia/commons/5/5a/Circuit_de_Monaco.svg",
+  9:  "https://upload.wikimedia.org/wikipedia/commons/c/c4/Circuit_de_Catalunya_2023.svg",
+  10: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Red_Bull_Ring_2022.svg",
+  11: "https://upload.wikimedia.org/wikipedia/commons/0/02/Silverstone_Circuit_2020.svg",
+  12: "https://upload.wikimedia.org/wikipedia/commons/4/47/Spa-Francorchamps_of_Belgium.svg",
+  13: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Hungaroring.svg",
+  14: "https://upload.wikimedia.org/wikipedia/commons/4/47/Circuit_Zandvoort.svg",
+  15: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Monza_track_map.svg",
+  // 16: Madrid IFEMA — new for 2026, no public SVG yet
+  17: "https://upload.wikimedia.org/wikipedia/commons/0/02/Baku_Formula_One_track.svg",
+  18: "https://upload.wikimedia.org/wikipedia/commons/8/82/Singapore_Street_Circuit_2023_Layout_Map.svg",
+  19: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Austin_circuit.svg",
+  20: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez_2015.svg",
+  21: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace_%28AKA_Interlagos%29_track_map.svg",
+  22: "https://upload.wikimedia.org/wikipedia/commons/3/35/Las_Vegas_Strip_Circuit.svg",
+  23: "https://upload.wikimedia.org/wikipedia/commons/3/30/Losail_International_Circuit.svg",
+  24: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Yas_Marina_Circuit_2021.svg",
 };
 
 // Circuit coordinates for weather forecast (Open-Meteo) and track maps
@@ -2186,6 +2238,27 @@ function buildWeekendTable(round){
     </div>`;
 }
 
+function buildTrackMap(r){
+  const url = TRACK_MAPS[r.round];
+  const cf  = CIRCUIT_FACTS[r.round];
+  if(!url) return ""; // graceful skip (e.g. R16 Madrid)
+  const stats = cf ? `<div class="track-map-stats">
+    <div class="track-map-stat"><div class="tms-num">${cf.laps}</div><div class="tms-lbl">${t("laps_lbl")}</div></div>
+    <div class="track-map-stat"><div class="tms-num">${cf.dist}</div><div class="tms-lbl">${t("dist_lbl")}</div></div>
+    <div class="track-map-stat"><div class="tms-num">${cf.corners}</div><div class="tms-lbl">${t("corners_lbl")}</div></div>
+  </div>` : "";
+  return `<div class="track-map">
+    <div class="track-map-info">
+      <div class="track-map-circuit">${r.circuit}</div>
+      <div class="track-map-loc">${r.location}</div>
+      ${stats}
+    </div>
+    <div class="track-map-svg-wrap">
+      <img src="${url}" alt="${r.circuit} layout" loading="lazy" onerror="this.closest('.track-map').style.display='none'">
+    </div>
+  </div>`;
+}
+
 function buildCircuitFacts(round){
   const cf = CIRCUIT_FACTS[round]; if(!cf) return "";
   return `<div class="section-title" style="margin-top:20px">${t("section_circuit")}</div>
@@ -2290,6 +2363,7 @@ function buildResultPanel(r, res){
         <div class="pills"><span class="pill pill-done">${t("done_badge")}</span><button class="share-btn" onclick="shareRace(${r.round})">${t("share_btn")}</button></div>
       </div>
     </div>
+    ${buildTrackMap(r)}
     <div class="results-layout">
       <div>
         <div class="section-title">${t("section_class")}</div>
@@ -2409,6 +2483,7 @@ function buildUpcomingPanel(r){
         <div class="pills">${pills}<button class="share-btn" onclick="shareRace(${r.round})">${t("share_btn")}</button></div>
       </div>
     </div>
+    ${buildTrackMap(r)}
     <div class="upcoming-layout">
       <div>
         <div class="section-title">${t("section_times")}</div>
