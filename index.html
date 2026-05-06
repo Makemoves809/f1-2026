@@ -480,6 +480,18 @@ body.light .ms-num{color:#18181b;}
 /* FOOTER */
 .site-footer{border-top:1px solid var(--border);padding:20px 16px;text-align:center;font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;line-height:2;}
 
+/* INLINE DRIVER PORTRAITS (race / sprint / quali rows) */
+.row-photo{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.3),inset 0 0 0 1px rgba(255,255,255,.06);}
+.row-photo .row-initials{font-family:'Bebas Neue',sans-serif;font-size:11px;color:#fff;letter-spacing:.5px;position:absolute;z-index:1;}
+.row-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:2;}
+.row-photo.sm{width:22px;height:22px;}
+.row-photo.sm .row-initials{font-size:9px;}
+.row-photo.xs{width:18px;height:18px;}
+.row-photo.xs .row-initials{font-size:8px;}
+
+/* Tighten driver-cell stripe so the photo fits without re-flowing the grid */
+.driver-cell .team-stripe{height:30px;}
+
 /* SEASON RECORDS */
 .records-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px;}
 .record-tile{background:var(--card);border:1px solid var(--border);border-left-width:3px;border-radius:var(--radius);padding:11px 14px;display:flex;align-items:center;gap:12px;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:default;}
@@ -1993,6 +2005,20 @@ function closeModal(e){
     document.getElementById("driver-modal").classList.remove("open");
 }
 
+// Tiny round driver portrait for inline use in result/sprint/quali rows.
+// `size` is one of "" (default 28px), "sm" (22px), "xs" (18px).
+function rowPhoto(name, color, size){
+  const d = DRIVER_STANDINGS.find(x=>x.name===name);
+  const initials = name.split(" ").map(n=>n[0]).join("").slice(0,2);
+  const cls = size ? "row-photo "+size : "row-photo";
+  const img = d && d.photo
+    ? `<img src="${d.photo}" alt="" loading="lazy" onerror="this.style.display='none'">`
+    : "";
+  return `<div class="${cls}" style="background:${color||'#333'}">
+    <span class="row-initials">${initials}</span>${img}
+  </div>`;
+}
+
 // ════════════════════════════════════════════════════════
 // SEASON RECORDS — auto-computed from results
 // ════════════════════════════════════════════════════════
@@ -2585,8 +2611,11 @@ function buildResultPanel(r, res){
     const gapTxt = x.gap==="WINNER"?t("winner"):x.gap;
     return `<div class="driver-row" onclick="openDriverModal('${x.name.replace(/'/g,"\\'")}')">
       <div class="pos-cell ${pc}">${posTxt}</div>
-      <div class="driver-cell"><div class="team-stripe" style="background:${x.color}"></div>
-        <div><div class="driver-full">${x.name}</div><div class="driver-team">${x.team}</div></div></div>
+      <div class="driver-cell">
+        <div class="team-stripe" style="background:${x.color}"></div>
+        ${rowPhoto(x.name, x.color)}
+        <div><div class="driver-full">${x.name}</div><div class="driver-team">${x.team}</div></div>
+      </div>
       <div class="${gapCls}">${gapTxt}</div>
       <div class="laps-cell">${x.laps}</div>
       <div class="${ptsCls}">${x.pts||"–"}</div></div>`;
@@ -2605,8 +2634,11 @@ function buildResultPanel(r, res){
   const miniRows = DRIVER_STANDINGS.slice(0,10).map((d,i)=>{
     const mc=i===0?"mp1":i===1?"mp2":i===2?"mp3":"";
     return `<div class="mini-row"><div class="mini-pos ${mc}">${d.pos}</div>
-      <div class="mini-driver"><div class="mini-stripe" style="background:${d.color}"></div>
-        <div><div class="mini-name">${d.name}</div><div class="mini-team">${d.team}</div></div></div>
+      <div class="mini-driver">
+        <div class="mini-stripe" style="background:${d.color}"></div>
+        ${rowPhoto(d.name, d.color, "xs")}
+        <div><div class="mini-name">${d.name}</div><div class="mini-team">${d.team}</div></div>
+      </div>
       <div class="mini-pts ${d.pts===0?"zero":""}">${d.pts}</div></div>`;
   }).join("");
 
@@ -2657,15 +2689,21 @@ function buildSprintSection(round){
     const ptsCls = x.pts>0?"sprint-pts":"sprint-pts zero-pts";
     return `<div class="sprint-row">
       <div class="sprint-pos ${pc}">${x.pos}</div>
-      <div class="sprint-info"><div class="sprint-stripe" style="background:${x.color}"></div>
-        <div><div class="sprint-name">${x.name}</div><div class="sprint-team">${x.team}</div></div></div>
+      <div class="sprint-info">
+        <div class="sprint-stripe" style="background:${x.color}"></div>
+        ${rowPhoto(x.name, x.color, "sm")}
+        <div><div class="sprint-name">${x.name}</div><div class="sprint-team">${x.team}</div></div>
+      </div>
       <div class="${gapCls}">${gapTxt}</div>
       <div class="${ptsCls}">${x.pts||"–"}</div></div>`;
   }).join("");
   const dnfRows = dnfs.map(x=>`<div class="sprint-row">
       <div class="sprint-pos sdnf">${t("dnf_lbl")}</div>
-      <div class="sprint-info"><div class="sprint-stripe" style="background:${x.color}"></div>
-        <div><div class="sprint-name">${x.name}</div><div class="sprint-team">${x.team}</div></div></div>
+      <div class="sprint-info">
+        <div class="sprint-stripe" style="background:${x.color}"></div>
+        ${rowPhoto(x.name, x.color, "sm")}
+        <div><div class="sprint-name">${x.name}</div><div class="sprint-team">${x.team}</div></div>
+      </div>
       <div class="sprint-gap" style="color:var(--red)">${x.gap}</div>
       <div class="sprint-pts zero-pts">–</div></div>`).join("");
   const highlights = sr.highlights ? sr.highlights.map(h=>`<div class="key-fact" style="margin-bottom:4px"><div class="kf-icon">${h.icon}</div><div class="kf-text" style="font-size:11px">${t(h.text)}</div></div>`).join("") : "";
@@ -2684,8 +2722,11 @@ function buildQualifyingGridSection(round){
     const timeCls = i===0?"quali-time pole-time":"quali-time";
     return `<div class="quali-row">
       <div class="quali-pos ${pc}">${x.pos}</div>
-      <div class="quali-info"><div class="quali-stripe" style="background:${x.color}"></div>
-        <div><div class="quali-name">${x.name}</div><div class="quali-team">${x.team}</div></div></div>
+      <div class="quali-info">
+        <div class="quali-stripe" style="background:${x.color}"></div>
+        ${rowPhoto(x.name, x.color, "sm")}
+        <div><div class="quali-name">${x.name}</div><div class="quali-team">${x.team}</div></div>
+      </div>
       <div class="${timeCls}">${x.time}</div></div>`;
   }).join("");
   return `<div class="section-title" style="margin-top:20px">${t("section_quali_grid")}</div>
@@ -2725,8 +2766,11 @@ function buildUpcomingPanel(r){
   const miniRows = DRIVER_STANDINGS.slice(0,10).map((d,i)=>{
     const mc=i===0?"mp1":i===1?"mp2":i===2?"mp3":"";
     return `<div class="mini-row"><div class="mini-pos ${mc}">${d.pos}</div>
-      <div class="mini-driver"><div class="mini-stripe" style="background:${d.color}"></div>
-        <div><div class="mini-name">${d.name}</div><div class="mini-team">${d.team}</div></div></div>
+      <div class="mini-driver">
+        <div class="mini-stripe" style="background:${d.color}"></div>
+        ${rowPhoto(d.name, d.color, "xs")}
+        <div><div class="mini-name">${d.name}</div><div class="mini-team">${d.team}</div></div>
+      </div>
       <div class="mini-pts ${d.pts===0?"zero":""}">${d.pts}</div></div>`;
   }).join("");
 
