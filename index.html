@@ -789,30 +789,43 @@ const driverPhoto = (team, code) => {
   return `${F1_CDN}/${slug}/${c}/2026${slug}${c}right.webp`;
 };
 
+// `born` (ISO date) drives age — keeps the site accurate as drivers age
+// without manual edits each season. Verified against Wikipedia.
 const DRIVER_STANDINGS = [
-  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:100, wins:3, nat:"🇮🇹", age:19, number:12, photo:driverPhoto("Mercedes",    "ANDANT01")},
-  {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:80,  wins:1, nat:"🇬🇧", age:28, number:63, photo:driverPhoto("Mercedes",    "GEORUS01")},
-  {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:59,  wins:0, nat:"🇲🇨", age:28, number:16, photo:driverPhoto("Ferrari",     "CHALEC01")},
-  {pos:4,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", pts:51,  wins:0, nat:"🇬🇧", age:26, number:1,  photo:driverPhoto("McLaren",     "LANNOR01")},
-  {pos:5,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:51,  wins:0, nat:"🇬🇧", age:41, number:44, photo:driverPhoto("Ferrari",     "LEWHAM01")},
-  {pos:6,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", pts:43,  wins:0, nat:"🇦🇺", age:24, number:81, photo:driverPhoto("McLaren",     "OSCPIA01")},
-  {pos:7,  name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", pts:26,  wins:0, nat:"🇳🇱", age:28, number:33, photo:driverPhoto("Red Bull",    "MAXVER01")},
-  {pos:8,  name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", pts:17,  wins:0, nat:"🇬🇧", age:19, number:87, photo:driverPhoto("Haas",        "OLIBEA01")},
-  {pos:9,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", pts:16,  wins:0, nat:"🇫🇷", age:28, number:10, photo:driverPhoto("Alpine",      "PIEGAS01")},
-  {pos:10, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", pts:10,  wins:0, nat:"🇳🇿", age:22, number:30, photo:driverPhoto("Racing Bulls","LIALAW01")},
-  {pos:11, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", pts:7,   wins:0, nat:"🇦🇷", age:21, number:43, photo:driverPhoto("Alpine",      "FRACOL01")},
-  {pos:12, name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", pts:4,   wins:0, nat:"🇫🇷", age:20, number:6,  photo:driverPhoto("Red Bull",    "ISAHAD01")},
-  {pos:13, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", pts:4,   wins:0, nat:"🇬🇧", age:18, number:41, photo:driverPhoto("Racing Bulls","ARVLIN01")},
-  {pos:14, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", pts:4,   wins:0, nat:"🇪🇸", age:30, number:55, photo:driverPhoto("Williams",    "CARSAI01")},
-  {pos:15, name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", pts:2,   wins:0, nat:"🇧🇷", age:20, number:5,  photo:driverPhoto("Audi",        "GABBOR01")},
-  {pos:16, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", pts:1,   wins:0, nat:"🇫🇷", age:28, number:31, photo:driverPhoto("Haas",        "ESTOCO01")},
-  {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", pts:1,   wins:0, nat:"🇹🇭", age:28, number:23, photo:driverPhoto("Williams",    "ALEALB01")},
-  {pos:18, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", pts:0,   wins:0, nat:"🇪🇸", age:44, number:14, photo:driverPhoto("Aston Martin","FERALO01")},
-  {pos:19, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", pts:0,   wins:0, nat:"🇨🇦", age:26, number:18, photo:driverPhoto("Aston Martin","LANSTR01")},
-  {pos:20, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", pts:0,   wins:0, nat:"🇲🇽", age:35, number:11, photo:driverPhoto("Cadillac",    "SERPER01")},
-  {pos:21, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", pts:0,   wins:0, nat:"🇩🇪", age:37, number:27, photo:driverPhoto("Audi",        "NICHUL01")},
-  {pos:22, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", pts:0,   wins:0, nat:"🇫🇮", age:36, number:77, photo:driverPhoto("Cadillac",    "VALBOT01")},
+  {pos:1,  name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be", pts:100, wins:3, nat:"🇮🇹", born:"2006-08-25", number:12, photo:driverPhoto("Mercedes",    "ANDANT01")},
+  {pos:2,  name:"George Russell",    team:"Mercedes",     color:"#00d2be", pts:80,  wins:1, nat:"🇬🇧", born:"1998-02-15", number:63, photo:driverPhoto("Mercedes",    "GEORUS01")},
+  {pos:3,  name:"Charles Leclerc",   team:"Ferrari",      color:"#e8002d", pts:59,  wins:0, nat:"🇲🇨", born:"1997-10-16", number:16, photo:driverPhoto("Ferrari",     "CHALEC01")},
+  {pos:4,  name:"Lando Norris",      team:"McLaren",      color:"#ff8000", pts:51,  wins:0, nat:"🇬🇧", born:"1999-11-13", number:1,  photo:driverPhoto("McLaren",     "LANNOR01")},
+  {pos:5,  name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d", pts:51,  wins:0, nat:"🇬🇧", born:"1985-01-07", number:44, photo:driverPhoto("Ferrari",     "LEWHAM01")},
+  {pos:6,  name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000", pts:43,  wins:0, nat:"🇦🇺", born:"2001-04-06", number:81, photo:driverPhoto("McLaren",     "OSCPIA01")},
+  {pos:7,  name:"Max Verstappen",    team:"Red Bull",     color:"#3671c6", pts:26,  wins:0, nat:"🇳🇱", born:"1997-09-30", number:33, photo:driverPhoto("Red Bull",    "MAXVER01")},
+  {pos:8,  name:"Oliver Bearman",    team:"Haas",         color:"#b6babd", pts:17,  wins:0, nat:"🇬🇧", born:"2005-05-08", number:87, photo:driverPhoto("Haas",        "OLIBEA01")},
+  {pos:9,  name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc", pts:16,  wins:0, nat:"🇫🇷", born:"1996-02-07", number:10, photo:driverPhoto("Alpine",      "PIEGAS01")},
+  {pos:10, name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff", pts:10,  wins:0, nat:"🇳🇿", born:"2002-02-11", number:30, photo:driverPhoto("Racing Bulls","LIALAW01")},
+  {pos:11, name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc", pts:7,   wins:0, nat:"🇦🇷", born:"2003-05-27", number:43, photo:driverPhoto("Alpine",      "FRACOL01")},
+  {pos:12, name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6", pts:4,   wins:0, nat:"🇫🇷", born:"2004-09-28", number:6,  photo:driverPhoto("Red Bull",    "ISAHAD01")},
+  {pos:13, name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff", pts:4,   wins:0, nat:"🇬🇧", born:"2007-08-08", number:41, photo:driverPhoto("Racing Bulls","ARVLIN01")},
+  {pos:14, name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff", pts:4,   wins:0, nat:"🇪🇸", born:"1994-09-01", number:55, photo:driverPhoto("Williams",    "CARSAI01")},
+  {pos:15, name:"Gabriel Bortoleto", team:"Audi",         color:"#c4b000", pts:2,   wins:0, nat:"🇧🇷", born:"2004-10-14", number:5,  photo:driverPhoto("Audi",        "GABBOR01")},
+  {pos:16, name:"Esteban Ocon",      team:"Haas",         color:"#b6babd", pts:1,   wins:0, nat:"🇫🇷", born:"1996-09-17", number:31, photo:driverPhoto("Haas",        "ESTOCO01")},
+  {pos:17, name:"Alexander Albon",   team:"Williams",     color:"#64c4ff", pts:1,   wins:0, nat:"🇹🇭", born:"1996-03-23", number:23, photo:driverPhoto("Williams",    "ALEALB01")},
+  {pos:18, name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75", pts:0,   wins:0, nat:"🇪🇸", born:"1981-07-29", number:14, photo:driverPhoto("Aston Martin","FERALO01")},
+  {pos:19, name:"Lance Stroll",      team:"Aston Martin", color:"#358c75", pts:0,   wins:0, nat:"🇨🇦", born:"1998-10-29", number:18, photo:driverPhoto("Aston Martin","LANSTR01")},
+  {pos:20, name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc", pts:0,   wins:0, nat:"🇲🇽", born:"1990-01-26", number:11, photo:driverPhoto("Cadillac",    "SERPER01")},
+  {pos:21, name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000", pts:0,   wins:0, nat:"🇩🇪", born:"1987-08-19", number:27, photo:driverPhoto("Audi",        "NICHUL01")},
+  {pos:22, name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc", pts:0,   wins:0, nat:"🇫🇮", born:"1989-08-28", number:77, photo:driverPhoto("Cadillac",    "VALBOT01")},
 ];
+
+// Compute age (in completed years) from a YYYY-MM-DD birthdate string.
+function ageFromBorn(dob){
+  if(!dob) return "";
+  const b = new Date(dob);
+  const now = new Date();
+  let age = now.getUTCFullYear() - b.getUTCFullYear();
+  const m = now.getUTCMonth() - b.getUTCMonth();
+  if(m < 0 || (m === 0 && now.getUTCDate() < b.getUTCDate())) age--;
+  return age;
+}
 
 const CONSTRUCTOR_STANDINGS = [
   {pos:1,  name:"Mercedes",     color:"#00d2be", pts:180, drivers:"Antonelli 100 · Russell 80"},
@@ -1695,7 +1708,7 @@ function openDriverModal(name){
       </div>
       <div>
         <div class="modal-name">${d.name}</div>
-        <div class="modal-team">${d.nat} · #${d.number} · ${d.team} · Age ${d.age}</div>
+        <div class="modal-team">${d.nat} · #${d.number} · ${d.team} · Age ${ageFromBorn(d.born)}</div>
       </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
