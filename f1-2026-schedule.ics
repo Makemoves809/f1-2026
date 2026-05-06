@@ -1,0 +1,389 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//F1 2026 Season Hub//Formula 1 2026 Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Formula 1 2026
+X-WR-CALDESC:Formula 1 2026 Season — All 22 Grands Prix (lights-out times in UTC)
+X-WR-TIMEZONE:UTC
+NAME:Formula 1 2026
+DESCRIPTION:Formula 1 2026 Season — All 22 Grands Prix (lights-out times in UTC)
+COLOR:red
+X-APPLE-CALENDAR-COLOR:#FF0000
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:f1-2026-r01-australian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260308T040000Z
+DTEND:20260308T060000Z
+SUMMARY:🏎️ R1 Australian Grand Prix
+DESCRIPTION:Round 1 of the 2026 Formula 1 World Championship.\nCircuit: Albert Park Circuit\nLocation: Melbourne, Australia
+LOCATION:Albert Park Circuit, Melbourne, Australia
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R1 Australian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r02-chinese-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260315T070000Z
+DTEND:20260315T090000Z
+SUMMARY:🏎️ R2 Chinese Grand Prix (Sprint)
+DESCRIPTION:Round 2 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Shanghai International Circuit\nLocation: Shanghai, China
+LOCATION:Shanghai International Circuit, Shanghai, China
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R2 Chinese Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r03-japanese-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260329T050000Z
+DTEND:20260329T070000Z
+SUMMARY:🏎️ R3 Japanese Grand Prix
+DESCRIPTION:Round 3 of the 2026 Formula 1 World Championship.\nCircuit: Suzuka Circuit\nLocation: Suzuka, Japan
+LOCATION:Suzuka Circuit, Suzuka, Japan
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R3 Japanese Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r06-miami-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260503T170000Z
+DTEND:20260503T190000Z
+SUMMARY:🏎️ R6 Miami Grand Prix (Sprint)
+DESCRIPTION:Round 6 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Miami International Autodrome\nLocation: Miami, Florida
+LOCATION:Miami International Autodrome, Miami, Florida
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R6 Miami Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r07-canadian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260524T180000Z
+DTEND:20260524T200000Z
+SUMMARY:🏎️ R7 Canadian Grand Prix (Sprint)
+DESCRIPTION:Round 7 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Circuit Gilles Villeneuve\nLocation: Montréal, Canada
+LOCATION:Circuit Gilles Villeneuve, Montréal, Canada
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R7 Canadian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r08-monaco-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260607T130000Z
+DTEND:20260607T150000Z
+SUMMARY:🏎️ R8 Monaco Grand Prix
+DESCRIPTION:Round 8 of the 2026 Formula 1 World Championship.\nCircuit: Circuit de Monaco\nLocation: Monte Carlo, Monaco
+LOCATION:Circuit de Monaco, Monte Carlo, Monaco
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R8 Monaco Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r09-spanish-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260614T130000Z
+DTEND:20260614T150000Z
+SUMMARY:🏎️ R9 Barcelona-Catalunya Grand Prix
+DESCRIPTION:Round 9 of the 2026 Formula 1 World Championship.\nCircuit: Circuit de Barcelona-Catalunya\nLocation: Barcelona, Spain
+LOCATION:Circuit de Barcelona-Catalunya, Barcelona, Spain
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R9 Barcelona-Catalunya Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r10-austrian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260628T130000Z
+DTEND:20260628T150000Z
+SUMMARY:🏎️ R10 Austrian Grand Prix
+DESCRIPTION:Round 10 of the 2026 Formula 1 World Championship.\nCircuit: Red Bull Ring\nLocation: Spielberg, Austria
+LOCATION:Red Bull Ring, Spielberg, Austria
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R10 Austrian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r11-british-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260705T140000Z
+DTEND:20260705T160000Z
+SUMMARY:🏎️ R11 British Grand Prix (Sprint)
+DESCRIPTION:Round 11 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Silverstone Circuit\nLocation: Silverstone, England
+LOCATION:Silverstone Circuit, Silverstone, England
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R11 British Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r12-belgian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260719T130000Z
+DTEND:20260719T150000Z
+SUMMARY:🏎️ R12 Belgian Grand Prix
+DESCRIPTION:Round 12 of the 2026 Formula 1 World Championship.\nCircuit: Circuit de Spa-Francorchamps\nLocation: Spa, Belgium
+LOCATION:Circuit de Spa-Francorchamps, Spa, Belgium
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R12 Belgian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r13-hungarian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260726T130000Z
+DTEND:20260726T150000Z
+SUMMARY:🏎️ R13 Hungarian Grand Prix
+DESCRIPTION:Round 13 of the 2026 Formula 1 World Championship.\nCircuit: Hungaroring\nLocation: Budapest, Hungary
+LOCATION:Hungaroring, Budapest, Hungary
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R13 Hungarian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r14-dutch-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260823T130000Z
+DTEND:20260823T150000Z
+SUMMARY:🏎️ R14 Dutch Grand Prix (Sprint)
+DESCRIPTION:Round 14 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Circuit Zandvoort\nLocation: Zandvoort, Netherlands
+LOCATION:Circuit Zandvoort, Zandvoort, Netherlands
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R14 Dutch Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r15-italian-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260906T130000Z
+DTEND:20260906T150000Z
+SUMMARY:🏎️ R15 Italian Grand Prix
+DESCRIPTION:Round 15 of the 2026 Formula 1 World Championship.\nCircuit: Autodromo Nazionale Monza\nLocation: Monza, Italy
+LOCATION:Autodromo Nazionale Monza, Monza, Italy
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R15 Italian Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r16-madrid-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260913T130000Z
+DTEND:20260913T150000Z
+SUMMARY:🏎️ R16 Spanish Grand Prix — Madrid
+DESCRIPTION:Round 16 of the 2026 Formula 1 World Championship — NEW 2026 Track.\nCircuit: IFEMA Madrid Street Circuit\nLocation: Madrid, Spain
+LOCATION:IFEMA Madrid Street Circuit, Madrid, Spain
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R16 Madrid Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r17-azerbaijan-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20260926T110000Z
+DTEND:20260926T130000Z
+SUMMARY:🏎️ R17 Azerbaijan Grand Prix (Saturday Race)
+DESCRIPTION:Round 17 of the 2026 Formula 1 World Championship — Saturday race for Remembrance Day.\nCircuit: Baku City Circuit\nLocation: Baku, Azerbaijan
+LOCATION:Baku City Circuit, Baku, Azerbaijan
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R17 Azerbaijan Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r18-singapore-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261011T120000Z
+DTEND:20261011T140000Z
+SUMMARY:🏎️ R18 Singapore Grand Prix (Sprint)
+DESCRIPTION:Round 18 of the 2026 Formula 1 World Championship — Sprint Weekend.\nCircuit: Marina Bay Street Circuit\nLocation: Singapore
+LOCATION:Marina Bay Street Circuit, Singapore
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R18 Singapore Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r19-united-states-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261025T200000Z
+DTEND:20261025T220000Z
+SUMMARY:🏎️ R19 United States Grand Prix
+DESCRIPTION:Round 19 of the 2026 Formula 1 World Championship.\nCircuit: Circuit of the Americas\nLocation: Austin, Texas
+LOCATION:Circuit of the Americas, Austin, Texas
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R19 United States Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r20-mexico-city-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261101T200000Z
+DTEND:20261101T220000Z
+SUMMARY:🏎️ R20 Mexico City Grand Prix
+DESCRIPTION:Round 20 of the 2026 Formula 1 World Championship.\nCircuit: Autodromo Hermanos Rodriguez\nLocation: Mexico City, Mexico
+LOCATION:Autodromo Hermanos Rodriguez, Mexico City, Mexico
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R20 Mexico City Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r21-sao-paulo-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261108T170000Z
+DTEND:20261108T190000Z
+SUMMARY:🏎️ R21 São Paulo Grand Prix
+DESCRIPTION:Round 21 of the 2026 Formula 1 World Championship.\nCircuit: Autodromo Jose Carlos Pace\nLocation: São Paulo, Brazil
+LOCATION:Autodromo Jose Carlos Pace, São Paulo, Brazil
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R21 São Paulo Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r22-las-vegas-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261122T040000Z
+DTEND:20261122T060000Z
+SUMMARY:🏎️ R22 Las Vegas Grand Prix (Saturday Night)
+DESCRIPTION:Round 22 of the 2026 Formula 1 World Championship — Saturday night race.\nCircuit: Las Vegas Strip Circuit\nLocation: Las Vegas, Nevada
+LOCATION:Las Vegas Strip Circuit, Las Vegas, Nevada
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R22 Las Vegas Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r23-qatar-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261129T160000Z
+DTEND:20261129T180000Z
+SUMMARY:🏎️ R23 Qatar Grand Prix
+DESCRIPTION:Round 23 of the 2026 Formula 1 World Championship.\nCircuit: Lusail International Circuit\nLocation: Lusail, Qatar
+LOCATION:Lusail International Circuit, Lusail, Qatar
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R23 Qatar Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f1-2026-r24-abu-dhabi-gp@f1hub
+DTSTAMP:20260101T000000Z
+DTSTART:20261206T130000Z
+DTEND:20261206T150000Z
+SUMMARY:🏎️ R24 Abu Dhabi Grand Prix (Season Finale)
+DESCRIPTION:Round 24 of the 2026 Formula 1 World Championship — Season Finale.\nCircuit: Yas Marina Circuit\nLocation: Abu Dhabi, UAE
+LOCATION:Yas Marina Circuit, Abu Dhabi, UAE
+CATEGORIES:Formula 1,Sports
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:🏎️ R24 Abu Dhabi Grand Prix starts in 30 minutes
+TRIGGER:-PT30M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
