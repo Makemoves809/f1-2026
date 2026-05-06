@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<!-- F1 2026 Season Hub v1.6 -->
+<!-- F1 2026 Season Hub v1.7 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>F1 2026 Season Hub</title>
+
+<!-- SEO -->
+<meta name="description" content="The 2026 Formula 1 season — live standings, race results, sprint classifications, qualifying grids and session times in your local timezone. Updated after every Grand Prix.">
+<meta name="theme-color" content="#e10600">
+<meta name="color-scheme" content="dark light">
+<meta name="author" content="F1 2026 Season Hub">
+<link rel="canonical" href="https://makemoves809.github.io/f1-2026/">
+
+<!-- Favicon (inline SVG, theme-color matched) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e10600'/%3E%3Crect x='6' y='44' width='52' height='8' fill='%23080808'/%3E%3Crect x='6' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='19' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='32' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='45' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Ctext x='50%25' y='34' text-anchor='middle' fill='%23fff' font-family='Impact,Bebas Neue,sans-serif' font-weight='900' font-size='34' letter-spacing='-1'%3EF1%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="https://makemoves809.github.io/f1-2026/og-image.svg">
+
+<!-- Open Graph (Facebook, LinkedIn, iMessage, Discord, Slack) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="F1 2026 Season Hub">
+<meta property="og:title" content="F1 2026 Season Hub">
+<meta property="og:description" content="Live standings, results, qualifying grids and race-weekend times for the 2026 Formula 1 season. Updated after every Grand Prix.">
+<meta property="og:url" content="https://makemoves809.github.io/f1-2026/">
+<meta property="og:image" content="https://makemoves809.github.io/f1-2026/og-image.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="F1 2026 Season Hub — live standings and race times in your local timezone">
+
+<!-- Twitter / X cards (Twitter requires PNG/JPG; if you commit a PNG variant, swap href) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="F1 2026 Season Hub">
+<meta name="twitter:description" content="Live standings, results, qualifying grids and race-weekend times for the 2026 Formula 1 season.">
+<meta name="twitter:image" content="https://makemoves809.github.io/f1-2026/og-image.svg">
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -1975,6 +2004,9 @@ function showTab(roundNum,btn){
   else{ const btns=document.querySelectorAll(".tab-btn"); if(btns[roundNum-1]) btns[roundNum-1].classList.add("active"); }
   // Update URL for deep-linking
   history.replaceState(null,'',`?race=${roundNum}`);
+  // Update document title so the browser tab + bookmarks show the active race
+  const r = SCHEDULE.find(x=>x.round===roundNum);
+  if(r) document.title = `R${r.round} ${r.flag} ${r.name.replace(" Grand Prix"," GP")} · F1 2026`;
   // Scroll tab into view
   const activeBtn = document.querySelector(".tab-btn.active");
   if(activeBtn) activeBtn.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
@@ -2453,6 +2485,10 @@ function showPage(id, btn){
   if(id==="races"){
     const next = SCHEDULE.find(r=>!r.done && !r.cancelled);
     if(next) setTimeout(()=>showTab(next.round),60);
+  } else {
+    // Reset to default title when leaving the races page
+    document.title = "F1 2026 Season Hub";
+    history.replaceState(null,'',location.pathname);
   }
 }
 
