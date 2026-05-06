@@ -1,0 +1,26 @@
+{
+  "name": "F1 2026 Season Hub",
+  "short_name": "F1 2026",
+  "description": "Live F1 2026 standings, results, qualifying grids and weekend times in your local timezone.",
+  "scope": "/f1-2026/",
+  "start_url": "/f1-2026/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080808",
+  "theme_color": "#e10600",
+  "categories": ["sports", "news", "entertainment"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

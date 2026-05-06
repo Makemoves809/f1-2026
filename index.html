@@ -15,7 +15,13 @@
 
 <!-- Favicon (inline SVG, theme-color matched) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23e10600'/%3E%3Crect x='6' y='44' width='52' height='8' fill='%23080808'/%3E%3Crect x='6' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='19' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='32' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Crect x='45' y='44' width='6.5' height='8' fill='%23fff'/%3E%3Ctext x='50%25' y='34' text-anchor='middle' fill='%23fff' font-family='Impact,Bebas Neue,sans-serif' font-weight='900' font-size='34' letter-spacing='-1'%3EF1%3C/text%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="https://makemoves809.github.io/f1-2026/og-image.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="F1 2026">
 
 <!-- Open Graph (Facebook, LinkedIn, iMessage, Discord, Slack) -->
 <meta property="og:type" content="website">
@@ -2754,6 +2760,12 @@ document.addEventListener("DOMContentLoaded",()=>{
   // Deep-link: navigate to race from URL param
   const urlRace = parseInt(new URLSearchParams(location.search).get('race'));
   if(urlRace){ showPage('races',null); setTimeout(()=>showTab(urlRace),80); }
+  // Register service worker for offline + installability
+  if("serviceWorker" in navigator){
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(()=>{});
+    });
+  }
 });
 </script>
 </body>

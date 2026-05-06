@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Maskable icon: keeps art inside the safe 80% center zone (Android may crop) -->
+  <rect width="512" height="512" fill="#e10600"/>
+  <!-- All decorative elements stay within x:51-461 / y:51-461 (80% safe zone) -->
+  <g fill="#080808">
+    <rect x="96" y="350" width="320" height="48"/>
+  </g>
+  <g fill="#fff">
+    <rect x="96"  y="350" width="40" height="24"/>
+    <rect x="176" y="350" width="40" height="24"/>
+    <rect x="256" y="350" width="40" height="24"/>
+    <rect x="336" y="350" width="40" height="24"/>
+    <rect x="136" y="374" width="40" height="24"/>
+    <rect x="216" y="374" width="40" height="24"/>
+    <rect x="296" y="374" width="40" height="24"/>
+    <rect x="376" y="374" width="40" height="24"/>
+  </g>
+  <text x="50%" y="295" text-anchor="middle" fill="#fff" font-family="Impact,Bebas Neue,sans-serif" font-weight="900" font-size="220" letter-spacing="-6">F1</text>
+</svg>

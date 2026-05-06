@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#e10600"/>
+  <!-- Checkered flag stripe near the bottom -->
+  <g fill="#080808">
+    <rect x="48" y="368" width="416" height="64"/>
+  </g>
+  <g fill="#fff">
+    <rect x="48"  y="368" width="52" height="32"/>
+    <rect x="152" y="368" width="52" height="32"/>
+    <rect x="256" y="368" width="52" height="32"/>
+    <rect x="360" y="368" width="52" height="32"/>
+    <rect x="100" y="400" width="52" height="32"/>
+    <rect x="204" y="400" width="52" height="32"/>
+    <rect x="308" y="400" width="52" height="32"/>
+    <rect x="412" y="400" width="52" height="32"/>
+  </g>
+  <!-- F1 mark -->
+  <text x="50%" y="290" text-anchor="middle" fill="#fff" font-family="Impact,Bebas Neue,sans-serif" font-weight="900" font-size="260" letter-spacing="-8">F1</text>
+</svg>
