@@ -474,6 +474,25 @@ body.light .ms-num{color:#18181b;}
 /* FOOTER */
 .site-footer{border-top:1px solid var(--border);padding:20px 16px;text-align:center;font-size:10px;color:var(--txt3);font-family:'DM Mono',monospace;letter-spacing:.5px;line-height:2;}
 
+/* WEATHER */
+.nrc-weather{margin-top:10px;padding:10px 12px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);border-radius:5px;display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;}
+.nrc-weather.cool{background:rgba(56,189,248,.06);border-color:rgba(56,189,248,.22);}
+.nrc-weather.warm{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.22);}
+.nrc-weather.wet{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.25);}
+.nrc-weather.unknown{background:rgba(255,255,255,.03);border-color:var(--border);}
+.wx-icon{font-size:22px;line-height:1;flex-shrink:0;}
+.wx-info{flex:1;min-width:0;}
+.wx-temp{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;letter-spacing:1px;line-height:1;}
+body.light .wx-temp{color:#18181b;}
+.wx-temp .wx-low{color:var(--txt3);font-size:14px;margin-left:4px;}
+.wx-meta{font-size:9px;color:var(--txt3);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+.wx-rain{color:var(--blue);}
+
+.race-weather-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-top:14px;display:flex;align-items:center;gap:12px;}
+.race-weather-card .wx-icon{font-size:32px;}
+.race-weather-card .wx-temp{font-size:26px;}
+.race-weather-card .wx-meta{font-size:10px;}
+
 /* RESPONSIVE */
 @media(max-width:680px){
   .hero-inner{grid-template-columns:1fr;}
@@ -711,6 +730,7 @@ body.light .standings-table,body.light .classification,body.light .mini-standing
         <div class="nrc-name" id="nrw-name">—</div>
         <div class="nrc-date" id="nrw-date">—</div>
         <div class="nrc-times" id="nrw-times"></div>
+        <div class="nrc-weather" id="nrw-weather" style="display:none"></div>
         <div class="countdown-wrap" id="nrw-countdown" style="display:none">
           <div class="countdown-label" id="cd-label">Race starts in</div>
           <div class="countdown-grid">
@@ -856,6 +876,93 @@ function ageFromBorn(dob){
   return age;
 }
 
+// ════════════════════════════════════════════════════════
+// WEATHER (Open-Meteo — free, no API key, no tracking)
+// ════════════════════════════════════════════════════════
+// Map WMO weather codes to a small icon + descriptor + tone class.
+// https://open-meteo.com/en/docs (codes column at the bottom).
+const WX_CODE = {
+  0:  ["☀️","Clear","cool"],
+  1:  ["🌤️","Mainly clear","cool"],
+  2:  ["⛅","Partly cloudy","cool"],
+  3:  ["☁️","Overcast","cool"],
+  45: ["🌫️","Fog","cool"], 48:["🌫️","Rime fog","cool"],
+  51: ["🌦️","Light drizzle","wet"],   53:["🌦️","Drizzle","wet"],   55:["🌧️","Heavy drizzle","wet"],
+  56: ["🌧️","Freezing drizzle","wet"],57:["🌧️","Freezing drizzle","wet"],
+  61: ["🌧️","Light rain","wet"],      63:["🌧️","Rain","wet"],       65:["⛈️","Heavy rain","wet"],
+  66: ["🌧️","Freezing rain","wet"],   67:["🌧️","Freezing rain","wet"],
+  71: ["🌨️","Light snow","cool"],     73:["🌨️","Snow","cool"],      75:["❄️","Heavy snow","cool"],
+  77: ["🌨️","Snow grains","cool"],
+  80: ["🌦️","Rain showers","wet"],    81:["🌧️","Rain showers","wet"],82:["⛈️","Heavy showers","wet"],
+  85: ["🌨️","Snow showers","cool"],   86:["❄️","Heavy snow","cool"],
+  95: ["⛈️","Thunderstorm","wet"],    96:["⛈️","Thunderstorm","wet"],99:["⛈️","Thunderstorm","wet"],
+};
+const _wxCache = {}; // round -> Promise|result; in-memory dedupe per session
+
+async function fetchRaceWeather(round){
+  const geo = CIRCUIT_GEO[round];
+  const r   = SCHEDULE.find(x=>x.round===round);
+  if(!geo || !r) return null;
+  if(_wxCache[round]) return _wxCache[round];
+
+  const raceDate   = new Date(r.utc);
+  const today      = new Date();
+  const daysAhead  = Math.floor((raceDate - today) / 86400000);
+  // Open-Meteo returns up to 16 days; if the race is past or further away,
+  // skip the call. We still render a placeholder.
+  if(daysAhead < -1 || daysAhead > 15) return _wxCache[round] = {tooFar:true, daysAhead};
+
+  // Use the local-circuit date string to query the right day
+  const ymd = raceDate.toISOString().slice(0,10);
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${geo.lat}&longitude=${geo.lon}`
+            + `&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code`
+            + `&temperature_unit=celsius&timezone=auto&start_date=${ymd}&end_date=${ymd}`;
+  try {
+    const res = await fetch(url);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const j = await res.json();
+    const d = j.daily;
+    if(!d || !d.weather_code || !d.weather_code.length) return _wxCache[round] = null;
+    const result = {
+      code: d.weather_code[0],
+      tmax: Math.round(d.temperature_2m_max[0]),
+      tmin: Math.round(d.temperature_2m_min[0]),
+      rain: d.precipitation_probability_max[0] ?? 0,
+    };
+    return _wxCache[round] = result;
+  } catch(e){
+    console.warn("weather fetch failed", e);
+    return _wxCache[round] = null;
+  }
+}
+
+function renderWeatherInto(el, round, variant){
+  if(!el) return;
+  fetchRaceWeather(round).then(wx => {
+    if(!el.isConnected) return; // panel was rebuilt
+    if(!wx){ el.style.display="none"; return; }
+    if(wx.tooFar){
+      const days = Math.max(wx.daysAhead - 14, 0);
+      el.style.display="flex";
+      el.className = (variant==="card" ? "race-weather-card" : "nrc-weather") + " unknown";
+      el.innerHTML = `<div class="wx-icon">📡</div>
+        <div class="wx-info">
+          <div class="wx-temp">—</div>
+          <div class="wx-meta">Forecast in ${days} day${days===1?"":"s"}</div>
+        </div>`;
+      return;
+    }
+    const [icon, label, tone] = WX_CODE[wx.code] || ["🌡️","Unknown","unknown"];
+    el.style.display="flex";
+    el.className = (variant==="card" ? "race-weather-card" : "nrc-weather") + " " + tone;
+    el.innerHTML = `<div class="wx-icon" title="${label}">${icon}</div>
+      <div class="wx-info">
+        <div class="wx-temp">${wx.tmax}°<span class="wx-low">/ ${wx.tmin}°C</span></div>
+        <div class="wx-meta">${label}${wx.rain>=20 ? ` · <span class="wx-rain">${wx.rain}% rain</span>` : ""}</div>
+      </div>`;
+  });
+}
+
 const CONSTRUCTOR_STANDINGS = [
   {pos:1,  name:"Mercedes",     color:"#00d2be", pts:180, drivers:"Antonelli 100 · Russell 80"},
   {pos:2,  name:"Ferrari",      color:"#e8002d", pts:110, drivers:"Leclerc 59 · Hamilton 51"},
@@ -882,6 +989,35 @@ const TEAM_LOGOS = {
   "Williams":     "https://media.formula1.com/content/dam/fom-website/teams/2026/williams.png",
   "Aston Martin": "https://media.formula1.com/content/dam/fom-website/teams/2026/aston-martin.png",
   "Cadillac":     "https://media.formula1.com/content/dam/fom-website/teams/2026/cadillac.png",
+};
+
+// Circuit coordinates for weather forecast (Open-Meteo) and track maps
+// Coords are the start/finish straight area, accurate enough for weather.
+const CIRCUIT_GEO = {
+  1:  {lat:-37.8497, lon:144.9681}, // Albert Park, Melbourne
+  2:  {lat: 31.3389, lon:121.2197}, // Shanghai
+  3:  {lat: 34.8431, lon:136.5419}, // Suzuka
+  4:  {lat: 26.0325, lon: 50.5106}, // Bahrain
+  5:  {lat: 21.6319, lon: 39.1044}, // Jeddah
+  6:  {lat: 25.9581, lon:-80.2389}, // Miami HRS
+  7:  {lat: 45.5050, lon:-73.5228}, // Montreal Gilles Villeneuve
+  8:  {lat: 43.7347, lon:  7.4206}, // Monte Carlo
+  9:  {lat: 41.5700, lon:  2.2611}, // Barcelona-Catalunya
+  10: {lat: 47.2197, lon: 14.7647}, // Red Bull Ring
+  11: {lat: 52.0786, lon: -1.0169}, // Silverstone
+  12: {lat: 50.4372, lon:  5.9714}, // Spa-Francorchamps
+  13: {lat: 47.5789, lon: 19.2486}, // Hungaroring
+  14: {lat: 52.3886, lon:  4.5419}, // Zandvoort
+  15: {lat: 45.6206, lon:  9.2811}, // Monza
+  16: {lat: 40.4647, lon: -3.6175}, // IFEMA Madrid
+  17: {lat: 40.3725, lon: 49.8533}, // Baku
+  18: {lat:  1.2914, lon:103.8642}, // Marina Bay
+  19: {lat: 30.1328, lon:-97.6411}, // Circuit of the Americas
+  20: {lat: 19.4042, lon:-99.0907}, // Hermanos Rodriguez
+  21: {lat:-23.7036, lon:-46.6997}, // Interlagos
+  22: {lat: 36.1147, lon:-115.1728},// Las Vegas Strip
+  23: {lat: 25.4900, lon: 51.4542}, // Lusail
+  24: {lat: 24.4672, lon: 54.6031}, // Yas Marina
 };
 
 // Points per round — cumulative totals after each session
@@ -1809,6 +1945,7 @@ function renderHome(){
     const calBtn = document.getElementById("nrw-cal-btn");
     if(calBtn){ calBtn.style.display="flex"; calBtn.onclick=()=>addToCalendar(next.name,next.utc,next.circuit); }
     startCountdown(next.utc);
+    renderWeatherInto(document.getElementById("nrw-weather"), next.round);
   }
 
   const sorted = [...DRIVER_STANDINGS].sort((a,b)=>a.pos - b.pos);
@@ -2017,6 +2154,10 @@ function buildPanel(roundNum,panel){
   const r = SCHEDULE.find(x=>x.round===roundNum); if(!r) return;
   panel.dataset.built = "1";
   panel.innerHTML = r.cancelled ? buildCancelledPanel(r) : r.done && RACE_RESULTS[roundNum] ? buildResultPanel(r,RACE_RESULTS[roundNum]) : buildUpcomingPanel(r);
+  // Weather only makes sense for upcoming, non-cancelled races
+  if(!r.cancelled && !r.done){
+    renderWeatherInto(document.getElementById("wx-card-"+roundNum), roundNum, "card");
+  }
 }
 
 function buildWeekendTable(round){
@@ -2243,6 +2384,7 @@ function buildUpcomingPanel(r){
     <div class="time-card tc-local"><div class="time-card-label">${t("local_time_lbl")}</div><div class="time-card-time">${localRace.time}</div><div class="time-card-tz">${localRace.tz}</div></div>
     ${showEtCard?`<div class="time-card tc-pa"><div class="time-card-label">${t("pa_label")}</div><div class="time-card-time">${r.pa}</div><div class="time-card-tz">${r.pa_tz}</div></div>`:""}
   </div>
+  <div class="race-weather-card" id="wx-card-${r.round}" style="display:none"></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;">
     <button class="notif-btn ${isNotifSet?"set":""}" id="notif-btn-${r.round}" onclick="toggleNotification(${r.round},'${r.name}','${r.utc}',this)">${notifLabel}</button>
     <button class="cal-btn" onclick="addToCalendar('${r.name.replace(/'/g,"\\'")}','${r.utc}','${r.circuit.replace(/'/g,"\\'")}')"> ${t("cal_btn")}</button>
