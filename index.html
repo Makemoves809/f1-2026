@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- F1 2026 Season Hub v1.8 -->
+<!-- F1 2026 Season Hub v1.9 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -835,6 +835,39 @@ body.light .pill{box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
   .race-panel-header{padding-left:16px;}
   .race-panel-header::before{width:3px;}
 }
+
+/* ════════════════════════════════════════════════════════
+   v1.9 HOME COHESION + SIDEBAR DENSITY — additive polish
+   ════════════════════════════════════════════════════════ */
+
+/* ── Race-panel sidebar: more breathing room around facts ── */
+.card-block-title{padding:11px 14px;letter-spacing:3.5px;}
+.key-fact{padding:11px 14px;gap:10px;}
+.kf-icon{font-size:14px;width:18px;text-align:center;}
+.kf-text{font-size:12.5px;line-height:1.55;}
+
+/* ── Records ↔ H2H: matching cast-card finish ── */
+.record-tile,.h2h-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.04);}
+body.light .record-tile,body.light .h2h-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.7);}
+
+/* ── H2H bar: depth + clearer leader / trailer hierarchy ── */
+.h2h-bar{box-shadow:inset 0 1px 2px rgba(0,0,0,.28);}
+body.light .h2h-bar{box-shadow:inset 0 1px 2px rgba(0,0,0,.06);}
+.h2h-bar-fill.right{filter:saturate(.35) brightness(.85);}
+body.light .h2h-bar-fill.right{filter:saturate(.5);}
+
+/* ── Last race banner: warmer hover, slight lift ── */
+.lrb-inner{transition:border-color var(--t),background .25s,transform .2s,box-shadow .25s;}
+.lrb-inner:hover{background:linear-gradient(90deg,rgba(225,6,0,.20),rgba(225,6,0,.06));border-color:rgba(225,6,0,.55);box-shadow:0 10px 24px rgba(225,6,0,.12);}
+body.light .lrb-inner:hover{box-shadow:0 10px 24px rgba(225,6,0,.10);}
+
+/* ── Section title rhythm: consistent breathing room across home ── */
+.section-title{margin-bottom:12px;}
+.section-title::after{background:linear-gradient(90deg,var(--border),transparent 70%);}
+
+/* ── Standings table rows: a little more vertical air ── */
+.st-row{padding-top:8px;padding-bottom:8px;}
+.mini-row{padding-top:7px;padding-bottom:7px;}
 
 /* REDUCED MOTION — respect users that prefer less animation */
 @media(prefers-reduced-motion:reduce){
