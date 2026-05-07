@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- F1 2026 Season Hub v1.7 -->
+<!-- F1 2026 Season Hub v1.8 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -777,10 +777,69 @@ body.light .pc-team-logo,body.light .cst-logo{--imgEnd:1;}
 /* LIGHT MODE — better card contrast */
 body.light .standings-table,body.light .classification,body.light .mini-standings,body.light .sprint-block,body.light .quali-block,body.light .wknd-table,body.light .chart-wrap,body.light .card-block,body.light .modal-box{box-shadow:0 1px 0 rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04);}
 
+/* ════════════════════════════════════════════════════════
+   v1.7 RACE TABS + PANEL HIERARCHY — additive polish
+   ════════════════════════════════════════════════════════ */
+
+/* Cancelled rounds visibly retired — current strikethrough was too subtle */
+.tab-btn.cancelled{color:#3a3a3a;opacity:.5;filter:grayscale(.4);}
+.tab-btn.cancelled .tab-rnd{text-decoration:line-through;}
+.tab-btn.cancelled:hover{opacity:.75;}
+body.light .tab-btn.cancelled{color:#a1a1aa;}
+
+/* Active tab: thicker indicator + bolder rnd, so the current race reads at a glance */
+.tab-btn.active{border-bottom-width:3px;}
+.tab-btn.active .tab-rnd{font-weight:700;letter-spacing:.5px;}
+.tab-btn.done.active{background:linear-gradient(180deg,transparent,rgba(34,197,94,.10));}
+
+/* Next-race tab: the small purple dot now pulses with a halo */
+.tab-btn.is-next .tab-dot.td-next{width:6px;height:6px;box-shadow:0 0 0 0 rgba(124,58,237,.6);}
+@media(prefers-reduced-motion:no-preference){
+  .tab-btn.is-next:not(.active) .tab-dot.td-next{animation:tabDotPulse 2s ease-out infinite;}
+}
+@keyframes tabDotPulse{
+  0%{box-shadow:0 0 0 0 rgba(124,58,237,.6);}
+  70%{box-shadow:0 0 0 7px rgba(124,58,237,0);}
+  100%{box-shadow:0 0 0 0 rgba(124,58,237,0);}
+}
+/* Done tab: green dot gets a faint inner glow so finished rounds feel "stamped" */
+.tab-btn.done .tab-dot.td-done{box-shadow:0 0 6px rgba(34,197,94,.55);}
+
+/* Bigger tap target on phones so 24 round tabs are usable */
+@media(max-width:680px){
+  .tab-btn{height:54px;padding:0 12px;}
+  .tab-rnd{font-size:15px;}
+}
+
+/* ── RACE PANEL HEADER — vertical accent bar matching status ── */
+.race-panel-header{position:relative;padding:0 0 22px 22px;gap:18px;}
+.race-panel-header::before{content:'';position:absolute;left:0;top:2px;bottom:22px;width:4px;border-radius:3px;background:var(--red);}
+/* Match the accent bar to the eyebrow color (uses :has — supported in all
+   major browsers since 2023). Falls back to red if :has is unsupported. */
+.race-panel-header:has(.race-eyebrow.done-eye)::before{background:var(--green);box-shadow:0 0 12px rgba(34,197,94,.30);}
+.race-panel-header:has(.race-eyebrow.next-eye)::before{background:var(--next);box-shadow:0 0 12px rgba(124,58,237,.35);}
+.race-panel-header:has(.pill-cancelled)::before{background:#f87171;opacity:.6;}
+
+/* Race name picks up a faint status-tinted glow */
+.race-name-big{transition:letter-spacing .25s,text-shadow .25s;}
+.race-panel-header:has(.race-eyebrow.done-eye) .race-name-big{text-shadow:0 0 22px rgba(34,197,94,.20);}
+.race-panel-header:has(.race-eyebrow.next-eye) .race-name-big{text-shadow:0 0 22px rgba(124,58,237,.25);}
+body.light .race-panel-header .race-name-big{text-shadow:none;}
+
+/* Pills get a touch more presence */
+.pill{box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
+body.light .pill{box-shadow:inset 0 1px 0 rgba(255,255,255,.6);}
+
+/* Mobile: pull the accent bar in slightly so it doesn't crowd the flag */
+@media(max-width:480px){
+  .race-panel-header{padding-left:16px;}
+  .race-panel-header::before{width:3px;}
+}
+
 /* REDUCED MOTION — respect users that prefer less animation */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
-  .hero::before,.hero::after,.nrc-label::before,.countdown-wrap.live .cd-unit,.podium-card.rank1::after,.chart-line,.chart-dot{animation:none !important;}
+  .hero::before,.hero::after,.nrc-label::before,.countdown-wrap.live .cd-unit,.podium-card.rank1::after,.chart-line,.chart-dot,.tab-btn.is-next .tab-dot.td-next{animation:none !important;}
   .chart-line{stroke-dashoffset:0 !important;}
 }
 
