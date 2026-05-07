@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- F1 2026 Season Hub v1.9 -->
+<!-- F1 2026 Season Hub v2.0 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -869,10 +869,102 @@ body.light .lrb-inner:hover{box-shadow:0 10px 24px rgba(225,6,0,.10);}
 .st-row{padding-top:8px;padding-bottom:8px;}
 .mini-row{padding-top:7px;padding-bottom:7px;}
 
+/* ════════════════════════════════════════════════════════
+   v2.0 BROADCAST HUD IDENTITY — restrained F1 graphic feel
+   Section captions, telemetry texture, live indicators.
+   ════════════════════════════════════════════════════════ */
+
+/* Caption bar prefix on every section title — evokes F1 timing-screen
+   captions. The .section-title is already display:flex with gap:10px,
+   so ::before becomes a flex item that sits before the emoji + label. */
+.section-title::before{
+  content:'';
+  display:inline-block;
+  width:4px;
+  height:14px;
+  background:var(--red);
+  border-radius:2px;
+  box-shadow:0 0 8px rgba(225,6,0,.40);
+  flex-shrink:0;
+}
+
+/* Per-section caption colour matched to the heading's intent */
+.section-title[data-i18n="driver_champ"]::before     {background:var(--gold);  box-shadow:0 0 8px rgba(245,197,24,.40);}
+.section-title[data-i18n="constructor_champ"]::before{background:var(--red);   box-shadow:0 0 8px rgba(225,6,0,.40);}
+.section-title[data-i18n="teammate_battle"]::before  {background:var(--orange);box-shadow:0 0 8px rgba(249,115,22,.45);}
+.section-title[data-i18n="season_records"]::before   {background:var(--green); box-shadow:0 0 8px rgba(34,197,94,.45);}
+.section-title[data-i18n="points_chart"]::before     {background:var(--next);  box-shadow:0 0 8px rgba(124,58,237,.40);}
+.section-title[data-i18n="season_progress"]::before  {background:var(--blue);  box-shadow:0 0 8px rgba(56,189,248,.40);}
+
+/* The two "active" sections breathe — feels live, not static */
+@media(prefers-reduced-motion:no-preference){
+  .section-title[data-i18n="season_records"]::before,
+  .section-title[data-i18n="teammate_battle"]::before{
+    animation:hudBarPulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes hudBarPulse{
+  0%,100%{opacity:.7;}
+  50%{opacity:1;}
+}
+
+/* Telemetry dot-grid texture on the chart card and the Next Race widget.
+   Layered as a background-image so the existing background-color stays. */
+.next-race-card,
+.chart-wrap{
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:14px 14px;
+}
+body.light .next-race-card,
+body.light .chart-wrap{
+  background-image:radial-gradient(rgba(0,0,0,.06) 1px,transparent 1px);
+}
+
+/* Driver result rows: F1-onboard-style 2px accent on the active driver
+   row when hovered — evokes the "selected car" highlight on broadcasts. */
+.driver-row{position:relative;}
+.driver-row::after{
+  content:'';
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  width:0;
+  background:var(--red);
+  opacity:.8;
+  transition:width .15s ease;
+  pointer-events:none;
+}
+.driver-row:hover::after{width:2px;}
+/* Top-3 rows pre-coloured to gold/silver/bronze when hovered */
+.driver-row:hover:has(.pos-cell.p1)::after{background:var(--gold);}
+.driver-row:hover:has(.pos-cell.p2)::after{background:var(--silver);}
+.driver-row:hover:has(.pos-cell.p3)::after{background:var(--bronze);}
+
+/* Constructor bar: subtle outer glow when the standings table is hovered.
+   Triggers on the table hover so individual rows don't all flash at once. */
+.standings-table:hover .cst-bar{box-shadow:0 0 6px currentColor;}
+
+/* Race name on the upcoming-race panel header gains a slow purple
+   "live data" pulse — tiny, only visible on the next-race panel */
+@media(prefers-reduced-motion:no-preference){
+  .race-eyebrow.next-eye{position:relative;display:inline-flex;align-items:center;gap:6px;}
+  .race-eyebrow.next-eye::after{
+    content:'';
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:var(--next);
+    box-shadow:0 0 0 0 rgba(124,58,237,.6);
+    animation:tabDotPulse 2s ease-out infinite;
+    margin-left:4px;
+  }
+}
+
 /* REDUCED MOTION — respect users that prefer less animation */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
-  .hero::before,.hero::after,.nrc-label::before,.countdown-wrap.live .cd-unit,.podium-card.rank1::after,.chart-line,.chart-dot,.tab-btn.is-next .tab-dot.td-next{animation:none !important;}
+  .hero::before,.hero::after,.nrc-label::before,.countdown-wrap.live .cd-unit,.podium-card.rank1::after,.chart-line,.chart-dot,.tab-btn.is-next .tab-dot.td-next,.section-title::before,.race-eyebrow.next-eye::after{animation:none !important;}
   .chart-line{stroke-dashoffset:0 !important;}
 }
 
