@@ -3,7 +3,7 @@
 // Bump CACHE_VERSION whenever you ship a meaningful HTML/CSS/JS change so the
 // activate handler purges the old caches.
 
-const CACHE_VERSION = "f1-2026-v3";
+const CACHE_VERSION = "f1-2026-v4";
 const CORE_ASSETS = [
   "./",
   "./index.html",

@@ -368,7 +368,6 @@ body.light .race-name-big{color:#18181b;}
 .time-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;flex:1;min-width:130px;}
 .tc-local{border-top:3px solid var(--next);}
 .tc-pa{border-top:3px solid var(--blue);}
-.tc-dr{border-top:3px solid var(--green);}
 .time-card-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--txt3);margin-bottom:4px;}
 .time-card-time{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#fff;letter-spacing:2px;line-height:1;}
 body.light .time-card-time{color:#18181b;}
@@ -418,18 +417,11 @@ body.light .wknd-time{color:#18181b;}
 .sprint-highlights{padding:10px 12px;border-top:1px solid var(--border);background:rgba(249,115,22,.04);}
 .sprint-hl-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
 
-/* INFO GRID */
-.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:14px 0;}
-.info-tile{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;}
-.info-tile-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--txt3);margin-bottom:3px;}
-.info-tile-value{font-size:13px;font-weight:500;color:var(--txt);}
-
 /* CIRCUIT FACTS CARD */
 .circuit-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:14px 0;}
 .cf-tile{background:var(--card2);border-radius:4px;padding:10px 12px;border-left:3px solid var(--border);}
-.cf-tile.lap{border-left-color:var(--gold);}
+.cf-tile.laps{border-left-color:var(--gold);}
 .cf-tile.dist{border-left-color:var(--blue);}
-.cf-tile.drs{border-left-color:var(--green);}
 .cf-tile.corners{border-left-color:var(--orange);}
 .cf-tile.record{border-left-color:var(--red);}
 .cf-tile.year{border-left-color:var(--next);}
@@ -551,7 +543,6 @@ body.light .track-map-stat .tms-num{color:#18181b;}
 /* WEATHER */
 .nrc-weather{margin-top:10px;padding:10px 12px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2);border-radius:5px;display:flex;align-items:center;gap:10px;font-family:'DM Mono',monospace;}
 .nrc-weather.cool{background:rgba(56,189,248,.06);border-color:rgba(56,189,248,.22);}
-.nrc-weather.warm{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.22);}
 .nrc-weather.wet{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.25);}
 .nrc-weather.unknown{background:rgba(255,255,255,.03);border-color:var(--border);}
 .wx-icon{font-size:22px;line-height:1;flex-shrink:0;}
@@ -1290,35 +1281,38 @@ const TEAM_LOGOS = {
   "Cadillac":     "https://media.formula1.com/content/dam/fom-website/teams/2026/cadillac.png",
 };
 
-// Track map SVGs hosted on Wikimedia Commons (CC-licensed). If a URL
-// 404s we hide the block via `onerror`, so a future update is just
-// dropping in a better source URL. Madrid intentionally omitted —
-// no good SVG exists yet for the 2026-debut IFEMA street circuit.
+// Track map SVGs from Wikimedia Commons (CC-licensed). Using the
+// Special:FilePath redirect URL pattern so we don't depend on
+// fragile internal hash paths — Commons resolves the canonical
+// file for us. Filenames verified via the MediaWiki parse API.
+// Rounds without a confirmed modern-layout SVG are intentionally
+// omitted; buildTrackMap() returns "" for missing entries.
+const _trackMap = name => `https://commons.wikimedia.org/wiki/Special:FilePath/${name}`;
 const TRACK_MAPS = {
-  1:  "https://upload.wikimedia.org/wikipedia/commons/4/4b/Albert_Park_Circuit_2021.svg",
-  2:  "https://upload.wikimedia.org/wikipedia/commons/4/4f/Shanghai_International_Racing_Circuit_track_map.svg",
-  3:  "https://upload.wikimedia.org/wikipedia/commons/c/c1/Suzuka_circuit_map--2005.svg",
-  4:  "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bahrain_International_Circuit--Grand_Prix_Layout.svg",
-  5:  "https://upload.wikimedia.org/wikipedia/commons/4/40/Jeddah_Corniche_Circuit.svg",
-  6:  "https://upload.wikimedia.org/wikipedia/commons/5/52/Miami_International_Autodrome_Track_Map.svg",
-  7:  "https://upload.wikimedia.org/wikipedia/commons/d/d4/Circuit_Gilles_Villeneuve.svg",
-  8:  "https://upload.wikimedia.org/wikipedia/commons/5/5a/Circuit_de_Monaco.svg",
-  9:  "https://upload.wikimedia.org/wikipedia/commons/c/c4/Circuit_de_Catalunya_2023.svg",
-  10: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Red_Bull_Ring_2022.svg",
-  11: "https://upload.wikimedia.org/wikipedia/commons/0/02/Silverstone_Circuit_2020.svg",
-  12: "https://upload.wikimedia.org/wikipedia/commons/4/47/Spa-Francorchamps_of_Belgium.svg",
-  13: "https://upload.wikimedia.org/wikipedia/commons/f/fc/Hungaroring.svg",
-  14: "https://upload.wikimedia.org/wikipedia/commons/4/47/Circuit_Zandvoort.svg",
-  15: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Monza_track_map.svg",
+  1:  _trackMap("Albert_Park_Circuit_2021.svg"),
+  2:  _trackMap("Shanghai_International_Racing_Circuit_track_map.svg"),
+  // 3: Suzuka — no modern SVG layout in Commons; awaiting update
+  4:  _trackMap("Bahrain_International_Circuit--Grand_Prix_Layout.svg"),
+  5:  _trackMap("Jeddah_Street_Circuit_2021.svg"),
+  6:  _trackMap("Hard_Rock_Stadium_Circuit_2022.svg"),
+  7:  _trackMap("Circuit_Gilles_Villeneuve.svg"),
+  8:  _trackMap("Monte_Carlo_Formula_1_track_map.svg"),
+  9:  _trackMap("Formula1_Circuit_Catalunya.svg"),
+  // 10: Red Bull Ring — only historical Österreichring layouts in Commons
+  // 11: Silverstone — current GP-config SVG not catalogued under the article
+  // 12: Spa-Francorchamps — current GP-config SVG not catalogued under the article
+  13: _trackMap("Hungaroring.svg"),
+  // 14: Zandvoort — only pre-2020 historical layouts in Commons
+  15: _trackMap("Monza_track_map.svg"),
   // 16: Madrid IFEMA — new for 2026, no public SVG yet
-  17: "https://upload.wikimedia.org/wikipedia/commons/0/02/Baku_Formula_One_track.svg",
-  18: "https://upload.wikimedia.org/wikipedia/commons/8/82/Singapore_Street_Circuit_2023_Layout_Map.svg",
-  19: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Austin_circuit.svg",
-  20: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez_2015.svg",
-  21: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace_%28AKA_Interlagos%29_track_map.svg",
-  22: "https://upload.wikimedia.org/wikipedia/commons/3/35/Las_Vegas_Strip_Circuit.svg",
-  23: "https://upload.wikimedia.org/wikipedia/commons/3/30/Losail_International_Circuit.svg",
-  24: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Yas_Marina_Circuit_2021.svg",
+  17: _trackMap("Baku_Formula_One_circuit_map.svg"),
+  18: _trackMap("Singapore_Street_Circuit_2015.svg"),
+  19: _trackMap("Austin_circuit.svg"),
+  // 20: Hermanos Rodríguez — no SVG layout in Commons
+  21: _trackMap("Autódromo_José_Carlos_Pace_(AKA_Interlagos)_track_map.svg"),
+  22: _trackMap("2023_Las_Vegas_street_circuit.svg"),
+  23: _trackMap("Lusail_International_Circuit_2023.svg"),
+  // 24: Yas Marina — only pre-2021 historical layouts in Commons
 };
 
 // Circuit coordinates for weather forecast (Open-Meteo) and track maps
@@ -2205,7 +2199,7 @@ function openDriverModal(name){
         <div class="modal-name">${d.name}</div>
         <div class="modal-team">${d.nat} · #${d.number} · ${d.team} · Age ${ageFromBorn(d.born)}</div>
       </div>
-      <button class="modal-close" onclick="closeModal()">✕</button>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close driver profile">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-stats">
