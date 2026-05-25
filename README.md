@@ -50,38 +50,39 @@ Single static page, works on any device, no login required.
 | R4 | 🇧🇭 Bahrain GP | Apr 12 | ❌ Cancelled | — |
 | R5 | 🇸🇦 Saudi Arabian GP | Apr 19 | ❌ Cancelled | — |
 | R6 | 🇺🇸 Miami GP *(Sprint)* | May 1–3 | ✓ Done | Kimi Antonelli |
-| R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ⚡ Next |  |
-| R8–R24 | Remaining rounds | Jun – Dec | Upcoming |  |
+| R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ✓ Done | Kimi Antonelli |
+| R8 | 🇲🇨 Monaco GP | Jun 7 | ⚡ Next |  |
+| R9–R24 | Remaining rounds | Jun – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R6 Miami
+## Championship — after R7 Canada
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 3 | 100 |
-| 2 | George Russell | Mercedes | 1 | 80 |
-| 3 | Charles Leclerc | Ferrari | 0 | 59 |
-| 4 | Lando Norris | McLaren | 0 | 51 |
-| 5 | Lewis Hamilton | Ferrari | 0 | 51 |
-| 6 | Oscar Piastri | McLaren | 0 | 43 |
-| 7 | Max Verstappen | Red Bull | 0 | 26 |
+| 1 | Kimi Antonelli | Mercedes | 4 | 131 |
+| 2 | George Russell | Mercedes | 1 | 88 |
+| 3 | Charles Leclerc | Ferrari | 0 | 75 |
+| 4 | Lewis Hamilton | Ferrari | 0 | 72 |
+| 5 | Lando Norris | McLaren | 0 | 58 |
+| 6 | Oscar Piastri | McLaren | 0 | 48 |
+| 7 | Max Verstappen | Red Bull | 0 | 43 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 180 |
-| 2 | Ferrari | 110 |
-| 3 | McLaren | 94 |
-| 4 | Red Bull | 30 |
-| 5 | Alpine | 23 |
-| 6 | Haas | 18 |
-| 7 | Racing Bulls | 14 |
+| 1 | Mercedes | 219 |
+| 2 | Ferrari | 147 |
+| 3 | McLaren | 106 |
+| 4 | Red Bull | 57 |
+| 5 | Alpine | 35 |
+| 6 | Racing Bulls | 21 |
+| 7 | Haas | 19 |
 
 ---
 
