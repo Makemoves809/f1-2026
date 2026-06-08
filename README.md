@@ -83,7 +83,7 @@ Single static page, works on any device, no login required.
 | 4 | Red Bull | 72 |
 | 5 | Alpine | 41 |
 | 6 | Racing Bulls | 39 |
-| 7 | Haas | 20 |
+| 7 | Haas | 21 |
 
 ---
 
