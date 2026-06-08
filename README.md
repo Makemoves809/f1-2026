@@ -52,7 +52,7 @@ Single static page, works on any device, no login required.
 | R6 | 🇺🇸 Miami GP *(Sprint)* | May 1–3 | ✓ Done | Kimi Antonelli |
 | R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ✓ Done | Kimi Antonelli |
 | R8 | 🇲🇨 Monaco GP | Jun 7 | ✓ Done | Kimi Antonelli |
-| R9 | 🇪🇸 Spanish GP (Barcelona) | Jun 14 | ⚡ Next |  |
+| R9 | 🇪🇸 Barcelona-Catalunya GP | Jun 14 | ⚡ Next |  |
 | R10–R24 | Remaining rounds | Jun – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
