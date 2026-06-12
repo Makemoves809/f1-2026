@@ -69,7 +69,7 @@ Single static page, works on any device, no login required.
 | 2 | Lewis Hamilton | Ferrari | 0 | 90 |
 | 3 | George Russell | Mercedes | 1 | 88 |
 | 4 | Charles Leclerc | Ferrari | 0 | 75 |
-| 5 | Oscar Piastri | McLaren | 0 | 60 |
+| 5 | Oscar Piastri | McLaren | 0 | 58 |
 | 6 | Lando Norris | McLaren | 0 | 58 |
 | 7 | Max Verstappen | Red Bull | 0 | 43 |
 
@@ -79,10 +79,10 @@ Single static page, works on any device, no login required.
 |-----|-------------|-----|
 | 1 | Mercedes | 244 |
 | 2 | Ferrari | 165 |
-| 3 | McLaren | 118 |
-| 4 | Red Bull | 72 |
-| 5 | Alpine | 41 |
-| 6 | Racing Bulls | 39 |
+| 3 | McLaren | 116 |
+| 4 | Red Bull | 69 |
+| 5 | Alpine | 50 |
+| 6 | Racing Bulls | 35 |
 | 7 | Haas | 21 |
 
 ---
