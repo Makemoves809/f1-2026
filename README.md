@@ -53,37 +53,38 @@ Single static page, works on any device, no login required.
 | R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ✓ Done | Kimi Antonelli |
 | R8 | 🇲🇨 Monaco GP | Jun 7 | ✓ Done | Kimi Antonelli |
 | R9 | 🇪🇸 Barcelona-Catalunya GP | Jun 14 | ✓ Done | Lewis Hamilton |
-| R10 | 🇦🇹 Austrian GP | Jun 28 | ⚡ Next |  |
-| R11–R24 | Remaining rounds | Jul – Dec | Upcoming |  |
+| R10 | 🇦🇹 Austrian GP | Jun 28 | ✓ Done | George Russell |
+| R11 | 🇬🇧 British GP *(Sprint)* | Jul 3–5 | ⚡ Next |  |
+| R12–R24 | Remaining rounds | Jul – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R9 Barcelona
+## Championship — after R10 Austria
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 5 | 156 |
-| 2 | Lewis Hamilton | Ferrari | 1 | 115 |
-| 3 | George Russell | Mercedes | 1 | 106 |
-| 4 | Charles Leclerc | Ferrari | 0 | 75 |
-| 5 | Lando Norris | McLaren | 0 | 73 |
-| 6 | Oscar Piastri | McLaren | 0 | 68 |
-| 7 | Max Verstappen | Red Bull | 0 | 55 |
+| 1 | Kimi Antonelli | Mercedes | 5 | 171 |
+| 2 | George Russell | Mercedes | 2 | 131 |
+| 3 | Lewis Hamilton | Ferrari | 1 | 125 |
+| 4 | Oscar Piastri | McLaren | 0 | 80 |
+| 5 | Lando Norris | McLaren | 0 | 79 |
+| 6 | Charles Leclerc | Ferrari | 0 | 79 |
+| 7 | Max Verstappen | Red Bull | 0 | 73 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 262 |
-| 2 | Ferrari | 190 |
-| 3 | McLaren | 141 |
-| 4 | Red Bull | 89 |
+| 1 | Mercedes | 302 |
+| 2 | Ferrari | 204 |
+| 3 | McLaren | 159 |
+| 4 | Red Bull | 115 |
 | 5 | Alpine | 57 |
-| 6 | Racing Bulls | 41 |
+| 6 | Racing Bulls | 44 |
 | 7 | Haas | 21 |
 
 ---
