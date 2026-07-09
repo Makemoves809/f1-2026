@@ -18,6 +18,18 @@ If the user types `update` (without `finalize`), default to the same
 protocol but ask first whether they want full lock-in or just a quick
 results bump.
 
+**Standing rule: every time the user says `update`, search online first.**
+Before doing anything else — before asking the lock-in-vs-quick-bump
+question, before checking dates against `SCHEDULE` — run at least one
+WebSearch sweep for the latest F1 news (results of the most recent
+session, penalty/steward reviews on anything already published, driver
+or schedule news). Do this even if the next round on the calendar looks
+like it hasn't happened yet by date math; sessions can finish early,
+get moved, or news can break (contract news, injuries, cancellations)
+that's worth surfacing regardless of whether there's a race to finalize.
+Report what the search turned up before asking how to proceed. If
+nothing new turns up, say so plainly rather than skipping the search.
+
 ---
 
 ## Project layout (single source of truth)
