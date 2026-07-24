@@ -55,37 +55,38 @@ Single static page, works on any device, no login required.
 | R9 | 🇪🇸 Barcelona-Catalunya GP | Jun 14 | ✓ Done | Lewis Hamilton |
 | R10 | 🇦🇹 Austrian GP | Jun 28 | ✓ Done | George Russell |
 | R11 | 🇬🇧 British GP *(Sprint)* | Jul 3–5 | ✓ Done | Charles Leclerc |
-| R12 | 🇧🇪 Belgian GP | Jul 17–19 | ⚡ Next |  |
-| R13–R24 | Remaining rounds | Jul – Dec | Upcoming |  |
+| R12 | 🇧🇪 Belgian GP | Jul 17–19 | ✓ Done | Kimi Antonelli |
+| R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ⚡ Next |  |
+| R14–R24 | Remaining rounds | Aug – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R11 British GP
+## Championship — after R12 Belgian GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 5 | 179 |
-| 2 | George Russell | Mercedes | 2 | 154 |
-| 3 | Lewis Hamilton | Ferrari | 1 | 147 |
-| 4 | Charles Leclerc | Ferrari | 1 | 108 |
-| 5 | Lando Norris | McLaren | 0 | 97 |
-| 6 | Oscar Piastri | McLaren | 0 | 82 |
-| 7 | Max Verstappen | Red Bull | 0 | 76 |
+| 1 | Kimi Antonelli | Mercedes | 6 | 204 |
+| 2 | Lewis Hamilton | Ferrari | 1 | 159 |
+| 3 | George Russell | Mercedes | 2 | 154 |
+| 4 | Charles Leclerc | Ferrari | 1 | 126 |
+| 5 | Lando Norris | McLaren | 0 | 103 |
+| 6 | Oscar Piastri | McLaren | 0 | 92 |
+| 7 | Max Verstappen | Red Bull | 0 | 91 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 333 |
-| 2 | Ferrari | 255 |
-| 3 | McLaren | 179 |
-| 4 | Red Bull | 128 |
-| 5 | Alpine | 60 |
-| 6 | Racing Bulls | 59 |
+| 1 | Mercedes | 358 |
+| 2 | Ferrari | 285 |
+| 3 | McLaren | 195 |
+| 4 | Red Bull | 151 |
+| 5 | Alpine | 61 |
+| 6 | Racing Bulls | 61 |
 | 7 | Haas | 21 |
 
 ---
