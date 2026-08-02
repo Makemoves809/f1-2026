@@ -56,37 +56,38 @@ Single static page, works on any device, no login required.
 | R10 | 🇦🇹 Austrian GP | Jun 28 | ✓ Done | George Russell |
 | R11 | 🇬🇧 British GP *(Sprint)* | Jul 3–5 | ✓ Done | Charles Leclerc |
 | R12 | 🇧🇪 Belgian GP | Jul 17–19 | ✓ Done | Kimi Antonelli |
-| R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ⚡ Next |  |
-| R14–R24 | Remaining rounds | Aug – Dec | Upcoming |  |
+| R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ✓ Done | Lando Norris |
+| R14 | 🇳🇱 Dutch GP *(Sprint)* | Aug 21–23 | ⚡ Next |  |
+| R15–R24 | Remaining rounds | Aug – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R12 Belgian GP
+## Championship — after R13 Hungarian GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 6 | 204 |
-| 2 | Lewis Hamilton | Ferrari | 1 | 159 |
-| 3 | George Russell | Mercedes | 2 | 154 |
-| 4 | Charles Leclerc | Ferrari | 1 | 126 |
-| 5 | Lando Norris | McLaren | 0 | 103 |
-| 6 | Oscar Piastri | McLaren | 0 | 92 |
-| 7 | Max Verstappen | Red Bull | 0 | 91 |
+| 1 | Kimi Antonelli | Mercedes | 6 | 219 |
+| 2 | Lewis Hamilton | Ferrari | 1 | 169 |
+| 3 | George Russell | Mercedes | 2 | 160 |
+| 4 | Charles Leclerc | Ferrari | 1 | 138 |
+| 5 | Lando Norris | McLaren | 1 | 128 |
+| 6 | Max Verstappen | Red Bull | 0 | 109 |
+| 7 | Oscar Piastri | McLaren | 0 | 92 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 358 |
-| 2 | Ferrari | 285 |
-| 3 | McLaren | 195 |
-| 4 | Red Bull | 151 |
-| 5 | Alpine | 61 |
-| 6 | Racing Bulls | 61 |
+| 1 | Mercedes | 379 |
+| 2 | Ferrari | 307 |
+| 3 | McLaren | 220 |
+| 4 | Red Bull | 177 |
+| 5 | Racing Bulls | 66 |
+| 6 | Alpine | 61 |
 | 7 | Haas | 21 |
 
 ---
