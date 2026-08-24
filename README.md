@@ -57,37 +57,38 @@ Single static page, works on any device, no login required.
 | R11 | 🇬🇧 British GP *(Sprint)* | Jul 3–5 | ✓ Done | Charles Leclerc |
 | R12 | 🇧🇪 Belgian GP | Jul 17–19 | ✓ Done | Kimi Antonelli |
 | R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ✓ Done | Lando Norris |
-| R14 | 🇳🇱 Dutch GP *(Sprint)* | Aug 21–23 | ⚡ Next |  |
-| R15–R24 | Remaining rounds | Aug – Dec | Upcoming |  |
+| R14 | 🇳🇱 Dutch GP *(Sprint)* | Aug 21–23 | ✓ Done | Lando Norris |
+| R15 | 🇮🇹 Italian GP | Sep 4–6 | ⚡ Next |  |
+| R16–R24 | Remaining rounds | Sep – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R13 Hungarian GP
+## Championship — after R14 Dutch GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 6 | 219 |
-| 2 | Lewis Hamilton | Ferrari | 1 | 169 |
-| 3 | George Russell | Mercedes | 2 | 160 |
-| 4 | Charles Leclerc | Ferrari | 1 | 138 |
-| 5 | Lando Norris | McLaren | 1 | 128 |
-| 6 | Max Verstappen | Red Bull | 0 | 109 |
-| 7 | Oscar Piastri | McLaren | 0 | 92 |
+| 1 | Kimi Antonelli | Mercedes | 6 | 242 |
+| 2 | George Russell | Mercedes | 2 | 183 |
+| 3 | Lewis Hamilton | Ferrari | 1 | 183 |
+| 4 | Lando Norris | McLaren | 2 | 159 |
+| 5 | Charles Leclerc | Ferrari | 1 | 155 |
+| 6 | Max Verstappen | Red Bull | 0 | 112 |
+| 7 | Oscar Piastri | McLaren | 0 | 104 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 379 |
-| 2 | Ferrari | 307 |
-| 3 | McLaren | 220 |
-| 4 | Red Bull | 177 |
+| 1 | Mercedes | 425 |
+| 2 | Ferrari | 338 |
+| 3 | McLaren | 263 |
+| 4 | Red Bull | 186 |
 | 5 | Racing Bulls | 66 |
-| 6 | Alpine | 61 |
+| 6 | Alpine | 63 |
 | 7 | Haas | 21 |
 
 ---

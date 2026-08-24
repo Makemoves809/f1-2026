@@ -44,8 +44,8 @@ Data sections inside `index.html` (line numbers drift; use grep, not absolutes):
 | Section | Purpose |
 |---|---|
 | `SCHEDULE` | Round list. Flip `done:false → true` for the finished round. |
-| `DRIVER_STANDINGS` | 22 drivers, sorted by pts desc, then tie-break. `pos` must equal array index + 1. |
-| `CONSTRUCTOR_STANDINGS` | 11 teams. `pts` must equal sum of its two drivers. |
+| `DRIVER_STANDINGS` | Every driver who has started a race (22 regulars + any substitutes), sorted by pts desc, then tie-break. `pos` must equal array index + 1. |
+| `CONSTRUCTOR_STANDINGS` | 11 teams. `pts` must equal the points its drivers scored **for that team** (see Substitutes below). |
 | `POINTS_HISTORY` | Top 6 championship drivers. Each array has one entry per **session** (sprints count separately). Last value must equal `DRIVER_STANDINGS[driver].pts`. |
 | `CHART_LABELS` | Display labels for `POINTS_HISTORY` x-axis. Already pre-populated through R24 — don't edit. |
 | `DRIVER_RESULTS` | All 22 drivers × all sessions. **Every** driver needs an entry for every race they participated in, including finishes outside points and DNS/DNF. |
@@ -150,6 +150,29 @@ Order matters because the validator depends on consistency:
 10. **`sw.js`**: bump `CACHE_VERSION = "f1-2026-v<N+1>"`. Required —
     returning visitors won't see new data otherwise.
 
+### Phase 3b — Substitute drivers (mid-season line-up changes)
+
+When a regular driver misses a round and a stand-in takes the seat:
+
+- The **absent** driver gets **no** `DRIVER_RESULTS` entry for that round (he
+  didn't participate — this is not a DNS). His points are simply unchanged.
+- The **substitute** gets a full set of entries. If he is new to the season,
+  add a `DRIVER_STANDINGS` row and a `DRIVER_RESULTS` key for him; he sorts
+  by the normal rules (a 0-point substitute still counts-back on best result).
+- Points follow the **driver** in `DRIVER_STANDINGS` but follow the **car** in
+  `CONSTRUCTOR_STANDINGS`. When a driver scores for a team that isn't his
+  season team, add `team:"<That Team>"` to those `DRIVER_RESULTS` entries and
+  to his `RACE_RESULTS`/`SPRINT_RESULTS` rows. Validator check B reads that
+  override; the `drivers:` label should list what each driver scored *for that
+  constructor*, so the label always sums to the team total.
+- A team may therefore show three names in one season. `teamH2H` compares the
+  two highest-placed drivers, so the head-to-head card still renders.
+
+Worked example — R14 2026 Dutch GP: Hadjar (Red Bull) was injured, Lawson moved
+up from Racing Bulls to Red Bull, Tsunoda came in at Racing Bulls. Lawson's P7
+banked 6 points to **Red Bull** (186), not Racing Bulls (66), while his driver
+total rose to 49.
+
 ### Phase 4 — Tie-breakers
 
 Drivers tied on points sort by **best result** (count of P1s, then P2s,
@@ -192,13 +215,17 @@ const d=new Function('driverPhoto',code)(driverPhoto);
 let p=[];
 const norm=s=>String(s||'').replace(/^P/,'');
 const RPTS=[25,18,15,12,10,8,6,4,2,1], SPTS=[8,7,6,5,4,3,2,1];
-const COMPLETED_RACES=[1,2,3,6,7,8]; // update as season progresses
-const COMPLETED_SPRINTS=[2,6,7];     // update as season progresses
+const COMPLETED_RACES=[1,2,3,6,7,8,9,10,11,12,13,14]; // update as season progresses
+const COMPLETED_SPRINTS=[2,6,7,11,14];     // update as season progresses
 
 // A) Driver totals
 d.DRIVER_STANDINGS.forEach(x=>{const s=(d.DRIVER_RESULTS[x.name]||[]).reduce((a,r)=>a+(r.pts||0),0);if(s!==x.pts)p.push(`pts ${x.name} ${x.pts}!=${s}`);});
-// B) Constructor totals
-const bt={};d.DRIVER_STANDINGS.forEach(x=>bt[x.team]=(bt[x.team]||0)+x.pts);
+// B) Constructor totals — sum DRIVER_RESULTS, honouring a per-entry `team`
+//    override (a substitute's points bank to the team he drove for that round)
+const HOME={};d.DRIVER_STANDINGS.forEach(x=>HOME[x.name]=x.team);
+const bt={};
+Object.entries(d.DRIVER_RESULTS).forEach(([n,res])=>{res.forEach(r=>{const t=r.team||HOME[n];bt[t]=(bt[t]||0)+(r.pts||0);});});
+d.DRIVER_STANDINGS.forEach(x=>{if(bt[x.team]==null)bt[x.team]=0;});
 d.CONSTRUCTOR_STANDINGS.forEach(c=>{if(bt[c.name]!==c.pts)p.push(`cons ${c.name} ${c.pts}!=${bt[c.name]}`);});
 // C) Pos sequences
 d.DRIVER_STANDINGS.forEach((x,i)=>{if(x.pos!==i+1)p.push(`pos seq ${x.name}:${x.pos}`);});
@@ -211,6 +238,10 @@ COMPLETED_RACES.forEach(r=>{const rr=d.RACE_RESULTS[r];if(!rr){p.push(`No RACE $
 COMPLETED_SPRINTS.forEach(r=>{const sr=d.SPRINT_RESULTS[r];if(!sr){p.push(`No SPRINT ${r}`);return;}if(sr.results.length!==22)p.push(`S${r} count ${sr.results.length}`);if(new Set(sr.results.map(x=>x.name)).size!==22)p.push(`S${r} dup names`);sr.results.forEach(x=>{const pos=parseInt(x.pos);const e=(!isNaN(pos)&&SPTS[pos-1]!=null)?SPTS[pos-1]:0;if((x.pts||0)!==e)p.push(`S${r} pts ${x.name} pos${x.pos} ${x.pts}!=${e}`);});});
 // F) Wins
 d.DRIVER_STANDINGS.forEach(x=>{const w=(d.DRIVER_RESULTS[x.name]||[]).filter(r=>!/Sprint/.test(r.race)&&r.pos==='P1').length;if(w!==x.wins)p.push(`wins ${x.name} ${x.wins}!=${w}`);});
+// J) Total points awarded must equal total points banked
+const awarded=COMPLETED_RACES.length*101+COMPLETED_SPRINTS.length*36;
+const banked=d.DRIVER_STANDINGS.reduce((a,x)=>a+x.pts,0);
+if(awarded!==banked)p.push(`total awarded ${awarded} != banked ${banked}`);
 // G) Points history finals match standings
 d.POINTS_HISTORY.forEach(([nn,,arr])=>{const dr=d.DRIVER_STANDINGS.find(x=>x.name===nn);if(!dr){p.push(`ph ${nn}`);return;}if(arr[arr.length-1]!==dr.pts)p.push(`ph final ${nn}: ${arr[arr.length-1]}!=${dr.pts}`);});
 // H) Cross-store position consistency
@@ -302,7 +333,12 @@ that came from only one source. Don't dump tables unless asked.
 9. **Race naming.** R9 is "Barcelona-Catalunya GP" (not "Spanish GP");
    R16 Madrid is the "Spanish GP" in 2026. Get the official names
    right — F1 sometimes rebrands events between seasons.
-10. **Driver numbers change.** Champions take #1; the previous #1
+10. **Mid-season substitutions break the driver→team assumption.** A stand-in
+    scores for the car, not for his usual team. Never let a substitute's points
+    silently land on his season team's constructor total — use the per-entry
+    `team` override (Phase 3b). Equally, never give the absent driver a "DNS"
+    row: he wasn't entered.
+11. **Driver numbers change.** Champions take #1; the previous #1
     reverts to their old number (Verstappen ran #1 when champion,
     then #3 in 2026 — *not* #33). Always verify after a title change.
 
@@ -311,7 +347,7 @@ that came from only one source. Don't dump tables unless asked.
 ## Quick reference
 
 - Points: race 25-18-15-12-10-8-6-4-2-1; sprint 8-7-6-5-4-3-2-1
-- 22 drivers / 11 teams (2026 adds Cadillac as #11)
+- 22 regular drivers / 11 teams (2026 adds Cadillac as #11); substitutes add rows
 - 2026 calendar: 22 rounds (Bahrain R4 + Saudi R5 cancelled March 2026)
 - Current branch convention: `claude/update-*` (check session prompt)
 - Deploy target: `main` (GitHub Pages)
