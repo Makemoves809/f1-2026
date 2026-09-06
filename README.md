@@ -58,37 +58,38 @@ Single static page, works on any device, no login required.
 | R12 | 🇧🇪 Belgian GP | Jul 17–19 | ✓ Done | Kimi Antonelli |
 | R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ✓ Done | Lando Norris |
 | R14 | 🇳🇱 Dutch GP *(Sprint)* | Aug 21–23 | ✓ Done | Lando Norris |
-| R15 | 🇮🇹 Italian GP | Sep 4–6 | ⚡ Next |  |
-| R16–R24 | Remaining rounds | Sep – Dec | Upcoming |  |
+| R15 | 🇮🇹 Italian GP | Sep 4–6 | ✓ Done | Kimi Antonelli |
+| R16 | 🇪🇸 Spanish GP (Madrid) | Sep 11–13 | ⚡ Next |  |
+| R17–R24 | Remaining rounds | Sep – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R14 Dutch GP
+## Championship — after R15 Italian GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 6 | 242 |
-| 2 | George Russell | Mercedes | 2 | 183 |
-| 3 | Lewis Hamilton | Ferrari | 1 | 183 |
-| 4 | Lando Norris | McLaren | 2 | 159 |
+| 1 | Kimi Antonelli | Mercedes | 7 | 267 |
+| 2 | George Russell | Mercedes | 2 | 201 |
+| 3 | Lewis Hamilton | Ferrari | 1 | 191 |
+| 4 | Lando Norris | McLaren | 2 | 171 |
 | 5 | Charles Leclerc | Ferrari | 1 | 155 |
-| 6 | Max Verstappen | Red Bull | 0 | 112 |
-| 7 | Oscar Piastri | McLaren | 0 | 104 |
+| 6 | Max Verstappen | Red Bull | 0 | 127 |
+| 7 | Oscar Piastri | McLaren | 0 | 114 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 425 |
-| 2 | Ferrari | 338 |
-| 3 | McLaren | 263 |
-| 4 | Red Bull | 186 |
-| 5 | Racing Bulls | 66 |
-| 6 | Alpine | 63 |
+| 1 | Mercedes | 468 |
+| 2 | Ferrari | 346 |
+| 3 | McLaren | 285 |
+| 4 | Red Bull | 201 |
+| 5 | Alpine | 71 |
+| 6 | Racing Bulls | 71 |
 | 7 | Haas | 21 |
 
 ---
