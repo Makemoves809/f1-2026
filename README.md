@@ -47,7 +47,7 @@ Single static page, works on any device, no login required.
 | R1 | 🇦🇺 Australian GP | Mar 8 | ✓ Done | George Russell |
 | R2 | 🇨🇳 Chinese GP *(Sprint)* | Mar 13–15 | ✓ Done | Kimi Antonelli |
 | R3 | 🇯🇵 Japanese GP | Mar 29 | ✓ Done | Kimi Antonelli |
-| R4 | 🇧🇭 Bahrain GP | Apr 12 | ❌ Cancelled | — |
+| R4 | 🇧🇭 Bahrain GP *(relocated to Sepang, Malaysia)* | Oct 4 | Upcoming |  |
 | R5 | 🇸🇦 Saudi Arabian GP | Apr 19 | ❌ Cancelled | — |
 | R6 | 🇺🇸 Miami GP *(Sprint)* | May 1–3 | ✓ Done | Kimi Antonelli |
 | R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ✓ Done | Kimi Antonelli |
@@ -62,7 +62,7 @@ Single static page, works on any device, no login required.
 | R16 | 🇪🇸 Spanish GP (Madrid) | Sep 11–13 | ⚡ Next |  |
 | R17–R24 | Remaining rounds | Sep – Dec | Upcoming |  |
 
-> **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA due to the Middle East conflict, reducing the 2026 calendar from 24 to 22 Grands Prix. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
+> **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA on March 15 due to the Middle East conflict. On July 28 the Bahrain Grand Prix was revived at Sepang, Malaysia (Oct 2–4, race Sunday Oct 4, 15:00 local), leaving the 2026 calendar at 23 Grands Prix. Saudi Arabia is not replaced. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
@@ -78,7 +78,7 @@ Single static page, works on any device, no login required.
 | 4 | Lando Norris | McLaren | 2 | 171 |
 | 5 | Charles Leclerc | Ferrari | 1 | 155 |
 | 6 | Max Verstappen | Red Bull | 0 | 127 |
-| 7 | Oscar Piastri | McLaren | 0 | 114 |
+| 7 | Oscar Piastri | McLaren | 0 | 116 |
 
 ### Constructors
 
@@ -86,10 +86,10 @@ Single static page, works on any device, no login required.
 |-----|-------------|-----|
 | 1 | Mercedes | 468 |
 | 2 | Ferrari | 346 |
-| 3 | McLaren | 285 |
-| 4 | Red Bull | 201 |
-| 5 | Alpine | 71 |
-| 6 | Racing Bulls | 71 |
+| 3 | McLaren | 287 |
+| 4 | Red Bull | 204 |
+| 5 | Racing Bulls | 75 |
+| 6 | Alpine | 62 |
 | 7 | Haas | 21 |
 
 ---

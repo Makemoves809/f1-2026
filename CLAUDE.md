@@ -170,8 +170,8 @@ When a regular driver misses a round and a stand-in takes the seat:
 
 Worked example — R14 2026 Dutch GP: Hadjar (Red Bull) was injured, Lawson moved
 up from Racing Bulls to Red Bull, Tsunoda came in at Racing Bulls. Lawson's P7
-banked 6 points to **Red Bull** (186), not Racing Bulls (66), while his driver
-total rose to 49.
+banked 6 points to **Red Bull**, not Racing Bulls, while his driver total rose
+by 6 (Racing Bulls' `drivers:` label shows Lawson's Racing Bulls-only points).
 
 ### Phase 4 — Tie-breakers
 
@@ -392,7 +392,14 @@ that came from only one source. Don't dump tables unless asked.
     silently land on his season team's constructor total — use the per-entry
     `team` override (Phase 3b). Equally, never give the absent driver a "DNS"
     row: he wasn't entered.
-11. **Driver numbers change.** Champions take #1; the previous #1
+11. **Post-race rulings can reverse more than once.** Monaco 2026: two 5s
+    penalties dropped Gasly to P7; Alpine's Right of Review restored him to
+    P3 four days later; then the FIA International Court of Appeal (25 Aug)
+    reimposed the penalties. The site carried the intermediate state for
+    eleven weeks. When a Right of Review succeeds, expect an appeal — and
+    check every subsequent `update` for "ICA" / "appeal" news on any round
+    whose classification was changed after the fact.
+12. **Driver numbers change.** Champions take #1; the previous #1
     reverts to their old number (Verstappen ran #1 when champion,
     then #3 in 2026 — *not* #33). Always verify after a title change.
 
@@ -402,7 +409,7 @@ that came from only one source. Don't dump tables unless asked.
 
 - Points: race 25-18-15-12-10-8-6-4-2-1; sprint 8-7-6-5-4-3-2-1
 - 22 regular drivers / 11 teams (2026 adds Cadillac as #11); substitutes add rows
-- 2026 calendar: 22 rounds (Bahrain R4 + Saudi R5 cancelled March 2026)
+- 2026 calendar: 23 rounds. Saudi R5 cancelled March 2026; Bahrain R4 cancelled then revived at Sepang, Malaysia (Oct 4) — it keeps `round:4` but sits between R17 and R18 in `SCHEDULE` and `CHART_LABELS`
 - Current branch convention: `claude/update-*` (check session prompt)
 - Deploy target: `main` (GitHub Pages)
 - Languages: EN + ES, both must be updated together

@@ -1100,7 +1100,7 @@ body.light .chart-wrap{
 
 <!-- FOOTER -->
 <footer class="site-footer">
-  F1 2026 Season Hub · 22 Races (R4 Bahrain &amp; R5 Saudi cancelled) · Times shown in your local timezone
+  F1 2026 Season Hub · 23 Races (R5 Saudi cancelled · R4 Bahrain relocated to Sepang, Oct 4) · Times shown in your local timezone
 </footer>
 
 <script>
@@ -1137,11 +1137,11 @@ const DRIVER_STANDINGS = [
   {pos:4,  name:"Lando Norris",     team:"McLaren",      color:"#ff8000", pts:171, wins:2, nat:"🇬🇧", born:"1999-11-13", number:1, photo:driverPhoto("McLaren",     "LANNOR01")},
   {pos:5,  name:"Charles Leclerc",  team:"Ferrari",      color:"#e8002d", pts:155, wins:1, nat:"🇲🇨", born:"1997-10-16", number:16,photo:driverPhoto("Ferrari",     "CHALEC01")},
   {pos:6,  name:"Max Verstappen",   team:"Red Bull",     color:"#3671c6", pts:127, wins:0, nat:"🇳🇱", born:"1997-09-30", number:3, photo:driverPhoto("Red Bull",    "MAXVER01")},
-  {pos:7,  name:"Oscar Piastri",    team:"McLaren",      color:"#ff8000", pts:114, wins:0, nat:"🇦🇺", born:"2001-04-06", number:81,photo:driverPhoto("McLaren",     "OSCPIA01")},
-  {pos:8,  name:"Isack Hadjar",     team:"Red Bull",     color:"#3671c6", pts:68,  wins:0, nat:"🇫🇷", born:"2004-09-28", number:6, photo:driverPhoto("Red Bull",    "ISAHAD01")},
-  {pos:9,  name:"Pierre Gasly",     team:"Alpine",       color:"#ff87bc", pts:50,  wins:0, nat:"🇫🇷", born:"1996-02-07", number:10,photo:driverPhoto("Alpine",      "PIEGAS01")},
-  {pos:10, name:"Liam Lawson",      team:"Racing Bulls", color:"#6692ff", pts:49,  wins:0, nat:"🇳🇿", born:"2002-02-11", number:30,photo:driverPhoto("Racing Bulls","LIALAW01")},
-  {pos:11, name:"Arvid Lindblad",   team:"Racing Bulls", color:"#6692ff", pts:27,  wins:0, nat:"🇬🇧", born:"2007-08-08", number:41,photo:driverPhoto("Racing Bulls","ARVLIN01")},
+  {pos:7,  name:"Oscar Piastri",    team:"McLaren",      color:"#ff8000", pts:116, wins:0, nat:"🇦🇺", born:"2001-04-06", number:81,photo:driverPhoto("McLaren",     "OSCPIA01")},
+  {pos:8,  name:"Isack Hadjar",     team:"Red Bull",     color:"#3671c6", pts:71,  wins:0, nat:"🇫🇷", born:"2004-09-28", number:6, photo:driverPhoto("Red Bull",    "ISAHAD01")},
+  {pos:9,  name:"Liam Lawson",      team:"Racing Bulls", color:"#6692ff", pts:51,  wins:0, nat:"🇳🇿", born:"2002-02-11", number:30,photo:driverPhoto("Racing Bulls","LIALAW01")},
+  {pos:10, name:"Pierre Gasly",     team:"Alpine",       color:"#ff87bc", pts:41,  wins:0, nat:"🇫🇷", born:"1996-02-07", number:10,photo:driverPhoto("Alpine",      "PIEGAS01")},
+  {pos:11, name:"Arvid Lindblad",   team:"Racing Bulls", color:"#6692ff", pts:29,  wins:0, nat:"🇬🇧", born:"2007-08-08", number:41,photo:driverPhoto("Racing Bulls","ARVLIN01")},
   {pos:12, name:"Franco Colapinto", team:"Alpine",       color:"#ff87bc", pts:21,  wins:0, nat:"🇦🇷", born:"2003-05-27", number:43,photo:driverPhoto("Alpine",      "FRACOL01")},
   {pos:13, name:"Oliver Bearman",   team:"Haas",         color:"#b6babd", pts:18,  wins:0, nat:"🇬🇧", born:"2005-05-08", number:87,photo:driverPhoto("Haas",        "OLIBEA01")},
   {pos:14, name:"Gabriel Bortoleto",team:"Audi",         color:"#c4b000", pts:10,  wins:0, nat:"🇧🇷", born:"2004-10-14", number:5, photo:driverPhoto("Audi",        "GABBOR01")},
@@ -1257,10 +1257,10 @@ function renderWeatherInto(el, round, variant){
 const CONSTRUCTOR_STANDINGS = [
   {pos:1,  name:"Mercedes",     color:"#00d2be", pts:468, drivers:"Antonelli 267 · Russell 201"},
   {pos:2,  name:"Ferrari",      color:"#e8002d", pts:346, drivers:"Hamilton 191 · Leclerc 155"},
-  {pos:3,  name:"McLaren",      color:"#ff8000", pts:285, drivers:"Norris 171 · Piastri 114"},
-  {pos:4,  name:"Red Bull",     color:"#3671c6", pts:201, drivers:"Verstappen 127 · Hadjar 68 · Lawson 6"},
-  {pos:5,  name:"Alpine",       color:"#ff87bc", pts:71,  drivers:"Gasly 50 · Colapinto 21"},
-  {pos:6,  name:"Racing Bulls", color:"#6692ff", pts:71,  drivers:"Lawson 43 · Lindblad 27 · Tsunoda 1"},
+  {pos:3,  name:"McLaren",      color:"#ff8000", pts:287, drivers:"Norris 171 · Piastri 116"},
+  {pos:4,  name:"Red Bull",     color:"#3671c6", pts:204, drivers:"Verstappen 127 · Hadjar 71 · Lawson 6"},
+  {pos:5,  name:"Racing Bulls", color:"#6692ff", pts:75,  drivers:"Lawson 45 · Lindblad 29 · Tsunoda 1"},
+  {pos:6,  name:"Alpine",       color:"#ff87bc", pts:62,  drivers:"Gasly 41 · Colapinto 21"},
   {pos:7,  name:"Haas",         color:"#b6babd", pts:21,  drivers:"Bearman 18 · Ocon 3"},
   {pos:8,  name:"Audi",         color:"#c4b000", pts:16,  drivers:"Bortoleto 10 · Hülkenberg 6"},
   {pos:9,  name:"Williams",     color:"#64c4ff", pts:11,  drivers:"Sainz 6 · Albon 5"},
@@ -1293,7 +1293,7 @@ const TRACK_MAPS = {
   1:  _trackMap("Albert_Park_Circuit_2021.svg"),
   2:  _trackMap("Shanghai_International_Racing_Circuit_track_map.svg"),
   // 3: Suzuka — no modern SVG layout in Commons; awaiting update
-  4:  _trackMap("Bahrain_International_Circuit--Grand_Prix_Layout.svg"),
+  // 4: Sepang — Bahrain GP relocated to Malaysia; no verified Commons SVG yet
   5:  _trackMap("Jeddah_Street_Circuit_2021.svg"),
   6:  _trackMap("Hard_Rock_Stadium_Circuit_2022.svg"),
   7:  _trackMap("Circuit_Gilles_Villeneuve.svg"),
@@ -1322,7 +1322,7 @@ const CIRCUIT_GEO = {
   1:  {lat:-37.8497, lon:144.9681}, // Albert Park, Melbourne
   2:  {lat: 31.3389, lon:121.2197}, // Shanghai
   3:  {lat: 34.8431, lon:136.5419}, // Suzuka
-  4:  {lat: 26.0325, lon: 50.5106}, // Bahrain
+  4:  {lat:  2.7608, lon:101.7381}, // Sepang (Bahrain GP relocated)
   5:  {lat: 21.6319, lon: 39.1044}, // Jeddah
   6:  {lat: 25.9581, lon:-80.2389}, // Miami HRS
   7:  {lat: 45.5050, lon:-73.5228}, // Montreal Gilles Villeneuve
@@ -1365,14 +1365,14 @@ const DRIVER_RESULTS = {
   "Charles Leclerc":   [{round:1, race:"Australia", pos:"P3", pts:15},{round:2, race:"China Sprint", pos:"P2", pts:7},{round:2, race:"China", pos:"P4", pts:12},{round:3, race:"Japan", pos:"P3", pts:15},{round:6, race:"Miami Sprint", pos:"P3", pts:6},{round:6, race:"Miami", pos:"P8", pts:4},{round:7, race:"Canada Sprint", pos:"P5", pts:4},{round:7, race:"Canada", pos:"P4", pts:12},{round:8, race:"Monaco", pos:"DNF",pts:0},{round:9, race:"Barcelona", pos:"DNF", pts:0},{round:10, race:"Austria", pos:"P8", pts:4},{round:11, race:"British Sprint", pos:"P5", pts:4},{round:11, race:"British", pos:"P1", pts:25},{round:12, race:"Belgium", pos:"P2", pts:18},{round:13, race:"Hungary", pos:"P4", pts:12},{round:14, race:"Dutch Sprint", pos:"P2", pts:7},{round:14, race:"Dutch", pos:"P5", pts:10},{round:15, race:"Italy", pos:"DNF", pts:0}],
   "Lando Norris":      [{round:1, race:"Australia", pos:"P5", pts:10},{round:2, race:"China Sprint", pos:"P4", pts:5},{round:2, race:"China", pos:"DNS", pts:0},{round:3, race:"Japan", pos:"P5", pts:10},{round:6, race:"Miami Sprint", pos:"P1", pts:8},{round:6, race:"Miami", pos:"P2", pts:18},{round:7, race:"Canada Sprint", pos:"P2", pts:7},{round:7, race:"Canada", pos:"DNF", pts:0},{round:8, race:"Monaco", pos:"DNF",pts:0},{round:9, race:"Barcelona", pos:"P3", pts:15},{round:10, race:"Austria", pos:"P7", pts:6},{round:11, race:"British Sprint", pos:"P3", pts:6},{round:11, race:"British", pos:"P4", pts:12},{round:12, race:"Belgium", pos:"P7", pts:6},{round:13, race:"Hungary", pos:"P1", pts:25},{round:14, race:"Dutch Sprint", pos:"P3", pts:6},{round:14, race:"Dutch", pos:"P1", pts:25},{round:15, race:"Italy", pos:"P4", pts:12}],
   "Lewis Hamilton":    [{round:1, race:"Australia", pos:"P4", pts:12},{round:2, race:"China Sprint", pos:"P3", pts:6},{round:2, race:"China", pos:"P3", pts:15},{round:3, race:"Japan", pos:"P6", pts:8},{round:6, race:"Miami Sprint", pos:"P7", pts:2},{round:6, race:"Miami", pos:"P6", pts:8},{round:7, race:"Canada Sprint", pos:"P6", pts:3},{round:7, race:"Canada", pos:"P2", pts:18},{round:8, race:"Monaco", pos:"P2", pts:18},{round:9, race:"Barcelona", pos:"P1", pts:25},{round:10, race:"Austria", pos:"P5", pts:10},{round:11, race:"British Sprint", pos:"P2", pts:7},{round:11, race:"British", pos:"P3", pts:15},{round:12, race:"Belgium", pos:"P4", pts:12},{round:13, race:"Hungary", pos:"P5", pts:10},{round:14, race:"Dutch Sprint", pos:"P7", pts:2},{round:14, race:"Dutch", pos:"P4", pts:12},{round:15, race:"Italy", pos:"P6", pts:8}],
-  "Oscar Piastri":     [{round:1, race:"Australia", pos:"DNS",pts:0},{round:2, race:"China Sprint", pos:"P6", pts:3},{round:2, race:"China", pos:"DNS", pts:0},{round:3, race:"Japan", pos:"P2", pts:18},{round:6, race:"Miami Sprint", pos:"P2", pts:7},{round:6, race:"Miami", pos:"P3", pts:15},{round:7, race:"Canada Sprint", pos:"P4", pts:5},{round:7, race:"Canada", pos:"P11",pts:0},{round:8, race:"Monaco", pos:"P5", pts:10},{round:9, race:"Barcelona", pos:"P5", pts:10},{round:10, race:"Austria", pos:"P4", pts:12},{round:11, race:"British Sprint", pos:"P7", pts:2},{round:11, race:"British", pos:"P11",pts:0},{round:12, race:"Belgium", pos:"P5", pts:10},{round:13, race:"Hungary", pos:"DNF", pts:0},{round:14, race:"Dutch Sprint", pos:"P5", pts:4},{round:14, race:"Dutch", pos:"P6", pts:8},{round:15, race:"Italy", pos:"P5", pts:10}],
+  "Oscar Piastri":     [{round:1, race:"Australia", pos:"DNS",pts:0},{round:2, race:"China Sprint", pos:"P6", pts:3},{round:2, race:"China", pos:"DNS", pts:0},{round:3, race:"Japan", pos:"P2", pts:18},{round:6, race:"Miami Sprint", pos:"P2", pts:7},{round:6, race:"Miami", pos:"P3", pts:15},{round:7, race:"Canada Sprint", pos:"P4", pts:5},{round:7, race:"Canada", pos:"P11",pts:0},{round:8, race:"Monaco", pos:"P4", pts:12},{round:9, race:"Barcelona", pos:"P5", pts:10},{round:10, race:"Austria", pos:"P4", pts:12},{round:11, race:"British Sprint", pos:"P7", pts:2},{round:11, race:"British", pos:"P11",pts:0},{round:12, race:"Belgium", pos:"P5", pts:10},{round:13, race:"Hungary", pos:"DNF", pts:0},{round:14, race:"Dutch Sprint", pos:"P5", pts:4},{round:14, race:"Dutch", pos:"P6", pts:8},{round:15, race:"Italy", pos:"P5", pts:10}],
   "Max Verstappen":    [{round:1, race:"Australia", pos:"P6", pts:8},{round:2, race:"China Sprint", pos:"P9", pts:0},{round:2, race:"China", pos:"DNF", pts:0},{round:3, race:"Japan", pos:"P8", pts:4},{round:6, race:"Miami Sprint", pos:"P5", pts:4},{round:6, race:"Miami", pos:"P5", pts:10},{round:7, race:"Canada Sprint", pos:"P7", pts:2},{round:7, race:"Canada", pos:"P3", pts:15},{round:8, race:"Monaco", pos:"DNF",pts:0},{round:9, race:"Barcelona", pos:"P4", pts:12},{round:10, race:"Austria", pos:"P2", pts:18},{round:11, race:"British Sprint", pos:"P6", pts:3},{round:11, race:"British", pos:"DNF", pts:0},{round:12, race:"Belgium", pos:"P3", pts:15},{round:13, race:"Hungary", pos:"P2", pts:18},{round:14, race:"Dutch Sprint", pos:"P6", pts:3},{round:14, race:"Dutch", pos:"DNF", pts:0},{round:15, race:"Italy", pos:"P3", pts:15}],
   "Oliver Bearman":    [{round:1, race:"Australia", pos:"P7", pts:6},{round:2, race:"China Sprint", pos:"P8", pts:1},{round:2, race:"China", pos:"P5", pts:10},{round:3, race:"Japan", pos:"DNF", pts:0},{round:6, race:"Miami Sprint", pos:"P12",pts:0},{round:6, race:"Miami", pos:"P11",pts:0},{round:7, race:"Canada Sprint", pos:"P18",pts:0},{round:7, race:"Canada", pos:"P10",pts:1},{round:8, race:"Monaco", pos:"DNF",pts:0},{round:9, race:"Barcelona", pos:"DNF", pts:0},{round:10, race:"Austria", pos:"P14",pts:0},{round:11, race:"British Sprint", pos:"P14",pts:0},{round:11, race:"British", pos:"P12",pts:0},{round:12, race:"Belgium", pos:"P14",pts:0},{round:13, race:"Hungary", pos:"P19", pts:0},{round:14, race:"Dutch Sprint", pos:"P15", pts:0},{round:14, race:"Dutch", pos:"DNF", pts:0},{round:15, race:"Italy", pos:"P15", pts:0}],
-  "Pierre Gasly":      [{round:1, race:"Australia", pos:"P10",pts:1},{round:2, race:"China Sprint", pos:"P11",pts:0},{round:2, race:"China", pos:"P6", pts:8},{round:3, race:"Japan", pos:"P7", pts:6},{round:6, race:"Miami Sprint", pos:"P8", pts:1},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P20",pts:0},{round:7, race:"Canada", pos:"P8", pts:4},{round:8, race:"Monaco", pos:"P3", pts:15},{round:9, race:"Barcelona", pos:"P7", pts:6},{round:10, race:"Austria", pos:"P13",pts:0},{round:11, race:"British Sprint", pos:"P11",pts:0},{round:11, race:"British", pos:"P10",pts:1},{round:12, race:"Belgium", pos:"P11",pts:0},{round:13, race:"Hungary", pos:"P12", pts:0},{round:14, race:"Dutch Sprint", pos:"P8", pts:1},{round:14, race:"Dutch", pos:"P10", pts:1},{round:15, race:"Italy", pos:"P7", pts:6}],
-  "Liam Lawson":       [{round:1, race:"Australia", pos:"P13",pts:0},{round:2, race:"China Sprint", pos:"P7", pts:2},{round:2, race:"China", pos:"P7", pts:6},{round:3, race:"Japan", pos:"P9", pts:2},{round:6, race:"Miami Sprint", pos:"P14",pts:0},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P11",pts:0},{round:7, race:"Canada", pos:"P7", pts:6},{round:8, race:"Monaco", pos:"P6", pts:8},{round:9, race:"Barcelona", pos:"P8", pts:4},{round:10, race:"Austria", pos:"P9", pts:2},{round:11, race:"British Sprint", pos:"P8", pts:1},{round:11, race:"British", pos:"P6", pts:8},{round:12, race:"Belgium", pos:"P12",pts:0},{round:13, race:"Hungary", pos:"P8", pts:4},{round:14, race:"Dutch Sprint", pos:"P11", pts:0, team:"Red Bull"},{round:14, race:"Dutch", pos:"P7", pts:6, team:"Red Bull"},{round:15, race:"Italy", pos:"P14", pts:0, team:"Red Bull"}],
+  "Pierre Gasly":      [{round:1, race:"Australia", pos:"P10",pts:1},{round:2, race:"China Sprint", pos:"P11",pts:0},{round:2, race:"China", pos:"P6", pts:8},{round:3, race:"Japan", pos:"P7", pts:6},{round:6, race:"Miami Sprint", pos:"P8", pts:1},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P20",pts:0},{round:7, race:"Canada", pos:"P8", pts:4},{round:8, race:"Monaco", pos:"P7", pts:6},{round:9, race:"Barcelona", pos:"P7", pts:6},{round:10, race:"Austria", pos:"P13",pts:0},{round:11, race:"British Sprint", pos:"P11",pts:0},{round:11, race:"British", pos:"P10",pts:1},{round:12, race:"Belgium", pos:"P11",pts:0},{round:13, race:"Hungary", pos:"P12", pts:0},{round:14, race:"Dutch Sprint", pos:"P8", pts:1},{round:14, race:"Dutch", pos:"P10", pts:1},{round:15, race:"Italy", pos:"P7", pts:6}],
+  "Liam Lawson":       [{round:1, race:"Australia", pos:"P13",pts:0},{round:2, race:"China Sprint", pos:"P7", pts:2},{round:2, race:"China", pos:"P7", pts:6},{round:3, race:"Japan", pos:"P9", pts:2},{round:6, race:"Miami Sprint", pos:"P14",pts:0},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P11",pts:0},{round:7, race:"Canada", pos:"P7", pts:6},{round:8, race:"Monaco", pos:"P5", pts:10},{round:9, race:"Barcelona", pos:"P8", pts:4},{round:10, race:"Austria", pos:"P9", pts:2},{round:11, race:"British Sprint", pos:"P8", pts:1},{round:11, race:"British", pos:"P6", pts:8},{round:12, race:"Belgium", pos:"P12",pts:0},{round:13, race:"Hungary", pos:"P8", pts:4},{round:14, race:"Dutch Sprint", pos:"P11", pts:0, team:"Red Bull"},{round:14, race:"Dutch", pos:"P7", pts:6, team:"Red Bull"},{round:15, race:"Italy", pos:"P14", pts:0, team:"Red Bull"}],
   "Franco Colapinto":  [{round:1, race:"Australia", pos:"P14",pts:0},{round:2, race:"China Sprint", pos:"P14",pts:0},{round:2, race:"China", pos:"P10", pts:1},{round:3, race:"Japan", pos:"P16",pts:0},{round:6, race:"Miami Sprint", pos:"P10",pts:0},{round:6, race:"Miami", pos:"P7", pts:6},{round:7, race:"Canada Sprint", pos:"P9", pts:0},{round:7, race:"Canada", pos:"P6", pts:8},{round:8, race:"Monaco", pos:"P14",pts:0},{round:9, race:"Barcelona", pos:"P10", pts:1},{round:10, race:"Austria", pos:"P15",pts:0},{round:11, race:"British Sprint", pos:"P12",pts:0},{round:11, race:"British", pos:"P9", pts:2},{round:12, race:"Belgium", pos:"P10",pts:1},{round:13, race:"Hungary", pos:"P15", pts:0},{round:14, race:"Dutch Sprint", pos:"P12", pts:0},{round:14, race:"Dutch", pos:"P14", pts:0},{round:15, race:"Italy", pos:"P9", pts:2}],
-  "Isack Hadjar":      [{round:1, race:"Australia", pos:"DNF",pts:0},{round:2, race:"China Sprint", pos:"P15",pts:0},{round:2, race:"China", pos:"P8", pts:4},{round:3, race:"Japan", pos:"P12",pts:0},{round:6, race:"Miami Sprint", pos:"P9", pts:0},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P21",pts:0},{round:7, race:"Canada", pos:"P5", pts:10},{round:8, race:"Monaco", pos:"P4", pts:12},{round:9, race:"Barcelona", pos:"P6", pts:8},{round:10, race:"Austria", pos:"P6", pts:8},{round:11, race:"British Sprint", pos:"P9", pts:0},{round:11, race:"British", pos:"P5", pts:10},{round:12, race:"Belgium", pos:"P6", pts:8},{round:13, race:"Hungary", pos:"P6", pts:8}],
-  "Arvid Lindblad":    [{round:1, race:"Australia", pos:"P8", pts:4},{round:2, race:"China Sprint", pos:"DNF",pts:0},{round:2, race:"China", pos:"P12",pts:0},{round:3, race:"Japan", pos:"P14",pts:0},{round:6, race:"Miami Sprint", pos:"DNS",pts:0},{round:6, race:"Miami", pos:"P14",pts:0},{round:7, race:"Canada Sprint", pos:"P8", pts:1},{round:7, race:"Canada", pos:"DNS",pts:0},{round:8, race:"Monaco", pos:"P7", pts:6},{round:9, race:"Barcelona", pos:"P9", pts:2},{round:10, race:"Austria", pos:"P10",pts:1},{round:11, race:"British Sprint", pos:"P10",pts:0},{round:11, race:"British", pos:"P7", pts:6},{round:12, race:"Belgium", pos:"P9", pts:2},{round:13, race:"Hungary", pos:"P10", pts:1},{round:14, race:"Dutch Sprint", pos:"P10", pts:0},{round:14, race:"Dutch", pos:"P12", pts:0},{round:15, race:"Italy", pos:"P8", pts:4}],
+  "Isack Hadjar":      [{round:1, race:"Australia", pos:"DNF",pts:0},{round:2, race:"China Sprint", pos:"P15",pts:0},{round:2, race:"China", pos:"P8", pts:4},{round:3, race:"Japan", pos:"P12",pts:0},{round:6, race:"Miami Sprint", pos:"P9", pts:0},{round:6, race:"Miami", pos:"DNF",pts:0},{round:7, race:"Canada Sprint", pos:"P21",pts:0},{round:7, race:"Canada", pos:"P5", pts:10},{round:8, race:"Monaco", pos:"P3", pts:15},{round:9, race:"Barcelona", pos:"P6", pts:8},{round:10, race:"Austria", pos:"P6", pts:8},{round:11, race:"British Sprint", pos:"P9", pts:0},{round:11, race:"British", pos:"P5", pts:10},{round:12, race:"Belgium", pos:"P6", pts:8},{round:13, race:"Hungary", pos:"P6", pts:8}],
+  "Arvid Lindblad":    [{round:1, race:"Australia", pos:"P8", pts:4},{round:2, race:"China Sprint", pos:"DNF",pts:0},{round:2, race:"China", pos:"P12",pts:0},{round:3, race:"Japan", pos:"P14",pts:0},{round:6, race:"Miami Sprint", pos:"DNS",pts:0},{round:6, race:"Miami", pos:"P14",pts:0},{round:7, race:"Canada Sprint", pos:"P8", pts:1},{round:7, race:"Canada", pos:"DNS",pts:0},{round:8, race:"Monaco", pos:"P6", pts:8},{round:9, race:"Barcelona", pos:"P9", pts:2},{round:10, race:"Austria", pos:"P10",pts:1},{round:11, race:"British Sprint", pos:"P10",pts:0},{round:11, race:"British", pos:"P7", pts:6},{round:12, race:"Belgium", pos:"P9", pts:2},{round:13, race:"Hungary", pos:"P10", pts:1},{round:14, race:"Dutch Sprint", pos:"P10", pts:0},{round:14, race:"Dutch", pos:"P12", pts:0},{round:15, race:"Italy", pos:"P8", pts:4}],
   "Yuki Tsunoda":      [{round:14, race:"Dutch Sprint", pos:"P13", pts:0},{round:14, race:"Dutch", pos:"P11", pts:0},{round:15, race:"Italy", pos:"P10", pts:1}],
   "Carlos Sainz Jr.":  [{round:1, race:"Australia", pos:"P15",pts:0},{round:2, race:"China Sprint", pos:"P12",pts:0},{round:2, race:"China", pos:"P9", pts:2},{round:3, race:"Japan", pos:"P15",pts:0},{round:6, race:"Miami Sprint", pos:"P13",pts:0},{round:6, race:"Miami", pos:"P9", pts:2},{round:7, race:"Canada Sprint", pos:"P10",pts:0},{round:7, race:"Canada", pos:"P9", pts:2},{round:8, race:"Monaco", pos:"DNF",pts:0},{round:9, race:"Barcelona", pos:"P12", pts:0},{round:10, race:"Austria", pos:"DNF",pts:0},{round:11, race:"British Sprint", pos:"P17",pts:0},{round:11, race:"British", pos:"P17",pts:0},{round:12, race:"Belgium", pos:"P16",pts:0},{round:13, race:"Hungary", pos:"P18", pts:0},{round:14, race:"Dutch Sprint", pos:"P20", pts:0},{round:14, race:"Dutch", pos:"P16", pts:0},{round:15, race:"Italy", pos:"P13", pts:0}],
   "Gabriel Bortoleto": [{round:1, race:"Australia", pos:"P9", pts:2},{round:2, race:"China Sprint", pos:"P13",pts:0},{round:2, race:"China", pos:"DNS",pts:0},{round:3, race:"Japan", pos:"P13",pts:0},{round:6, race:"Miami Sprint", pos:"DSQ",pts:0},{round:6, race:"Miami", pos:"P12",pts:0},{round:7, race:"Canada Sprint", pos:"P12",pts:0},{round:7, race:"Canada", pos:"P13",pts:0},{round:8, race:"Monaco", pos:"P11",pts:0},{round:9, race:"Barcelona", pos:"P11", pts:0},{round:10, race:"Austria", pos:"P11",pts:0},{round:11, race:"British Sprint", pos:"P13",pts:0},{round:11, race:"British", pos:"P8", pts:4},{round:12, race:"Belgium", pos:"P8", pts:4},{round:13, race:"Hungary", pos:"P11", pts:0},{round:14, race:"Dutch Sprint", pos:"P9", pts:0},{round:14, race:"Dutch", pos:"P13", pts:0},{round:15, race:"Italy", pos:"P11", pts:0}],
@@ -1429,10 +1429,8 @@ const WEEKEND_SESSIONS = {
     ["Practice 1","Fri Mar 27","02:30"],["Practice 2","Fri Mar 27","06:00"],
     ["Practice 3","Sat Mar 28","02:30"],["Qualifying","Sat Mar 28","06:00"],
     ["Race","Sun Mar 29","05:00"]]},
-  4: {pa_off:-4, sessions:[
-    ["Practice 1","Fri Apr 10","11:30"],["Practice 2","Fri Apr 10","15:00"],
-    ["Practice 3","Sat Apr 11","12:30"],["Qualifying","Sat Apr 11","16:00"],
-    ["Race","Sun Apr 12","15:00"]]},
+  4: {pa_off:-4, sessions:[  // Sepang — only the race start has been published so far
+    ["Race","Sun Oct 4","07:00"]]},
   5: {pa_off:-4, sessions:[
     ["Practice 1","Fri Apr 17","13:30"],["Practice 2","Fri Apr 17","17:00"],
     ["Practice 3","Sat Apr 18","13:30"],["Qualifying","Sat Apr 18","17:00"],
@@ -1444,7 +1442,7 @@ const WEEKEND_SESSIONS = {
   7: {pa_off:-4, sprint:true, sessions:[
     ["Practice 1","Fri May 22","17:30"],["Sprint Qualifying","Fri May 22","21:30"],
     ["Sprint","Sat May 23","17:00"],["Qualifying","Sat May 23","21:00"],
-    ["Race","Sun May 24","18:00"]]},
+    ["Race","Sun May 24","20:00"]]},   // moved to 4pm local to avoid the Indy 500 clash
   8: {pa_off:-4, sessions:[
     ["Practice 1","Fri Jun 5","11:30"],["Practice 2","Fri Jun 5","15:00"],
     ["Practice 3","Sat Jun 6","10:30"],["Qualifying","Sat Jun 6","14:00"],
@@ -1520,10 +1518,9 @@ const SCHEDULE = [
   {round:1,  flag:"🇦🇺",name:"Australian Grand Prix",       circuit:"Albert Park Circuit",             location:"Melbourne, Australia",   date:"Mar 6–8",   race_date:"Sun Mar 8, 2026",   pa:"11:00 PM",pa_tz:"EST",dr:"12:00 AM",dr_tz:"AST",utc:"2026-03-08T04:00:00Z",done:true, sprint:false,sat:false,new_track:false},
   {round:2,  flag:"🇨🇳",name:"Chinese Grand Prix",          circuit:"Shanghai International Circuit",  location:"Shanghai, China",        date:"Mar 13–15",race_date:"Sun Mar 15, 2026",  pa:"3:00 AM", pa_tz:"EDT",dr:"3:00 AM", dr_tz:"AST",utc:"2026-03-15T07:00:00Z",done:true, sprint:true, sat:false,new_track:false},
   {round:3,  flag:"🇯🇵",name:"Japanese Grand Prix",         circuit:"Suzuka Circuit",                  location:"Suzuka, Japan",          date:"Mar 27–29",race_date:"Sun Mar 29, 2026",  pa:"1:00 AM", pa_tz:"EDT",dr:"1:00 AM", dr_tz:"AST",utc:"2026-03-29T05:00:00Z",done:true, sprint:false,sat:false,new_track:false},
-  {round:4,  flag:"🇧🇭",name:"Bahrain Grand Prix", cancelled:true,          circuit:"Bahrain International Circuit",   location:"Sakhir, Bahrain",        date:"Apr 10–12",race_date:"Sun Apr 12, 2026",  pa:"11:00 AM",pa_tz:"EDT",dr:"11:00 AM",dr_tz:"AST",utc:"2026-04-12T15:00:00Z",done:false,sprint:false,sat:false,new_track:false},
   {round:5,  flag:"🇸🇦",name:"Saudi Arabian Grand Prix", cancelled:true,    circuit:"Jeddah Corniche Circuit",         location:"Jeddah, Saudi Arabia",   date:"Apr 17–19",race_date:"Sun Apr 19, 2026",  pa:"1:00 PM", pa_tz:"EDT",dr:"1:00 PM", dr_tz:"AST",utc:"2026-04-19T17:00:00Z",done:false,sprint:false,sat:false,new_track:false},
   {round:6,  flag:"🇺🇸",name:"Miami Grand Prix",            circuit:"Miami International Autodrome",   location:"Miami, Florida",         date:"May 1–3",  race_date:"Sun May 3, 2026",   pa:"1:00 PM", pa_tz:"EDT",dr:"1:00 PM", dr_tz:"AST",utc:"2026-05-03T17:00:00Z",done:true, sprint:true, sat:false,new_track:false},
-  {round:7,  flag:"🇨🇦",name:"Canadian Grand Prix",         circuit:"Circuit Gilles Villeneuve",       location:"Montréal, Canada",       date:"May 22–24",race_date:"Sun May 24, 2026",  pa:"2:00 PM", pa_tz:"EDT",dr:"2:00 PM", dr_tz:"AST",utc:"2026-05-24T18:00:00Z",done:true, sprint:true, sat:false,new_track:false},
+  {round:7,  flag:"🇨🇦",name:"Canadian Grand Prix",         circuit:"Circuit Gilles Villeneuve",       location:"Montréal, Canada",       date:"May 22–24",race_date:"Sun May 24, 2026",  pa:"4:00 PM", pa_tz:"EDT",dr:"4:00 PM", dr_tz:"AST",utc:"2026-05-24T20:00:00Z",done:true, sprint:true, sat:false,new_track:false},
   {round:8,  flag:"🇲🇨",name:"Monaco Grand Prix",           circuit:"Circuit de Monaco",               location:"Monte Carlo, Monaco",    date:"Jun 5–7",  race_date:"Sun Jun 7, 2026",   pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-06-07T13:00:00Z",done:true, sprint:false,sat:false,new_track:false},
   {round:9,  flag:"🇪🇸",name:"Barcelona-Catalunya GP",      circuit:"Circuit de Barcelona-Catalunya",  location:"Barcelona, Spain",       date:"Jun 12–14",race_date:"Sun Jun 14, 2026",  pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-06-14T13:00:00Z",done:true, sprint:false,sat:false,new_track:false},
   {round:10, flag:"🇦🇹",name:"Austrian Grand Prix",         circuit:"Red Bull Ring",                   location:"Spielberg, Austria",     date:"Jun 26–28",race_date:"Sun Jun 28, 2026",  pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-06-28T13:00:00Z",done:true, sprint:false,sat:false,new_track:false},
@@ -1534,6 +1531,7 @@ const SCHEDULE = [
   {round:15, flag:"🇮🇹",name:"Italian Grand Prix",          circuit:"Autodromo Nazionale Monza",       location:"Monza, Italy",           date:"Sep 4–6",  race_date:"Sun Sep 6, 2026",   pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-09-06T13:00:00Z",done:true,sprint:false,sat:false,new_track:false},
   {round:16, flag:"🇪🇸",name:"Spanish GP — Madrid",         circuit:"IFEMA Madrid Street Circuit",     location:"Madrid, Spain",          date:"Sep 11–13",race_date:"Sun Sep 13, 2026",  pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-09-13T13:00:00Z",done:false,sprint:false,sat:false,new_track:true},
   {round:17, flag:"🇦🇿",name:"Azerbaijan Grand Prix",       circuit:"Baku City Circuit",               location:"Baku, Azerbaijan",       date:"Sep 24–26",race_date:"Sat Sep 26, 2026",  pa:"7:00 AM", pa_tz:"EDT",dr:"7:00 AM", dr_tz:"AST",utc:"2026-09-26T11:00:00Z",done:false,sprint:false,sat:true, new_track:false},
+  {round:4,  flag:"🇧🇭",name:"Bahrain Grand Prix",          circuit:"Sepang International Circuit",     location:"Sepang, Malaysia",       date:"Oct 2–4",  race_date:"Sun Oct 4, 2026",   pa:"3:00 AM", pa_tz:"EDT",dr:"3:00 AM", dr_tz:"AST",utc:"2026-10-04T07:00:00Z",done:false,sprint:false,sat:false,new_track:true, relocated:true},
   {round:18, flag:"🇸🇬",name:"Singapore Grand Prix",        circuit:"Marina Bay Street Circuit",       location:"Singapore",              date:"Oct 9–11", race_date:"Sun Oct 11, 2026",  pa:"8:00 AM", pa_tz:"EDT",dr:"8:00 AM", dr_tz:"AST",utc:"2026-10-11T12:00:00Z",done:false,sprint:true, sat:false,new_track:false},
   {round:19, flag:"🇺🇸",name:"United States Grand Prix",    circuit:"Circuit of the Americas",         location:"Austin, Texas",          date:"Oct 23–25",race_date:"Sun Oct 25, 2026",  pa:"4:00 PM", pa_tz:"EDT",dr:"4:00 PM", dr_tz:"AST",utc:"2026-10-25T20:00:00Z",done:false,sprint:false,sat:false,new_track:false},
   {round:20, flag:"🇲🇽",name:"Mexico City Grand Prix",      circuit:"Autodromo Hermanos Rodriguez",    location:"Mexico City, Mexico",    date:"Oct 30–Nov 1",race_date:"Sun Nov 1, 2026",pa:"3:00 PM", pa_tz:"EST",dr:"4:00 PM", dr_tz:"AST",utc:"2026-11-01T20:00:00Z",done:false,sprint:false,sat:false,new_track:false,split:true},
@@ -1552,14 +1550,14 @@ const RACE_FACTS = {
   1:  ["7 lead changes in the first 9 laps between Russell and Leclerc.","Ferrari VSC blunder — stayed out during Virtual Safety Cars, handing Mercedes the win.","Verstappen started P20 after a Q1 crash and recovered to P6 with the fastest lap.","Piastri DNS — crashed on his sighting lap in front of his home Melbourne crowd.","Alonso retired mid-race and flagged a risk of nerve damage.","Bortoleto scored Audi's first-ever F1 point in P9 on the team's debut."],
   2:  ["Russell wins the China Sprint from Leclerc (+0.674s) and Hamilton (+2.554s) after a thrilling lead battle.","Antonelli qualifies on pole — youngest pole-sitter in F1 history at 19 years, 6 months, 18 days.","Antonelli given 10-second penalty in the Sprint for contact with Hadjar at Turn 4.","Hülkenberg stoppage triggers Safety Car on lap 14 of 19 — Russell holds on at the restart.","Three DNFs in the Sprint: Hülkenberg (stopped), Bottas and Lindblad (retired).","Hamilton led early but Russell retook the lead on lap 7 and pulled away after Leclerc's poor restart from SC."],
   3:  ["Antonelli takes back-to-back poles with a 1:28.778 — 0.298s clear of Russell. Verstappen knocked out in Q2, complaining of an 'undriveable' car.","FP1: Russell headed a Mercedes 1-2. FP2: Piastri set the pace from Antonelli. FP3: Antonelli beat Russell by 0.3s. Red Bull 1.5s off pace all weekend.","Norris plagued by reliability — hydraulics issue in FP2, battery change before FP3, but recovered to qualify P5.","Suzuka has decided more world championships than any other circuit on the calendar."],
-  4:  ["Floodlit night race in the desert — local start 6:00 PM Bahrain time.","Sandy, abrasive tarmac makes tyre management absolutely crucial.","Bahrain also hosted 2026 pre-season testing — teams arrive with extra setup data."],
+  4:  ["RELOCATED — the Bahrain Grand Prix moves to Sepang, Malaysia, after the April date in Sakhir was cancelled by the Middle East conflict. Confirmed 28 July 2026.","F1 returns to Malaysia for the first time since 2017 — Sepang hosted the Malaysian GP from 1999 to 2017.","Race start 3:00 PM local (07:00 UTC). Practice and qualifying times are not yet published."],
   5:  ["One of the fastest street circuits — average speeds over 250 km/h.","Night race under floodlights at 8:00 PM local time.","Tight barriers and minimal run-off areas make qualifying uniquely intense."],
   6:  ["Set around Hard Rock Stadium, home of the Miami Dolphins.","Sprint weekend — Saturday sprint plus Sunday feature race.","May heat averages 28–32°C — one of the hottest races of the season."],
   7:  ["Set on Île Notre-Dame, surrounded by the St. Lawrence River in Montréal.","The Wall of Champions at the final chicane has caught out many title contenders.","Sprint weekend — the second North American sprint after Miami."],
   8:  ["The crown jewel of Formula One — Monaco has been on the calendar since 1950.","Zero overtaking room: where you qualify is largely where you finish.","Yachts fill the harbour for one of sport's most glamorous events.","First race under the FIA's new hot-engine compression-ratio test (130°C, effective Jun 1) — the rule change brought in to close the alleged Mercedes loophole."],
   9:  ["Barcelona is also a pre-season testing venue — teams have maximum setup data here.","June track temperatures can exceed 45°C, making tyre degradation extremely challenging.","First of two Spanish rounds — Madrid hosts Round 16 in September.","Seven teams field rookies in FP1: Vesti (Mercedes/in for Antonelli), Beganovic (Ferrari/Hamilton), Fornaroli (McLaren/Norris), Iwasa (Red Bull/Hadjar), Browning (Williams/Albon), Aron (Audi/Hülkenberg), Herta (Cadillac/Pérez)."],
   10: ["The Red Bull Ring sits in the scenic Styrian hills at 660 m elevation.","One of the shortest laps on the calendar at 4.318 km — fast and punchy.","Multiple DRS zones create frequent overtaking opportunities."],
-  11: ["The British GP was the very first World Championship race — Silverstone, 1950.","Sprint weekend — championship leader Russell races in front of his home crowd.","Silverstone weather is infamously unpredictable — rain is possible in any session."],
+  11: ["The British GP was the very first World Championship race — Silverstone, 1950.","Sprint weekend — Russell, Hamilton, Norris, Bearman and Lindblad all race in front of their home crowd.","Silverstone weather is infamously unpredictable — rain is possible in any session."],
   12: ["Spa weather can be sunny in Sector 1 and raining in Sector 3 simultaneously.","Raidillon/Eau Rouge is arguably the most iconic corner sequence in motorsport.","Set deep in the Ardennes forest."],
   13: ["Monaco without the walls — twisty, technical, and very hard to overtake.","The hottest race of the European season — intense summer heat at the Hungaroring.","Last race before the summer break."],
   14: ["The Orange Army of Verstappen fans turns all of Zandvoort into a sea of orange.","The circuit sits metres from the North Sea dunes — a uniquely coastal track.","Sprint weekend — the 5th sprint of the 2026 season."],
@@ -1569,10 +1567,10 @@ const RACE_FACTS = {
   18: ["F1's premier night race — the Marina Bay circuit looks stunning under floodlights.","Humidity exceeds 80% — physically one of the most demanding races of the season.","Sprint weekend — the 6th and final sprint race of the 2026 season."],
   19: ["Circuit of the Americas is the only purpose-built F1 circuit in the United States.","Austin's GP weekend is legendary for live music, amazing atmosphere, and huge crowds.","Turn 1 features a dramatic uphill blind crest — one of the most breathtaking approaches in F1."],
   20: ["Highest circuit on the calendar at 2,285 m — thin air is brutal on power units.","The Foro Sol baseball stadium forms the iconic stadium section.","Race day (Nov 1) is North American Daylight Saving Time end — clocks fall back 1 hour."],
-  21: ["Interlagos is notorious for unpredictable weather — fierce thunderstorms can arrive anytime.","Brazilian fans create one of the loudest atmospheres in all of Formula One.","Race day (Nov 8) coincides with the US clock change from EDT to EST — check your local time."],
+  21: ["Interlagos is notorious for unpredictable weather — fierce thunderstorms can arrive anytime.","Brazilian fans create one of the loudest atmospheres in all of Formula One.","First race after the US clock change (Nov 1) — US viewers see a 12:00 PM EST start."],
   22: ["SATURDAY NIGHT RACE — local start 8:00 PM PST. One of the most glamorous venues on the calendar.","November nights in Las Vegas can drop below 10°C — cold tyres make for tricky opening laps.","The Las Vegas Strip Circuit winds past the iconic casino hotels on the famous Strip."],
-  23: ["Floodlit Lusail circuit — cool desert air creates ideal racing conditions.","Penultimate race — championship battles typically reach their boiling point here.","Qatar hosts its second consecutive F1 Grand Prix after joining the permanent calendar."],
-  24: ["The season finale — world championship titles decided under the Yas Marina floodlights.","Race starts at sunset and ends under lights — visually stunning.","Yas Marina has hosted the season finale every year since 2009."],
+  23: ["Floodlit Lusail circuit — cool desert air creates ideal racing conditions.","Penultimate race — championship battles typically reach their boiling point here.","Qatar has been on the calendar since 2021 and holds a contract to host F1 until 2032."],
+  24: ["The season finale — world championship titles decided under the Yas Marina floodlights.","Race starts at sunset and ends under lights — visually stunning.","Yas Marina has hosted the season finale every year since 2014."],
 };
 
 const RACE_RESULTS = {
@@ -1756,11 +1754,11 @@ const RACE_RESULTS = {
     results:[
       {pos:"1", name:"Kimi Antonelli",    team:"Mercedes",     color:"#00d2be",gap:"WINNER",            laps:"78",pts:25, status:"fin"},
       {pos:"2", name:"Lewis Hamilton",    team:"Ferrari",      color:"#e8002d",gap:"+6.271 (+5s pen, no pos. change)",laps:"78",pts:18, status:"fin"},
-      {pos:"3", name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc",gap:"+20.369 (review)",    laps:"78",pts:15, status:"fin"},
-      {pos:"4", name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6",gap:"+23.394",            laps:"78",pts:12, status:"fin"},
-      {pos:"5", name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000",gap:"+24.261",            laps:"78",pts:10, status:"fin"},
-      {pos:"6", name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff",gap:"+26.553",            laps:"78",pts:8,  status:"fin"},
-      {pos:"7", name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff",gap:"+29.010",            laps:"78",pts:6,  status:"fin"},
+      {pos:"3", name:"Isack Hadjar",      team:"Red Bull",     color:"#3671c6",gap:"+23.394",            laps:"78",pts:15, status:"fin"},
+      {pos:"4", name:"Oscar Piastri",     team:"McLaren",      color:"#ff8000",gap:"+24.261",            laps:"78",pts:12, status:"fin"},
+      {pos:"5", name:"Liam Lawson",       team:"Racing Bulls", color:"#6692ff",gap:"+26.553",            laps:"78",pts:10, status:"fin"},
+      {pos:"6", name:"Arvid Lindblad",    team:"Racing Bulls", color:"#6692ff",gap:"+29.010",            laps:"78",pts:8,  status:"fin"},
+      {pos:"7", name:"Pierre Gasly",      team:"Alpine",       color:"#ff87bc",gap:"+30.369 (two 5s pens, upheld by ICA)",laps:"78",pts:6,  status:"fin"},
       {pos:"8", name:"Alexander Albon",   team:"Williams",     color:"#64c4ff",gap:"+33.413",            laps:"78",pts:4,  status:"fin"},
       {pos:"9", name:"Esteban Ocon",      team:"Haas",         color:"#b6babd",gap:"+37.410",            laps:"78",pts:2,  status:"fin"},
       {pos:"10",name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75",gap:"+41.899",            laps:"78",pts:1,  status:"fin"},
@@ -1769,10 +1767,10 @@ const RACE_RESULTS = {
       {pos:"13",name:"Nico Hülkenberg",   team:"Audi",         color:"#c4b000",gap:"+44.102",            laps:"78",pts:0,  status:"fin"},
       {pos:"14",name:"Franco Colapinto",  team:"Alpine",       color:"#ff87bc",gap:"+48.964 (+5s pen)",  laps:"78",pts:0,  status:"fin"},
       {pos:"15",name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc",gap:"+49.153 (+10s pen)", laps:"78",pts:0,  status:"fin"},
-      {pos:"DNF",name:"Max Verstappen",   team:"Red Bull",     color:"#3671c6",gap:"Engine (Lap 1)",     laps:"0", pts:0,  status:"dnf"},
-      {pos:"DNF",name:"Valtteri Bottas",  team:"Cadillac",     color:"#cccccc",gap:"Brake overheating (Lap 15)",laps:"14",pts:0,  status:"dnf"},
-      {pos:"DNF",name:"Oliver Bearman",   team:"Haas",         color:"#b6babd",gap:"Retired (Lap 30)",   laps:"29",pts:0,  status:"dnf"},
       {pos:"DNF",name:"Lando Norris",     team:"McLaren",      color:"#ff8000",gap:"Power unit (Lap 45)",laps:"44",pts:0,  status:"dnf"},
+      {pos:"DNF",name:"Oliver Bearman",   team:"Haas",         color:"#b6babd",gap:"Retired (Lap 30)",   laps:"29",pts:0,  status:"dnf"},
+      {pos:"DNF",name:"Valtteri Bottas",  team:"Cadillac",     color:"#cccccc",gap:"Brake overheating (Lap 15)",laps:"14",pts:0,  status:"dnf"},
+      {pos:"DNF",name:"Max Verstappen",   team:"Red Bull",     color:"#3671c6",gap:"Engine (Lap 1)",     laps:"0", pts:0,  status:"dnf"},
       {pos:"DNF",name:"Carlos Sainz Jr.", team:"Williams",     color:"#64c4ff",gap:"Collision (SC restart)",laps:"—",pts:0,status:"dnf"},
       {pos:"DNF",name:"Lance Stroll",     team:"Aston Martin", color:"#358c75",gap:"Crash (final corner)",laps:"—",pts:0,  status:"dnf"},
       {pos:"DNF",name:"Charles Leclerc",  team:"Ferrari",      color:"#e8002d",gap:"Crash on SC restart",laps:"—", pts:0,  status:"dnf"},
@@ -1782,7 +1780,7 @@ const RACE_RESULTS = {
       {icon:"⚡",text:"hl_r8_2"},
       {icon:"🔴",text:"hl_r8_3"},
       {icon:"💔",text:"hl_r8_4"},
-      {icon:"🥉",text:"hl_r8_5"},
+      {icon:"⚖️",text:"hl_r8_5"},
       {icon:"🚩",text:"hl_r8_6"},
     ]
   },
@@ -1803,14 +1801,14 @@ const RACE_RESULTS = {
       {pos:"12",name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff",gap:"+2 laps",            laps:"64",pts:0,  status:"fin"},
       {pos:"13",name:"Esteban Ocon",      team:"Haas",         color:"#b6babd",gap:"+2 laps",            laps:"64",pts:0,  status:"fin"},
       {pos:"14",name:"Sergio Pérez",      team:"Cadillac",     color:"#cccccc",gap:"+3 laps",            laps:"63",pts:0,  status:"fin"},
-      {pos:"NC",name:"Alexander Albon",   team:"Williams",     color:"#64c4ff",gap:"+8 laps (NC)",       laps:"58",pts:0,  status:"dnf"},
       {pos:"DNF",name:"Kimi Antonelli",   team:"Mercedes",     color:"#00d2be",gap:"Electrical (Lap 62)",laps:"61",pts:0,  status:"dnf"},
+      {pos:"NC",name:"Alexander Albon",   team:"Williams",     color:"#64c4ff",gap:"+8 laps (NC)",       laps:"58",pts:0,  status:"dnf"},
+      {pos:"DNF",name:"Lance Stroll",     team:"Aston Martin", color:"#358c75",gap:"Gearbox (Lap 6)",    laps:"5", pts:0,  status:"dnf"},
       {pos:"DNF",name:"Charles Leclerc",  team:"Ferrari",      color:"#e8002d",gap:"Brake-by-wire / power steering",laps:"—",pts:0,status:"dnf"},
       {pos:"DNF",name:"Oliver Bearman",   team:"Haas",         color:"#b6babd",gap:"Retired",            laps:"—",pts:0,  status:"dnf"},
       {pos:"DNF",name:"Nico Hülkenberg",  team:"Audi",         color:"#c4b000",gap:"Retired",            laps:"—",pts:0,  status:"dnf"},
       {pos:"DNF",name:"Fernando Alonso",  team:"Aston Martin", color:"#358c75",gap:"Retired (caused VSC)",laps:"—",pts:0, status:"dnf"},
       {pos:"DNF",name:"Valtteri Bottas",  team:"Cadillac",     color:"#cccccc",gap:"Technical",          laps:"—",pts:0,  status:"dnf"},
-      {pos:"DNF",name:"Lance Stroll",     team:"Aston Martin", color:"#358c75",gap:"Gearbox (Lap 6)",    laps:"5", pts:0,  status:"dnf"},
     ],
     highlights:[
       {icon:"🏆",text:"hl_r9_1"},
@@ -1913,8 +1911,8 @@ const RACE_RESULTS = {
       {pos:"17",name:"Esteban Ocon",      team:"Haas",         color:"#b6babd",gap:"+1:50.9",    laps:"44",pts:0,  status:"fin"},
       {pos:"18",name:"Valtteri Bottas",   team:"Cadillac",     color:"#cccccc",gap:"+1 lap",     laps:"43",pts:0,  status:"fin"},
       {pos:"19",name:"Fernando Alonso",   team:"Aston Martin", color:"#358c75",gap:"+2 laps",    laps:"42",pts:0,  status:"fin"},
-      {pos:"DNF",name:"Sergio Pérez",     team:"Cadillac",     color:"#cccccc",gap:"Rear suspension failure (Lap 13)",laps:"12",pts:0,status:"dnf"},
       {pos:"DNF",name:"Lance Stroll",     team:"Aston Martin", color:"#358c75",gap:"Gearbox (Lap 25)",laps:"24",pts:0,status:"dnf"},
+      {pos:"DNF",name:"Sergio Pérez",     team:"Cadillac",     color:"#cccccc",gap:"Rear suspension failure (Lap 13)",laps:"12",pts:0,status:"dnf"},
       {pos:"DNF",name:"George Russell",   team:"Mercedes",     color:"#00d2be",gap:"Collision w/ Hamilton, Les Combes (Lap 1)",laps:"0",pts:0,status:"dnf"},
     ],
     highlights:[
@@ -1948,9 +1946,9 @@ const RACE_RESULTS = {
       {pos:"17",name:"Alexander Albon",   team:"Williams",     color:"#64c4ff",gap:"+2 laps",    laps:"68",pts:0,  status:"fin"},
       {pos:"18",name:"Carlos Sainz Jr.",  team:"Williams",     color:"#64c4ff",gap:"+2 laps",    laps:"68",pts:0,  status:"fin"},
       {pos:"19",name:"Oliver Bearman",    team:"Haas",         color:"#b6babd",gap:"+2 laps (incl. 5s pen)",laps:"68",pts:0,status:"fin"},
-      {pos:"DNF",name:"Valtteri Bottas",  team:"Cadillac",     color:"#cccccc",gap:"Brake fire (Lap 15)",laps:"14",pts:0,status:"dnf"},
-      {pos:"DNF",name:"Sergio Pérez",     team:"Cadillac",     color:"#cccccc",gap:"Front-left suspension failure (Lap 48)",laps:"47",pts:0,status:"dnf"},
       {pos:"DNF",name:"Oscar Piastri",    team:"McLaren",      color:"#ff8000",gap:"Gearbox (Lap 56)",laps:"55",pts:0,status:"dnf"},
+      {pos:"DNF",name:"Sergio Pérez",     team:"Cadillac",     color:"#cccccc",gap:"Front-left suspension failure (Lap 48)",laps:"47",pts:0,status:"dnf"},
+      {pos:"DNF",name:"Valtteri Bottas",  team:"Cadillac",     color:"#cccccc",gap:"Brake fire (Lap 15)",laps:"14",pts:0,status:"dnf"},
     ],
     highlights:[
       {icon:"🏆",text:"hl_r13_1"},
@@ -2423,7 +2421,7 @@ const T = {
     hl_r8_2:"<strong>Verstappen DNF from the line</strong> — Red Bull 'dropped dead' on the start; Max coasted to the pits and retired on lap 1 with an engine failure.",
     hl_r8_3:"<strong>Hamilton's clever P2</strong> — took a 5s pit-lane speeding penalty but served it neatly under a Safety Car; back-to-back podiums lift him past Russell into second in the championship.",
     hl_r8_4:"<strong>Leclerc's home heartbreak</strong> — qualified P4 after a Q3 crash, then crashed out of P3 on the Safety Car restart as the surface broke up at the final corner.",
-    hl_r8_5:"<strong>Gasly's reinstated podium</strong> — Alpine wins a Right of Review four days post-race after FOM evidence shows the timing distance used for pit-lane speed was wrong; Gasly's two 5s penalties are voided, promoting him from P7 back to P3 and costing Hadjar his maiden podium.",
+    hl_r8_5:"<strong>Gasly's podium: given back, then taken away again</strong> — Alpine won a Right of Review four days after the race and Gasly was briefly restored to P3, but McLaren and Red Bull appealed to the FIA International Court of Appeal, which reimposed both 5s pit-lane speeding penalties on 25 August. Final classification: Hadjar P3, Piastri P4, Lawson P5, Lindblad P6, Gasly P7.",
     hl_r8_6:"<strong>Chaos, red flag, late penalty</strong> — seven retirements; Stroll then Leclerc smashed the final corner, the tarmac broke up and the red flag flew with 10 laps to go. A 10s post-race penalty on Pérez (false start) promoted Alonso to P10 — Aston Martin's first points of the season.",
     hl_r9_1:"<strong>Hamilton's maiden Ferrari win</strong> — the first non-Mercedes victory of 2026, ending a 686-day drought as a mid-race Virtual Safety Car for Alonso's stoppage handed Lewis a lead he never lost.",
     hl_r9_2:"<strong>Antonelli heartbreak</strong> — the championship leader retired with an electrical failure on Lap 62 of 66 while running second, moments after passing Russell; his title lead is cut to 41 points.",
@@ -2530,7 +2528,7 @@ const T = {
     same_note:"★ ET y DR ven la carrera a la misma hora",
     split_note:"⚠ PA en EST (UTC-5) · DR en AST (UTC-4) · DR es 1 hora después",
     same_badge:"★ Igual",diff_badge:"⚠ 1 hr diferencia",
-    points_avail:"Puntos disponibles",gap_leader:"Diferencia al líder",math_open:"ABIERTO",math_tight:"CERRADO",math_closed:"CERRADO",
+    points_avail:"Puntos disponibles",gap_leader:"Diferencia al líder",math_open:"ABIERTO",math_tight:"AJUSTADO",math_closed:"CERRADO",
     laps_lbl:"Vueltas",dist_lbl:"Distancia",corners_lbl:"Curvas",record_lbl:"Vuelta Rápida",first_lbl:"Primer GP",
     driver_profile:"Perfil del Piloto",total_pts:"Puntos Totales",race_wins:"Victorias",races_entered:"Carreras",
     notify_on:"Recordatorio activado — recibirás una notificación 10 min antes de la carrera",
@@ -2591,7 +2589,7 @@ const T = {
     hl_r8_2:"<strong>Verstappen abandona en la salida</strong> — el Red Bull 'se apagó' al arrancar; Max llegó al pit y abandonó en la vuelta 1 por fallo de motor.",
     hl_r8_3:"<strong>Hábil P2 de Hamilton</strong> — recibió 5s por exceso de velocidad en el pitlane pero los cumplió bajo Safety Car; segundo podio seguido y supera a Russell en el campeonato.",
     hl_r8_4:"<strong>Drama en casa para Leclerc</strong> — clasificó P4 tras chocar en Q3, luego se estrelló desde P3 en el reinicio tras Safety Car cuando el asfalto se rompía en la última curva.",
-    hl_r8_5:"<strong>Podio restituido para Gasly</strong> — Alpine gana un Derecho de Revisión cuatro días después de la carrera tras una evidencia de FOM de que la distancia usada para medir la velocidad en el pitlane era errónea; sus dos sanciones de 5s son anuladas y sube de P7 a P3, dejando a Hadjar sin su primer podio.",
+    hl_r8_5:"<strong>El podio de Gasly: devuelto y luego retirado de nuevo</strong> — Alpine ganó un Derecho de Revisión cuatro días después de la carrera y Gasly recuperó brevemente el P3, pero McLaren y Red Bull apelaron ante el Tribunal Internacional de Apelación de la FIA, que restableció ambas sanciones de 5s por exceso de velocidad en el pit lane el 25 de agosto. Clasificación final: Hadjar P3, Piastri P4, Lawson P5, Lindblad P6, Gasly P7.",
     hl_r8_6:"<strong>Caos, bandera roja y sanción tardía</strong> — siete abandonos; Stroll y luego Leclerc chocaron en la última curva, el asfalto se rompió y la bandera roja salió a 10 vueltas del final. Una sanción post-carrera de 10s a Pérez (salida adelantada) promovió a Alonso a P10 — los primeros puntos del año para Aston Martin.",
     hl_r9_1:"<strong>Primera victoria de Hamilton con Ferrari</strong> — el primer triunfo que no es de Mercedes en 2026, poniendo fin a una sequía de 686 días cuando un Coche de Seguridad Virtual por el abandono de Alonso le entregó un liderato que ya no soltó.",
     hl_r9_2:"<strong>Drama para Antonelli</strong> — el líder del campeonato abandonó por un fallo eléctrico en la vuelta 62 de 66 cuando rodaba segundo, justo tras superar a Russell; su ventaja en el título se reduce a 41 puntos.",
@@ -2980,6 +2978,8 @@ function teamH2H(teamName){
   aRes.forEach(ra=>{
     const rb = bRes.find(x=>x.round===ra.round);
     if(!rb) return;
+    // skip rounds where either driver was on loan to another team (per-entry override)
+    if((ra.team && ra.team!==teamName) || (rb.team && rb.team!==teamName)) return;
     const pa = ra.pos.startsWith("P") ? parseInt(ra.pos.slice(1)) : null;
     const pb = rb.pos.startsWith("P") ? parseInt(rb.pos.slice(1)) : null;
     if(pa==null || pb==null) return;
@@ -3168,7 +3168,7 @@ function renderHome(){
   prog.innerHTML = `
     ${lastDone?`<div class="prog-row" style="border-left:3px solid var(--green)"><span class="prog-label" style="color:var(--green)">✓ Last</span><span class="prog-value">R${lastDone.round} ${lastDone.name.replace(" Grand Prix"," GP")}</span></div>`:""}
     ${nxtActual?`<div class="prog-row" style="border-left:3px solid var(--next)"><span class="prog-label" style="color:var(--next)">⚡ Next</span><span class="prog-value">R${nxtActual.round} ${nxtActual.name.replace(" Grand Prix"," GP")} · ${nxtLocal.time} ${nxtLocal.tz}</span></div>`:""}
-    <div class="prog-row" style="border-left:3px solid #f87171"><span class="prog-label" style="color:#f87171">❌ Cancelled</span><span class="prog-value">R4 Bahrain &amp; R5 Saudi — Middle East conflict</span></div>
+    <div class="prog-row" style="border-left:3px solid #f87171"><span class="prog-label" style="color:#f87171">❌ Cancelled</span><span class="prog-value">R5 Saudi — Middle East conflict · R4 Bahrain relocated to Sepang, Oct 4</span></div>
     <div class="prog-row"><span class="prog-label">Sprint rounds</span><span class="prog-value">R2, R6, R7, R11, R14, R18</span></div>
     <div class="prog-row"><span class="prog-label">Saturday races</span><span class="prog-value">R17 Baku · R22 Las Vegas</span></div>
     <div class="prog-row"><span class="prog-label">Season finale</span><span class="prog-value">Abu Dhabi · Dec 6</span></div>`;
@@ -3190,7 +3190,7 @@ function renderChart(){
   // Use actual data points in POINTS_HISTORY (supports mid-round sprint updates)
   const dataPoints = Math.max(...POINTS_HISTORY.map(([,,pts])=>pts.length), 1);
   // Labels match each cumulative entry in POINTS_HISTORY (sprint sessions get -S suffix)
-  const CHART_LABELS = ["R1","R2-S","R2","R3","R6-S","R6","R7-S","R7","R8","R9","R10","R11-S","R11","R12","R13","R14-S","R14","R15","R16","R17","R18-S","R18","R19","R20","R21","R22","R23","R24"];
+  const CHART_LABELS = ["R1","R2-S","R2","R3","R6-S","R6","R7-S","R7","R8","R9","R10","R11-S","R11","R12","R13","R14-S","R14","R15","R16","R17","R4","R18-S","R18","R19","R20","R21","R22","R23","R24"];
   const maxPts = Math.max(...POINTS_HISTORY.map(([,,pts])=>pts[pts.length-1]||0),1);
   const padL=28, padR=10, padT=10, padB=24;
   const gW = W-padL-padR, gH = H-padT-padB;
@@ -3362,7 +3362,9 @@ function buildCircuitFacts(round){
 function buildChampMath(round){
   const racesLeft = REMAINING_ROUNDS;
   if(racesLeft<=0) return "";
-  const maxRemaining = racesLeft * 26; // max pts per race (win + fastest lap)
+  // 2026 scoring: 25 for a win, no fastest-lap point, plus 8 for each remaining Sprint
+  const sprintsLeft = SCHEDULE.filter(r=>!r.done && !r.cancelled && r.sprint).length;
+  const maxRemaining = racesLeft * 25 + sprintsLeft * 8;
   const leader = DRIVER_STANDINGS[0];
   const p2 = DRIVER_STANDINGS[1];
   const gap = leader.pts - p2.pts;
@@ -3395,10 +3397,10 @@ function buildCancelledPanel(r){
         The ${r.name} has been officially cancelled by Formula 1 and the FIA due to the ongoing conflict in the Middle East, following US-Israeli strikes on Iran and subsequent retaliatory attacks on Gulf states including Bahrain.
       </p>
       <p style="font-size:13px;color:var(--txt2);line-height:1.6;margin-bottom:10px;">
-        The cancellation was confirmed on March 15, 2026 — the morning of the Chinese Grand Prix. The race will <strong style="color:var(--txt)">not be rescheduled or replaced</strong>, reducing the 2026 season from 24 to 22 Grands Prix.
+        The cancellation was confirmed on March 15, 2026 — the morning of the Chinese Grand Prix. This race will <strong style="color:var(--txt)">not be rescheduled or replaced</strong>. The Bahrain Grand Prix, cancelled at the same time, was later revived at Sepang in Malaysia (Oct 2–4), so the 2026 season stands at 23 Grands Prix.
       </p>
       <div style="font-size:11px;color:var(--txt3);font-family:'DM Mono',monospace;border-top:1px solid rgba(239,68,68,.2);padding-top:10px;margin-top:4px;">
-        Qatar and Abu Dhabi late-season races are currently not considered at risk but will be monitored.
+        F1 confirmed in August 2026 that the Qatar (Nov 29) and Abu Dhabi (Dec 6) rounds will go ahead as scheduled.
       </div>
     </div>`;
 }
