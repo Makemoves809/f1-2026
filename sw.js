@@ -1,9 +1,10 @@
 // F1 2026 Season Hub — service worker
-// Strategy: cache-first for the shell + stale-while-revalidate for everything else.
+// Strategy: network-first for page navigations (the HTML *is* the data, so it
+// must never be a deploy behind) + stale-while-revalidate for static assets.
 // Bump CACHE_VERSION whenever you ship a meaningful HTML/CSS/JS change so the
 // activate handler purges the old caches.
 
-const CACHE_VERSION = "f1-2026-v24";
+const CACHE_VERSION = "f1-2026-v25";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -16,7 +17,12 @@ const CORE_ASSETS = [
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_VERSION)
-      .then(cache => cache.addAll(CORE_ASSETS))
+      // `cache: "reload"` bypasses the browser HTTP cache. Without it, GitHub
+      // Pages' max-age on index.html can seed a brand-new cache with the very
+      // copy this deploy was meant to replace.
+      .then(cache => cache.addAll(
+        CORE_ASSETS.map(url => new Request(url, { cache: "reload" }))
+      ))
       .then(() => self.skipWaiting())
   );
 });
@@ -41,8 +47,31 @@ self.addEventListener("fetch", event => {
   // Don't cache GoogleFonts CSS (they have their own cache headers and 30-day TTLs).
   if (req.url.includes("fonts.googleapis.com") || req.url.includes("fonts.gstatic.com")) return;
 
-  // Stale-while-revalidate: respond from cache immediately if we have it,
-  // and refresh the cache in the background.
+  // ── Page navigations: NETWORK-FIRST ──────────────────────────────
+  // Every standing, result and schedule lives inside index.html, so serving a
+  // cached page means serving stale race data. Go to the network first and fall
+  // back to the cache only when the network actually fails (i.e. offline).
+  if (req.mode === "navigate") {
+    event.respondWith(
+      fetch(req)
+        .then(res => {
+          if (res && res.ok && res.type === "basic") {
+            const copy = res.clone();
+            caches.open(CACHE_VERSION).then(c => c.put(req, copy)).catch(() => {});
+          }
+          return res;
+        })
+        .catch(() => caches.open(CACHE_VERSION).then(async cache =>
+          (await cache.match(req)) ||
+          (await cache.match("./index.html")) ||
+          (await cache.match("./"))
+        ))
+    );
+    return;
+  }
+
+  // ── Everything else: stale-while-revalidate ──────────────────────
+  // Respond from cache immediately if we have it, and refresh in the background.
   event.respondWith(
     caches.open(CACHE_VERSION).then(cache =>
       cache.match(req).then(cached => {

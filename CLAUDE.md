@@ -375,8 +375,17 @@ that came from only one source. Don't dump tables unless asked.
 6. **Lower-order positions are not "free."** P11-P22 may carry zero
    points, but they affect tie-breakers (best-result countback).
    Don't fabricate them — leave gap as `"—"` if unknown.
-7. **Service worker cache version.** If you don't bump `CACHE_VERSION`
-   in `sw.js`, the new data is invisible to PWA users. Always bump.
+7. **Service worker cache version and strategy.** If you don't bump
+   `CACHE_VERSION` in `sw.js`, new data can stay invisible to returning
+   visitors. Always bump. `sw.js` serves page navigations **network-first**
+   (every standing and result lives inside `index.html`, so a cached page is
+   stale race data) and falls back to cache only when the network fails;
+   static assets stay stale-while-revalidate. It was stale-while-revalidate
+   for everything until a user reported the live site still showing R4 struck
+   through and "234 pts" hours after that fix was verified on `origin/main` —
+   the deploy was fine, the worker was handing back the previous page. Install
+   also fetches core assets with `cache: "reload"` so GitHub Pages' `max-age`
+   can't seed a brand-new cache with the copy the deploy was replacing.
    And a clean `git push` is not proof of publication — an earlier
    auto-update routine fired on schedule for weeks while publishing
    nothing at all. Always finish with Phase 6 Step 3 and confirm the
