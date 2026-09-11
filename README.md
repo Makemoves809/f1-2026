@@ -59,7 +59,7 @@ Single static page, works on any device, no login required.
 | R13 | 🇭🇺 Hungarian GP | Jul 24–26 | ✓ Done | Lando Norris |
 | R14 | 🇳🇱 Dutch GP *(Sprint)* | Aug 21–23 | ✓ Done | Lando Norris |
 | R15 | 🇮🇹 Italian GP | Sep 4–6 | ✓ Done | Kimi Antonelli |
-| R16 | 🇪🇸 Spanish GP (Madrid) | Sep 11–13 | ⚡ Next |  |
+| R16 | 🇪🇸 Spanish GP — Madring, Madrid | Sep 11–13 | ⚡ Next |  |
 | R17–R24 | Remaining rounds | Sep – Dec | Upcoming |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA on March 15 due to the Middle East conflict. On July 28 the Bahrain Grand Prix was revived at Sepang, Malaysia (Oct 2–4, race Sunday Oct 4, 15:00 local), leaving the 2026 calendar at 23 Grands Prix. Saudi Arabia is not replaced. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))

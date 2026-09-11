@@ -403,8 +403,10 @@ that came from only one source. Don't dump tables unless asked.
     row: he wasn't entered.
 11. **Post-race rulings can reverse more than once.** Monaco 2026: two 5s
     penalties dropped Gasly to P7; Alpine's Right of Review restored him to
-    P3 four days later; then the FIA International Court of Appeal (25 Aug)
-    reimposed the penalties. The site carried the intermediate state for
+    P3 four days later; then the FIA International Court of Appeal heard the
+    case on 25 Aug and reimposed the penalties on 3 Sep (mind the gap between
+    hearing and decision — this playbook once recorded the hearing date as the
+    ruling date). The site carried the intermediate state for
     eleven weeks. When a Right of Review succeeds, expect an appeal — and
     check every subsequent `update` for "ICA" / "appeal" news on any round
     whose classification was changed after the fact.
@@ -422,6 +424,24 @@ that came from only one source. Don't dump tables unless asked.
 - Current branch convention: `claude/update-*` (check session prompt)
 - Deploy target: `main` (GitHub Pages)
 - Languages: EN + ES, both must be updated together
+
+## Open items to re-check on every `update`
+
+Live disputes that could still change data already published. Clear an entry
+once it is resolved and the data reflects it.
+
+- **R15 Italian GP — Audi appeal vs Tsunoda's non-penalty.** Stewards cleared
+  Tsunoda over the aborted restart (Art. B5.9.4) and he kept P10 and the final
+  point; Audi confirmed on 10 Sep it is proceeding to a full FIA hearing. No
+  hearing date announced. If it succeeds, a 30s penalty drops Tsunoda out of
+  the points and promotes Bortoleto to P10 — that is Tsunoda 1→0, Bortoleto
+  10→11, Racing Bulls 75→74, Audi 16→17, plus `RACE_RESULTS[15]`,
+  `DRIVER_RESULTS`, `POINTS_HISTORY` and the `hl_r15_4` note in EN + ES.
+- **Season finale venue.** Qatar (Nov 29) and Abu Dhabi (Dec 6) are still on
+  the calendar, but FOM is due to decide during September whether the season
+  ends in the Middle East or in Europe (Imola is the frontrunner for a
+  post-Las Vegas slot). A change would touch `SCHEDULE`, `CHART_LABELS`, the
+  coordinate and track-map tables, `RACE_FACTS`, the footer and the README.
 
 ## When in doubt
 
