@@ -47,7 +47,7 @@ Single static page, works on any device, no login required.
 | R1 | 🇦🇺 Australian GP | Mar 8 | ✓ Done | George Russell |
 | R2 | 🇨🇳 Chinese GP *(Sprint)* | Mar 13–15 | ✓ Done | Kimi Antonelli |
 | R3 | 🇯🇵 Japanese GP | Mar 29 | ✓ Done | Kimi Antonelli |
-| R4 | 🇧🇭 Bahrain GP *(relocated to Sepang, Malaysia)* | Oct 4 | Upcoming |  |
+| R4 | 🇧🇭 Bahrain GP *(relocated to Sepang, Malaysia)* | Oct 4 | ✓ Done | Max Verstappen |
 | R5 | 🇸🇦 Saudi Arabian GP | Apr 19 | ❌ Cancelled | — |
 | R6 | 🇺🇸 Miami GP *(Sprint)* | May 1–3 | ✓ Done | Kimi Antonelli |
 | R7 | 🇨🇦 Canadian GP *(Sprint)* | May 22–24 | ✓ Done | Kimi Antonelli |
@@ -67,29 +67,29 @@ Single static page, works on any device, no login required.
 
 ---
 
-## Championship — after R17 Azerbaijan GP (Baku)
+## Championship — after R4 Bahrain GP (Sepang, Malaysia)
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 8 | 302 |
+| 1 | Kimi Antonelli | Mercedes | 8 | 320 |
 | 2 | George Russell | Mercedes | 3 | 236 |
-| 3 | Lewis Hamilton | Ferrari | 1 | 199 |
-| 4 | Lando Norris | McLaren | 2 | 186 |
-| 5 | Charles Leclerc | Ferrari | 1 | 179 |
-| 6 | Max Verstappen | Red Bull | 0 | 163 |
-| 7 | Oscar Piastri | McLaren | 0 | 120 |
+| 3 | Lewis Hamilton | Ferrari | 1 | 214 |
+| 4 | Charles Leclerc | Ferrari | 1 | 191 |
+| 5 | Lando Norris | McLaren | 2 | 188 |
+| 6 | Max Verstappen | Red Bull | 1 | 188 |
+| 7 | Oscar Piastri | McLaren | 0 | 128 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 538 |
-| 2 | Ferrari | 378 |
-| 3 | McLaren | 306 |
-| 4 | Red Bull | 263 |
-| 5 | Racing Bulls | 83 |
+| 1 | Mercedes | 556 |
+| 2 | Ferrari | 405 |
+| 3 | McLaren | 316 |
+| 4 | Red Bull | 298 |
+| 5 | Racing Bulls | 90 |
 | 6 | Alpine | 68 |
 | 7 | Haas | 27 |
 
