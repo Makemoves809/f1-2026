@@ -277,6 +277,7 @@ body.light .race-name-big{color:#18181b;}
 .pill-sprint{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.25);}
 .pill-sat{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.25);}
 .pill-new{background:rgba(245,197,24,.1);color:var(--gold);border:1px solid rgba(245,197,24,.25);}
+.pill-moved{background:rgba(168,85,247,.12);color:#c084fc;border:1px solid rgba(168,85,247,.3);}
 .pill-cancelled{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);}
 /* ── NOTIFICATIONS ── */
 .notif-btn{background:none;border:1px solid var(--border);border-radius:3px;padding:4px 9px;font-size:11px;color:var(--txt3);display:flex;align-items:center;gap:5px;transition:all var(--t);cursor:pointer;white-space:nowrap;}
@@ -1531,7 +1532,7 @@ const SCHEDULE = [
   {round:15, flag:"🇮🇹",name:"Italian Grand Prix",          circuit:"Autodromo Nazionale Monza",       location:"Monza, Italy",           date:"Sep 4–6",  race_date:"Sun Sep 6, 2026",   pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-09-06T13:00:00Z",done:true,sprint:false,sat:false,new_track:false},
   {round:16, flag:"🇪🇸",name:"Spanish GP — Madrid",         circuit:"Madring",                         location:"Madrid, Spain",          date:"Sep 11–13",race_date:"Sun Sep 13, 2026",  pa:"9:00 AM", pa_tz:"EDT",dr:"9:00 AM", dr_tz:"AST",utc:"2026-09-13T13:00:00Z",done:true,sprint:false,sat:false,new_track:true},
   {round:17, flag:"🇦🇿",name:"Azerbaijan Grand Prix",       circuit:"Baku City Circuit",               location:"Baku, Azerbaijan",       date:"Sep 24–26",race_date:"Sat Sep 26, 2026",  pa:"7:00 AM", pa_tz:"EDT",dr:"7:00 AM", dr_tz:"AST",utc:"2026-09-26T11:00:00Z",done:true,sprint:false,sat:true, new_track:false},
-  {round:4,  flag:"🇧🇭",name:"Bahrain Grand Prix",          circuit:"Sepang International Circuit",     location:"Sepang, Malaysia",       date:"Oct 2–4",  race_date:"Sun Oct 4, 2026",   pa:"3:00 AM", pa_tz:"EDT",dr:"3:00 AM", dr_tz:"AST",utc:"2026-10-04T07:00:00Z",done:true,sprint:false,sat:false,new_track:true, relocated:true},
+  {round:4,  flag:"🇲🇾",name:"Bahrain GP in Malaysia",     circuit:"Sepang International Circuit",     location:"Sepang, Malaysia",       date:"Oct 2–4",  race_date:"Sun Oct 4, 2026",   pa:"3:00 AM", pa_tz:"EDT",dr:"3:00 AM", dr_tz:"AST",utc:"2026-10-04T07:00:00Z",done:true,sprint:false,sat:false,new_track:true, relocated:true},
   {round:18, flag:"🇸🇬",name:"Singapore Grand Prix",        circuit:"Marina Bay Street Circuit",       location:"Singapore",              date:"Oct 9–11", race_date:"Sun Oct 11, 2026",  pa:"8:00 AM", pa_tz:"EDT",dr:"8:00 AM", dr_tz:"AST",utc:"2026-10-11T12:00:00Z",done:false,sprint:true, sat:false,new_track:false},
   {round:19, flag:"🇺🇸",name:"United States Grand Prix",    circuit:"Circuit of the Americas",         location:"Austin, Texas",          date:"Oct 23–25",race_date:"Sun Oct 25, 2026",  pa:"4:00 PM", pa_tz:"EDT",dr:"4:00 PM", dr_tz:"AST",utc:"2026-10-25T20:00:00Z",done:false,sprint:false,sat:false,new_track:false},
   {round:20, flag:"🇲🇽",name:"Mexico City Grand Prix",      circuit:"Autodromo Hermanos Rodriguez",    location:"Mexico City, Mexico",    date:"Oct 30–Nov 1",race_date:"Sun Nov 1, 2026",pa:"3:00 PM", pa_tz:"EST",dr:"4:00 PM", dr_tz:"AST",utc:"2026-11-01T20:00:00Z",done:false,sprint:false,sat:false,new_track:false,split:true},
@@ -2456,7 +2457,7 @@ const T = {
     col_pos:"POS",col_driver:"Driver / Team",col_pts:"PTS",
     winner:"WINNER",dnf_lbl:"DNF",dns_lbl:"DNS",
     done_badge:"✓ Complete",next_badge:"⚡ Next Race",upcoming_badge:"📅 Upcoming",
-    sprint_badge:"⚡ Sprint",sat_badge:"⚡ Sat Race",new_badge:"★ New 2026",
+    sprint_badge:"⚡ Sprint",sat_badge:"⚡ Sat Race",new_badge:"★ New 2026",moved_badge:"⇄ Rescheduled",
     section_class:"Full Race Classification",section_champ:"Championship After Round",
     section_current:"Current Championship Standings",
     section_times:"Race Day Times",section_wknd:"Full Weekend Schedule",
@@ -2642,7 +2643,7 @@ const T = {
     col_pos:"POS",col_driver:"Piloto / Equipo",col_pts:"PTS",
     winner:"GANADOR",dnf_lbl:"RET",dns_lbl:"NS",
     done_badge:"✓ Completada",next_badge:"⚡ Próxima",upcoming_badge:"📅 Próximamente",
-    sprint_badge:"⚡ Sprint",sat_badge:"⚡ Sábado",new_badge:"★ Nuevo 2026",
+    sprint_badge:"⚡ Sprint",sat_badge:"⚡ Sábado",new_badge:"★ Nuevo 2026",moved_badge:"⇄ Reprogramada",
     section_class:"Clasificación Completa",section_champ:"Campeonato Después de la Ronda",
     section_current:"Clasificación Actual",
     section_times:"Horarios de Carrera",section_wknd:"Horario Completo del Fin de Semana",
@@ -3004,10 +3005,13 @@ function computeRecords(){
     driver: topPod[0], color: teamColor(teamOf(topPod[0]))||"#b8b8b8"
   });
 
-  // 3. Win streak (consecutive grands prix)
+  // 3. Win streak (consecutive grands prix, in the order they were actually run —
+  //    round number is NOT chronological: R4 Bahrain was relocated to October and
+  //    sits between R17 and R18, so sorting by round splits real streaks.)
+  const CHRONO = {}; SCHEDULE.forEach((r,i)=>CHRONO[r.round]=i);
   let streak = {name:"", len:0};
   Object.entries(DRIVER_RESULTS).forEach(([name, list])=>{
-    const races = onlyRaces(list).slice().sort((a,b)=>a.round-b.round);
+    const races = onlyRaces(list).slice().sort((a,b)=>CHRONO[a.round]-CHRONO[b.round]);
     let cur = 0, max = 0;
     races.forEach(r=>{
       if(r.pos==="P1"){ cur++; if(cur>max) max = cur; }
@@ -3603,7 +3607,7 @@ function buildResultPanel(r, res){
         <div class="race-name-big">${r.name}</div>
         <div class="race-circuit">${r.circuit} · ${r.location}</div>
         <div class="race-dates-big">${r.date} · ${res.laps} laps</div>
-        <div class="pills"><span class="pill pill-done">${t("done_badge")}</span><button class="share-btn" onclick="shareRace(${r.round})">${t("share_btn")}</button></div>
+        <div class="pills"><span class="pill pill-done">${t("done_badge")}</span>${r.relocated?`<span class="pill pill-moved">${t("moved_badge")}</span>`:""}<button class="share-btn" onclick="shareRace(${r.round})">${t("share_btn")}</button></div>
       </div>
     </div>
     ${buildTrackMap(r)}
@@ -3699,6 +3703,7 @@ function buildUpcomingPanel(r){
     r.sprint?`<span class="pill pill-sprint">${t("sprint_badge")}</span>`:"",
     r.sat?`<span class="pill pill-sat">${t("sat_badge")}</span>`:"",
     r.new_track?`<span class="pill pill-new">${t("new_badge")}</span>`:"",
+    r.relocated?`<span class="pill pill-moved">${t("moved_badge")}</span>`:"",
   ].join("");
 
   const isNotifSet = !!notifTimers[r.round];

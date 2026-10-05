@@ -437,11 +437,11 @@ once it is resolved and the data reflects it.
   the points and promotes Bortoleto to P10 — that is Tsunoda 1→0, Bortoleto
   10→11, Racing Bulls 75→74, Audi 16→17, plus `RACE_RESULTS[15]`,
   `DRIVER_RESULTS`, `POINTS_HISTORY` and the `hl_r15_4` note in EN + ES.
-- **Season finale venue.** Qatar (Nov 29) and Abu Dhabi (Dec 6) are still on
-  the calendar, but FOM is due to decide during September whether the season
-  ends in the Middle East or in Europe (Imola is the frontrunner for a
-  post-Las Vegas slot). A change would touch `SCHEDULE`, `CHART_LABELS`, the
-  coordinate and track-map tables, `RACE_FACTS`, the footer and the README.
+- **Season finale venue — RESOLVED (5 Oct).** Domenicali confirmed the original
+  calendar stands: Qatar 29 Nov, Abu Dhabi 6 Dec (Abu Dhabi ~99% ticketed).
+  `SCHEDULE` already matched, so no data change was needed. Imola remains an
+  informal standby only if the regional situation changes again — re-check if
+  new conflict news breaks, otherwise treat this as closed.
 
 ## When in doubt
 
