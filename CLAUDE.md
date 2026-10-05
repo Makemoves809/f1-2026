@@ -331,17 +331,29 @@ destroyed the thing it was insuring and replaced it by luck. So:
 - Push an empty `chore: deploy nudge` commit **only** if that build actually
   ended `cancelled`/`failure`, or never appeared after ~10 minutes. Then
   verify the nudge's build too.
-- Reading build status needs `mcp__github__actions_list` (method
-  `list_workflow_runs`, branch `main`) or the Actions tab. Plain `curl` to
-  `api.github.com` does **not** work: the host resolves, but the agent proxy
-  rejects the Pages/Actions paths with 403 "not permitted through this proxy".
-  Egress to `makemoves809.github.io` is blocked outright, so the live HTML
-  can't be fetched back from here — Step 3's `git show origin/main` check is
-  the strongest content proof available in-session, and it is enough.
-- If build status is unreadable (no MCP), stop at Step 3 and say so: the
-  commit is confirmed on `origin/main` and Pages deploys `main` automatically,
-  so the content is published even when the build's conclusion can't be
-  observed from here.
+- Reading build status: `mcp__github__actions_list` (method
+  `list_workflow_runs`, branch `main`) works, but **the MCP server can drop
+  mid-session** — it did on 5 Oct. The reliable fallback is Claude Code's
+  built-in `gh` client, which goes through this session's authenticated GitHub
+  proxy and *does* serve the Actions API (verified 5 Oct):
+
+  ```bash
+  gh api "repos/Makemoves809/f1-2026/actions/runs?branch=main&per_page=3"
+  gh api "repos/Makemoves809/f1-2026/actions/runs/<run_id>"   # .status/.conclusion
+  ```
+
+  Prefer `gh api` when the MCP list response is too large to read — it is also
+  far lighter. Plain `curl` to `api.github.com` still does **not** work: the
+  host resolves, but the agent proxy rejects it with 403 "not permitted through
+  this proxy". The distinction is the credential, not the host — use `gh api`,
+  never `curl`. Egress to `makemoves809.github.io` is blocked outright, so the
+  live HTML can't be fetched back from here; Step 3's `git show origin/main`
+  check is the strongest *content* proof available in-session, and it is enough.
+- An unattended run (no MCP connectors) should still try `gh api` before
+  claiming the build is unverifiable. Only if that also fails, stop at Step 3
+  and say so: the commit is confirmed on `origin/main` and Pages deploys `main`
+  automatically, so the content is published even when the build's conclusion
+  can't be observed from here.
 
 ### Phase 7 — Report back to user
 
