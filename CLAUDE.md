@@ -215,8 +215,8 @@ const d=new Function('driverPhoto',code)(driverPhoto);
 let p=[];
 const norm=s=>String(s||'').replace(/^P/,'');
 const RPTS=[25,18,15,12,10,8,6,4,2,1], SPTS=[8,7,6,5,4,3,2,1];
-const COMPLETED_RACES=[1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17]; // update as season progresses
-const COMPLETED_SPRINTS=[2,6,7,11,14];     // update as season progresses
+const COMPLETED_RACES=[1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18]; // update as season progresses
+const COMPLETED_SPRINTS=[2,6,7,11,14,18];     // update as season progresses
 
 // A) Driver totals
 d.DRIVER_STANDINGS.forEach(x=>{const s=(d.DRIVER_RESULTS[x.name]||[]).reduce((a,r)=>a+(r.pts||0),0);if(s!==x.pts)p.push(`pts ${x.name} ${x.pts}!=${s}`);});
