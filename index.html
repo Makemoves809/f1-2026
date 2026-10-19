@@ -441,6 +441,36 @@ body.light .cf-num{color:#18181b;}
 .cm-val.tight{color:var(--orange);}
 .cm-val.closed{color:var(--red);}
 
+/* ── Title Math (homepage) ───────────────────────────── */
+.tm-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:8px;margin-bottom:10px;}
+.tm-tile{background:var(--card);border:1px solid var(--border);border-left-width:3px;border-radius:var(--radius);padding:10px 13px;}
+.tm-tile-num{font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;letter-spacing:1px;color:#fff;}
+body.light .tm-tile-num{color:#18181b;}
+.tm-tile-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt3);margin-top:4px;}
+.tm-tile-sub{font-size:11px;color:var(--txt2);margin-top:3px;}
+.tm-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:760px){.tm-cols{grid-template-columns:1fr;}}
+.tm-col{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;}
+.tm-col-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--txt3);margin-bottom:4px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+.tm-col-title b{color:var(--txt);font-weight:700;}
+.tm-row{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:10px;padding:7px 0;}
+.tm-row + .tm-row{border-top:1px solid var(--border);}
+.tm-rank{font-family:'DM Mono',monospace;font-size:10px;color:var(--txt3);text-align:right;}
+.tm-rank.lead{color:var(--gold);}
+.tm-name{font-size:12px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tm-bar{position:relative;height:3px;border-radius:2px;background:var(--border);margin-top:5px;}
+.tm-bar i,.tm-bar b{position:absolute;left:0;top:0;height:100%;border-radius:2px;display:block;}
+.tm-bar i{opacity:.3;}
+.tm-fig{text-align:right;white-space:nowrap;}
+.tm-fig b{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--txt);display:block;line-height:1.1;}
+.tm-fig span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.5px;color:var(--txt3);}
+.tm-out{font-size:11px;color:var(--txt3);margin-top:10px;padding-top:9px;border-top:1px dashed var(--border);line-height:1.5;}
+.tm-clinch{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2);border-radius:var(--radius);padding:11px 14px;margin-top:10px;}
+.tm-ck{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--next);display:block;margin-bottom:6px;}
+.tm-clinch p{font-size:12px;color:var(--txt2);line-height:1.6;margin:0;}
+.tm-clinch p + p{margin-top:5px;}
+.tm-clinch b{color:var(--txt);font-weight:700;}
+
 /* DRIVER PROFILE MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:none;align-items:center;justify-content:center;padding:16px;}
 .modal-overlay.open{display:flex;}
@@ -886,6 +916,7 @@ body.light .lrb-inner:hover{box-shadow:0 10px 24px rgba(225,6,0,.10);}
 .section-title[data-i18n="teammate_battle"]::before  {background:var(--orange);box-shadow:0 0 8px rgba(249,115,22,.45);}
 .section-title[data-i18n="season_records"]::before   {background:var(--green); box-shadow:0 0 8px rgba(34,197,94,.45);}
 .section-title[data-i18n="points_chart"]::before     {background:var(--next);  box-shadow:0 0 8px rgba(124,58,237,.40);}
+.section-title[data-i18n="title_math"]::before       {background:var(--blue);  box-shadow:0 0 8px rgba(56,189,248,.40);}
 .section-title[data-i18n="season_progress"]::before  {background:var(--blue);  box-shadow:0 0 8px rgba(56,189,248,.40);}
 
 /* The two "active" sections breathe — feels live, not static */
@@ -1048,6 +1079,10 @@ body.light .chart-wrap{
 
     <!-- Driver Standings full -->
     <div class="standings-table" id="driver-standings-home"></div>
+
+    <!-- Championship Math -->
+    <div class="section-title" style="margin-top:24px" data-i18n="title_math">📐 Title Math</div>
+    <div id="title-math"></div>
 
     <div class="home-grid">
       <div>
@@ -2567,6 +2602,25 @@ const T = {
     split_note:"⚠ PA on EST (UTC-5) · DR on AST (UTC-4) · DR is 1 hour later",
     same_badge:"★ Same",diff_badge:"⚠ 1 hr diff",
     points_avail:"Points still available",gap_leader:"Gap to leader",math_open:"OPEN",math_tight:"TIGHT",math_closed:"CLOSED",
+    title_math:"📐 Title Math",
+    tm_rounds_left:"Rounds left",tm_max_driver:"Max driver points",tm_max_team:"Max team points",
+    tm_contention:"Still in it",tm_drivers_teams:"drivers / teams",
+    tm_per_driver:"if one driver wins out",tm_per_team:"with a 1–2 every round",
+    tm_no_sprints:"no sprints left",tm_sprint_one:"sprint left",tm_sprint_many:"sprints left",
+    tm_drivers_live:"Drivers who can still win",tm_teams_live:"Teams who can still win",
+    tm_of:"of",tm_max_lbl:"max",
+    tm_out_drivers:"{n} drivers can no longer reach {leader}'s {pts} pts.",
+    tm_out_teams:"{n} teams can no longer reach {leader} on {pts} pts.",
+    tm_clinch_head:"Where the titles stand",
+    tm_clinch_drv:"<b>{leader}</b> can seal the drivers' title as early as <b>{round}</b> — but only by taking maximum points from here, with <b>{rival}</b> held to <b>{cap}</b>.",
+    tm_clinch_drv_solo:"<b>{leader}</b> seals the drivers' title at <b>{round}</b> simply by taking maximum points there — no rival can stop it.",
+    tm_clinch_con:"<b>{leader}</b> can seal the constructors' title at <b>{round}</b> at the very earliest.",
+    tm_clinch_drv_none:"The drivers' title cannot be settled before the finale.",
+    tm_clinch_con_none:"The constructors' title cannot be settled before the finale.",
+    tm_any_result:"any result",tm_no_points:"no points at all",tm_or_lower:"or lower",
+    tm_season_over:"Season complete",
+    tm_decided_drv:"<b>{leader}</b> is the 2026 Drivers' Champion.",
+    tm_decided_con:"<b>{leader}</b> takes the Constructors' Championship.",
     laps_lbl:"Laps",dist_lbl:"Distance",corners_lbl:"Corners",record_lbl:"Lap Record",first_lbl:"First GP",
     driver_profile:"Driver Profile",total_pts:"Total Points",race_wins:"Race Wins",races_entered:"Races Entered",
     notify_on:"Reminder set — you'll be notified 10 min before the race",
@@ -2762,6 +2816,25 @@ const T = {
     split_note:"⚠ PA en EST (UTC-5) · DR en AST (UTC-4) · DR es 1 hora después",
     same_badge:"★ Igual",diff_badge:"⚠ 1 hr diferencia",
     points_avail:"Puntos disponibles",gap_leader:"Diferencia al líder",math_open:"ABIERTO",math_tight:"AJUSTADO",math_closed:"CERRADO",
+    title_math:"📐 Matemáticas del Título",
+    tm_rounds_left:"Carreras restantes",tm_max_driver:"Máx. puntos piloto",tm_max_team:"Máx. puntos equipo",
+    tm_contention:"Siguen con opciones",tm_drivers_teams:"pilotos / equipos",
+    tm_per_driver:"si gana todas las restantes",tm_per_team:"con un 1–2 en cada carrera",
+    tm_no_sprints:"sin sprints restantes",tm_sprint_one:"sprint restante",tm_sprint_many:"sprints restantes",
+    tm_drivers_live:"Pilotos que aún pueden ganar",tm_teams_live:"Equipos que aún pueden ganar",
+    tm_of:"de",tm_max_lbl:"máx",
+    tm_out_drivers:"{n} pilotos ya no pueden alcanzar los {pts} pts de {leader}.",
+    tm_out_teams:"{n} equipos ya no pueden alcanzar los {pts} pts de {leader}.",
+    tm_clinch_head:"Situación de los títulos",
+    tm_clinch_drv:"<b>{leader}</b> puede sellar el título de pilotos ya en <b>{round}</b> — pero solo sumando el máximo desde ahora, con <b>{rival}</b> limitado a <b>{cap}</b>.",
+    tm_clinch_drv_solo:"<b>{leader}</b> sella el título de pilotos en <b>{round}</b> con solo sumar el máximo allí — ningún rival puede impedirlo.",
+    tm_clinch_con:"<b>{leader}</b> puede sellar el título de constructores en <b>{round}</b> como muy pronto.",
+    tm_clinch_drv_none:"El título de pilotos no puede decidirse antes de la última carrera.",
+    tm_clinch_con_none:"El título de constructores no puede decidirse antes de la última carrera.",
+    tm_any_result:"cualquier resultado",tm_no_points:"ningún punto",tm_or_lower:"o peor",
+    tm_season_over:"Temporada finalizada",
+    tm_decided_drv:"<b>{leader}</b> es el Campeón de Pilotos 2026.",
+    tm_decided_con:"<b>{leader}</b> gana el Campeonato de Constructores.",
     laps_lbl:"Vueltas",dist_lbl:"Distancia",corners_lbl:"Curvas",record_lbl:"Vuelta Rápida",first_lbl:"Primer GP",
     driver_profile:"Perfil del Piloto",total_pts:"Puntos Totales",race_wins:"Victorias",races_entered:"Carreras",
     notify_on:"Recordatorio activado — recibirás una notificación 10 min antes de la carrera",
@@ -3412,6 +3485,9 @@ function renderHome(){
   }).join("");
   document.getElementById("constructor-standings-home").innerHTML = csHdr + csRows;
 
+  // Championship math
+  renderTitleMath();
+
   // Teammate head-to-head
   const h2hEl = document.getElementById("h2h-cards");
   if(h2hEl) h2hEl.innerHTML = renderH2H();
@@ -3435,6 +3511,117 @@ function renderHome(){
     <div class="prog-row"><span class="prog-label">Sprint rounds</span><span class="prog-value">R2, R6, R7, R11, R14, R18</span></div>
     <div class="prog-row"><span class="prog-label">Saturday races</span><span class="prog-value">R17 Baku · R22 Las Vegas</span></div>
     <div class="prog-row"><span class="prog-label">Season finale</span><span class="prog-value">Abu Dhabi · Dec 6</span></div>`;
+}
+
+// ════════════════════════════════════════════════════════
+// TITLE MATH
+// ════════════════════════════════════════════════════════
+// Everything below is derived from SCHEDULE + the standings arrays, so the
+// panel keeps itself honest as rounds are finalized — nothing to hand-edit.
+const TM_RACE_PTS = [25,18,15,12,10,8,6,4,2,1];
+
+function titleMath(){
+  const left    = SCHEDULE.filter(r=>!r.done && !r.cancelled);
+  const sprints = left.filter(r=>r.sprint);
+  // A driver can take 25 a race and 8 a sprint; a team scores with both cars.
+  const drvMax = left.length*25 + sprints.length*8;
+  const conMax = left.length*(25+18) + sprints.length*(8+7);
+
+  // A contender is anyone who can still *reach* the leader's current total.
+  // Equalling it counts: a points tie is settled on countback, not discarded.
+  const alive = (stand,max)=>stand.filter(x=>x.pts + max >= stand[0].pts);
+
+  // Earliest clinch: the first round after which the leader is out of reach
+  // even if a rival wins out. Best case = leader takes the maximum every time.
+  const clinch = (stand,win,max)=>{
+    const L = stand[0], rivals = stand.slice(1);
+    let gained = 0;
+    for(let i=0;i<left.length;i++){
+      gained += win.race + (left[i].sprint ? win.sprint : 0);
+      const rest  = left.slice(i+1);
+      const after = rest.length*max.race + rest.filter(r=>r.sprint).length*max.sprint;
+      if(rivals.every(x=>(L.pts+gained) - x.pts > after))
+        return {round:left[i], cutoff:L.pts + gained - after};
+    }
+    return null;
+  };
+
+  return {left, sprints, drvMax, conMax,
+    drivers:      alive(DRIVER_STANDINGS, drvMax),
+    constructors: alive(CONSTRUCTOR_STANDINGS, conMax),
+    drvClinch: clinch(DRIVER_STANDINGS,      {race:25,sprint:8},  {race:25,sprint:8}),
+    conClinch: clinch(CONSTRUCTOR_STANDINGS, {race:43,sprint:15}, {race:43,sprint:15})};
+}
+
+function renderTitleMath(){
+  const el = document.getElementById("title-math"); if(!el) return;
+  const m  = titleMath();
+  const fill = (s,o)=>s.replace(/\{(\w+)\}/g,(_,k)=>o[k]);
+
+  if(!m.left.length){
+    el.innerHTML = `<div class="tm-clinch"><span class="tm-ck">${t("tm_season_over")}</span>
+      <p>${fill(t("tm_decided_drv"),{leader:DRIVER_STANDINGS[0].name})}
+         ${fill(t("tm_decided_con"),{leader:CONSTRUCTOR_STANDINGS[0].name})}</p></div>`;
+    return;
+  }
+
+  const sprintSub = m.sprints.length===0 ? t("tm_no_sprints")
+    : `${m.sprints.length} ${m.sprints.length===1?t("tm_sprint_one"):t("tm_sprint_many")}`;
+  const tiles = [
+    {n:m.left.length,                             l:t("tm_rounds_left"), s:sprintSub,          c:"var(--next)"},
+    {n:m.drvMax,                                  l:t("tm_max_driver"),  s:t("tm_per_driver"), c:"var(--gold)"},
+    {n:m.conMax,                                  l:t("tm_max_team"),    s:t("tm_per_team"),   c:"var(--red)"},
+    {n:`${m.drivers.length} / ${m.constructors.length}`, l:t("tm_contention"), s:t("tm_drivers_teams"), c:"var(--green)"}
+  ].map(x=>`<div class="tm-tile" style="border-left-color:${x.c}">
+      <div class="tm-tile-num">${x.n}</div><div class="tm-tile-lbl">${x.l}</div>
+      <div class="tm-tile-sub">${x.s}</div></div>`).join("");
+
+  // Two-layer bar: faded = still reachable ceiling, solid = points banked.
+  const column = (title, list, full, max, outKey)=>{
+    const top   = Math.max(...list.map(x=>x.pts + max), 1);
+    const rows  = list.map(x=>{
+      const ceil = x.pts + max;
+      return `<div class="tm-row">
+        <div class="tm-rank${x.pos===1?" lead":""}">P${x.pos}</div>
+        <div><div class="tm-name">${x.name}</div>
+          <div class="tm-bar"><i style="width:${(ceil/top*100).toFixed(1)}%;background:${x.color}"></i><b style="width:${(x.pts/top*100).toFixed(1)}%;background:${x.color}"></b></div></div>
+        <div class="tm-fig"><b>${x.pts}</b><span>${t("tm_max_lbl")} ${ceil}</span></div></div>`;
+    }).join("");
+    const out = full.length - list.length;
+    return `<div class="tm-col">
+      <div class="tm-col-title"><span>${title}</span><b>${list.length} ${t("tm_of")} ${full.length}</b></div>
+      ${rows}
+      ${out>0?`<div class="tm-out">${fill(t(outKey),{n:out,leader:full[0].name,pts:full[0].pts})}</div>`:""}
+    </div>`;
+  };
+
+  // Of the contenders, the rival who must be held lowest is the binding one.
+  const clinchLine = (c, list, tmpl, finale, decided, solo)=>{
+    // Nobody left to catch the leader: the title is already won, not pending.
+    if(list.length<=1) return `<p>${fill(t(decided),{leader:list[0].name})}</p>`;
+    if(!c) return `<p>${t(finale)}</p>`;
+    const r = list.slice(1).map(x=>({name:x.name, cap:c.cutoff - 1 - x.pts}))
+                  .sort((a,b)=>a.cap-b.cap)[0];
+    // A cap at or above a win means no rival can stop it — naming one would
+    // read as a condition when there isn't one, so use the unconditional line.
+    const unstoppable = !r || r.cap >= TM_RACE_PTS[0];
+    const capTxt = unstoppable ? "" :
+        r.cap < TM_RACE_PTS[TM_RACE_PTS.length-1] ? t("tm_no_points")
+      : `P${TM_RACE_PTS.findIndex(p=>p<=r.cap)+1} ${t("tm_or_lower")}`;
+    return `<p>${fill(t(unstoppable && solo ? solo : tmpl),
+      {leader:list[0].name, round:`R${c.round.round} · ${c.round.name.replace(" Grand Prix"," GP")}`,
+       rival:r?r.name:"", cap:capTxt})}</p>`;
+  };
+
+  el.innerHTML = `<div class="tm-tiles">${tiles}</div>
+    <div class="tm-cols">
+      ${column(t("tm_drivers_live"),      m.drivers,      DRIVER_STANDINGS,      m.drvMax, "tm_out_drivers")}
+      ${column(t("tm_teams_live"),        m.constructors, CONSTRUCTOR_STANDINGS, m.conMax, "tm_out_teams")}
+    </div>
+    <div class="tm-clinch"><span class="tm-ck">${t("tm_clinch_head")}</span>
+      ${clinchLine(m.drvClinch, m.drivers,      "tm_clinch_drv", "tm_clinch_drv_none", "tm_decided_drv", "tm_clinch_drv_solo")}
+      ${clinchLine(m.conClinch, m.constructors, "tm_clinch_con", "tm_clinch_con_none", "tm_decided_con")}
+    </div>`;
 }
 
 // ════════════════════════════════════════════════════════
