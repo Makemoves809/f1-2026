@@ -63,37 +63,38 @@ Single static page, works on any device, no login required.
 | R17 | 🇦🇿 Azerbaijan GP *(Saturday race)* | Sep 24–26 | ✓ Done | George Russell |
 | R18 | 🇸🇬 Singapore GP *(Sprint)* | Oct 9–11 | ✓ Done | Max Verstappen |
 | R19 | 🇺🇸 United States GP | Oct 23–25 | ✓ Done | Kimi Antonelli |
-| R20–R24 | Remaining rounds | Oct – Dec | ⚡ Next |  |
+| R20 | 🇲🇽 Mexico City GP | Oct 30–Nov 1 | ✓ Done | Max Verstappen |
+| R21–R24 | Remaining rounds | Nov – Dec | ⚡ Next |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA on March 15 due to the Middle East conflict. On July 28 the Bahrain Grand Prix was revived at Sepang, Malaysia (Oct 2–4, race Sunday Oct 4, 15:00 local), leaving the 2026 calendar at 23 Grands Prix. Saudi Arabia is not replaced. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R19 United States GP
+## Championship — after R20 Mexico City GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli | Mercedes | 9 | 365 |
-| 2 | George Russell | Mercedes | 3 | 242 |
-| 3 | Lewis Hamilton | Ferrari | 1 | 241 |
-| 4 | Max Verstappen | Red Bull | 2 | 236 |
-| 5 | Charles Leclerc | Ferrari | 1 | 233 |
-| 6 | Lando Norris | McLaren | 2 | 211 |
+| 1 | Kimi Antonelli 🏆 | Mercedes | 9 | 380 |
+| 2 | Max Verstappen | Red Bull | 3 | 261 |
+| 3 | Lewis Hamilton | Ferrari | 1 | 259 |
+| 4 | George Russell | Mercedes | 3 | 250 |
+| 5 | Charles Leclerc | Ferrari | 1 | 245 |
+| 6 | Lando Norris | McLaren | 2 | 221 |
 | 7 | Oscar Piastri | McLaren | 0 | 144 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 607 |
-| 2 | Ferrari | 474 |
-| 3 | Red Bull | 355 |
-| 4 | McLaren | 355 |
-| 5 | Racing Bulls | 102 |
+| 1 | Mercedes | 630 |
+| 2 | Ferrari | 504 |
+| 3 | Red Bull | 382 |
+| 4 | McLaren | 365 |
+| 5 | Racing Bulls | 108 |
 | 6 | Alpine | 69 |
-| 7 | Haas | 30 |
+| 7 | Haas | 31 |
 
 ---
 
