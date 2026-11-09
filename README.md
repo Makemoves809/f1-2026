@@ -64,35 +64,36 @@ Single static page, works on any device, no login required.
 | R18 | 🇸🇬 Singapore GP *(Sprint)* | Oct 9–11 | ✓ Done | Max Verstappen |
 | R19 | 🇺🇸 United States GP | Oct 23–25 | ✓ Done | Kimi Antonelli |
 | R20 | 🇲🇽 Mexico City GP | Oct 30–Nov 1 | ✓ Done | Max Verstappen |
-| R21–R24 | Remaining rounds | Nov – Dec | ⚡ Next |  |
+| R21 | 🇧🇷 São Paulo GP | Nov 6–8 | ✓ Done | Lando Norris |
+| R22–R24 | Remaining rounds | Nov – Dec | ⚡ Next |  |
 
 > **R4 Bahrain and R5 Saudi were officially cancelled** by F1 and the FIA on March 15 due to the Middle East conflict. On July 28 the Bahrain Grand Prix was revived at Sepang, Malaysia (Oct 2–4, race Sunday Oct 4, 15:00 local), leaving the 2026 calendar at 23 Grands Prix. Saudi Arabia is not replaced. ([Sky Sports](https://www.skysports.com/f1/news/12433/13519453/f1-confirms-cancellation-of-bahrain-and-saudi-arabian-grands-prix-due-to-war-in-middle-east-as-2026-calendar-reduced-to-22-races))
 
 ---
 
-## Championship — after R20 Mexico City GP
+## Championship — after R21 São Paulo GP
 
 ### Drivers
 
 | Pos | Driver | Team | Wins | Pts |
 |-----|--------|------|------|-----|
-| 1 | Kimi Antonelli 🏆 | Mercedes | 9 | 380 |
-| 2 | Max Verstappen | Red Bull | 3 | 261 |
-| 3 | Lewis Hamilton | Ferrari | 1 | 259 |
-| 4 | George Russell | Mercedes | 3 | 250 |
-| 5 | Charles Leclerc | Ferrari | 1 | 245 |
-| 6 | Lando Norris | McLaren | 2 | 221 |
-| 7 | Oscar Piastri | McLaren | 0 | 144 |
+| 1 | Kimi Antonelli 🏆 | Mercedes | 9 | 390 |
+| 2 | Max Verstappen | Red Bull | 3 | 279 |
+| 3 | George Russell | Mercedes | 3 | 262 |
+| 4 | Lewis Hamilton | Ferrari | 1 | 261 |
+| 5 | Charles Leclerc | Ferrari | 1 | 249 |
+| 6 | Lando Norris | McLaren | 3 | 246 |
+| 7 | Oscar Piastri | McLaren | 0 | 152 |
 
 ### Constructors
 
 | Pos | Constructor | Pts |
 |-----|-------------|-----|
-| 1 | Mercedes | 630 |
-| 2 | Ferrari | 504 |
-| 3 | Red Bull | 382 |
-| 4 | McLaren | 365 |
-| 5 | Racing Bulls | 108 |
+| 1 | Mercedes 🏆 | 652 |
+| 2 | Ferrari | 510 |
+| 3 | Red Bull | 415 |
+| 4 | McLaren | 398 |
+| 5 | Racing Bulls | 114 |
 | 6 | Alpine | 69 |
 | 7 | Haas | 31 |
 
